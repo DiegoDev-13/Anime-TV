@@ -14,14 +14,14 @@ export const Navbar = () => {
 
       <Logo />
 
-      <nav className="gap-5 hidden md:flex">
-        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-purple-400 underline' : ''} transition-all duration-300 font-medium hover:text-purple-600 flex justify-center items-center uppercase `}>
-          <IoMdHome size={25} />
+      <nav className="gap-4 hidden md:flex">
+        <NavLink to='/' className={({isActive}) => `${isActive ? 'text-purple-400 underline' : ''} transition-all duration-300 font-medium hover:text-purple-600 flex justify-center items-center uppercase text-sm`}>
+          <IoMdHome size={20} />
           Inicio
         </NavLink>
 
-        <NavLink to='/directorio' className={({isActive}) => `${isActive ? 'text-purple-400 underline' : ''} transition-all duration-300 font-medium hover:text-purple-600 flex justify-center items-center uppercase gap-1`}>
-          <IoFolderOpenSharp  size={25} />
+        <NavLink to='/directorio' className={({isActive}) => `${isActive ? 'text-purple-400 underline' : ''} transition-all duration-300 font-medium hover:text-purple-600 flex justify-center items-center uppercase gap-1  text-sm`}>
+          <IoFolderOpenSharp  size={20} />
           Directorio
         </NavLink>
       </nav>

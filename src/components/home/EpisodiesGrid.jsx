@@ -4,7 +4,7 @@ import { CardEpisodie } from "./CardEpisodie"
 export const EpisodiesGrid = ({title}) => {
   return (
     <div className="my-12 text-white w-full flex flex-col justify-center">
-        <h2 className="text-3xl text-left flex items-center font-medium mb-6 ml-6">
+        <h2 className="text-xl md:text-3xl flex items-center font-medium text-left md:mb-6 ml-2">
           <RiArrowRightDoubleLine size={45} className="text-purple-600"/>
           {title}
         </h2>
