@@ -10,12 +10,10 @@ export const AnimesGrid = ({title}) => {
 
   const navigate = useNavigate()
 
-  console.log(seasons)
-
   if(isLoading || !seasons) return <Loader />
 
   return (
-    <div className="mt-12 text-white w-full flex flex-col justify-center">
+    <div className="mt-12 mb-6 text-white w-full flex flex-col justify-center">
         
         <div className="flex justify-between mx-5 md:mx-4 items-center md:mb-4">
 
@@ -28,7 +26,7 @@ export const AnimesGrid = ({title}) => {
         </div>
 
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 space-y-10 mt-6 mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 space-y-14 mt-6 mx-auto">
             {
               seasons?.map(item => (
                 <CardAnime key={item.id} item={item} />

@@ -6,7 +6,7 @@ import { FaUserCircle, FaBars  } from "react-icons/fa";
 
 export const Navbar = () => {
   return (
-    <header className="py-6 bg-surface-dark text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12">
+    <header className="py-4 bg-surface-dark text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12">
 
       <button className="md:hidden cursor-pointer">
         <FaBars size={25} />
