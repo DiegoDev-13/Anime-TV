@@ -1,8 +1,8 @@
 import { FaFire } from "react-icons/fa"
 import { CardAnime } from "../shared/CardAnime"
 import { useSeasonsHome } from "../../hooks/useSeasonsHome"
-import { Loader } from "../shared/Loader"
 import { useNavigate } from "react-router-dom"
+import { SkeletonAnime } from "../skeletons/SkeletonAnime"
 
 export const AnimesGrid = ({title}) => {
 
@@ -10,7 +10,7 @@ export const AnimesGrid = ({title}) => {
 
   const navigate = useNavigate()
 
-  if(isLoading || !seasons) return <Loader />
+  if(isLoading || !seasons) return <SkeletonAnime quantity={12} />
 
   return (
     <div className="mt-12 mb-6 text-white w-full flex flex-col justify-center">
@@ -24,7 +24,6 @@ export const AnimesGrid = ({title}) => {
 
           <button className="w-20 md:w-30 py-2 md:py-3 bg-purple-600 text-white rounded-lg cursor-pointer text-xs md:text-sm font-medium hover:bg-purple-700 transition-colors duration-300" onClick={() => navigate('/directorio')}>Ver más</button>
         </div>
-
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-4 space-y-14 mt-6 mx-auto">
             {

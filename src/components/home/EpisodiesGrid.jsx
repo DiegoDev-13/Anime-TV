@@ -1,7 +1,7 @@
 import { RiArrowRightDoubleLine } from "react-icons/ri"
 import { CardEpisodie } from "./CardEpisodie"
 import { useEpisodiesHome } from '../../hooks/useEpisodiesHome'
-import { Loader } from "../shared/Loader"
+import { SkeletonEpisodies } from "../skeletons/SkeletonEpisodies"
  
 
 export const EpisodiesGrid = ({title}) => {
@@ -10,7 +10,7 @@ export const EpisodiesGrid = ({title}) => {
 
   // console.log(episodies)
 
-  if(isLoading || !episodies) return <Loader />
+  if(isLoading || !episodies) return <SkeletonEpisodies quantity={10} />
 
   return (
     <div className="my-12 text-white w-full flex flex-col justify-center">

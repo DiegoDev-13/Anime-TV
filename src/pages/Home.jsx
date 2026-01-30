@@ -13,7 +13,7 @@ export const Home = () => {
 
       <Banner />
 
-      <AnimesGrid title="Ultimos Animes" />
+      <AnimesGrid title="Últimos animes" />
 
     </div>
   )

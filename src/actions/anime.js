@@ -26,7 +26,7 @@ export const getSeasonsHome = async () => {
 
 // Hace la peticion en supabase para traer el anime mediante el slug
 export const getAnimeBySlug = async (slug) => {
-    const {data, error} = await supabase.from('animes').select('*, seasons(*)').eq('slug', slug).single()
+    const {data, error} = await supabase.from('seasons').select('*, episodes(*), season_comments(*))').eq('slug_season', slug).limit(2, { foreignTable: 'season_comments' }).order('created_at', { foreignTable: 'episodes', ascending: false }).order('created_at', { foreignTable: 'season_comments', ascending: false }).single()
 
     if(error) {
         console.log(error)

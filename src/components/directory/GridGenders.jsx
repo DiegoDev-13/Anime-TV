@@ -2,7 +2,7 @@ import { CardGender } from "./Cardgender"
 
 export const GridGenders = ({genders, handleChangeGender}) => {
   return (
-    <div className="w-full p-15 flex flex-wrap justify-center border border-slate-400 rounded-lg gap-6">
+    <div className="w-full p-15 flex flex-wrap justify-center rounded-lg gap-6">
         <CardGender text='All' handleChangeGender={handleChangeGender} />
         
         {

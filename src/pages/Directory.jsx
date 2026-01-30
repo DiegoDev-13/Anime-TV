@@ -24,8 +24,6 @@ export const Directory = () => {
   }
 
   const {data: animes, totalAnimes, isLoading: isLoadingAnimes, isError} = useAnimeByGender(currentOption, page)
-
-  console.log(totalAnimes)
     
 
   if(isLoading || !genders || isLoadingAnimes) return <Loader />
@@ -33,7 +31,7 @@ export const Directory = () => {
   if(isError) return <div className="flex justify-center items-center my-20 mx-auto text-red-500">Error</div>
 
   return (
-    <div className="w-full flex flex-col justify-center text-white mb-10">
+    <div className="w-full flex flex-col justify-center text-white md:mb-10">
 
       {/* Muestra los generos en pantalla grande */}
       <div className="hidden md:flex">

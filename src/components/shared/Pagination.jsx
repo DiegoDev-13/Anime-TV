@@ -15,7 +15,7 @@ export const Pagination = ({setPage, page, totalItems}) => {
     const isLastpage = page >= totalPage
 
   return (
-    <div className="w-[80%] flex justify-between items-center my-10 mx-auto">
+    <div className="w-[80%] flex justify-between items-center mt-12 mb-2 md:my-10 mx-auto">
         <div>
             <p className="text-sm text-stone-300">
                 Pagina <span className="font-semibold text-white">{page}</span> de <span className="font-semibold text-white">{totalPage}</span>
