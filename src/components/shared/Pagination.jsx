@@ -10,7 +10,7 @@ export const Pagination = ({setPage, page, totalItems}) => {
         }
     }
 
-    const itemsPerPage = 3
+    const itemsPerPage = 24
     const totalPage = totalItems ? Math.ceil(totalItems / itemsPerPage) : 1
     const isLastpage = page >= totalPage
 

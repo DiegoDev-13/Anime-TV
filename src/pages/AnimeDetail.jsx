@@ -23,7 +23,7 @@ export const AnimeDetail = () => {
 
         <Separator />
 
-        <div className="w-full flex flex-wrap gap-2 md:gap-8 mb-6">
+        <div className="w-full flex flex-wrap gap-2 md:gap-8 mb-0 md:mb-6">
           <AnimeListEpisodes episodes={anime.episodes} />
 
           <div className="flex flex-col w-full md:w-auto mt-3">

@@ -13,12 +13,12 @@ export const AnimeInfo = ({anime}) => {
             <p className="tracking-widest">Inicio / Anime / <span className="text-purple-700">{anime?.name_season}</span></p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 mx-8 space-x-5 my-3 text-white">
-            <div className="my-6 md:my-1 flex justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 mx-auto md:mx-8 space-x-5 my-3 text-white">
+            <div className="w-full md:w-auto my-6 md:my-1 flex justify-center">
                 <img src={anime?.image} alt="" className="w-90 md:w-70 h-full object-contain rounded-sm shadow-[0px_4px_37px_-18px_rgb(147,51,234)]"/>
             </div>
             <div className="space-y-2">
-                <h3 className="text-3xl font-semibold">{anime?.name_season}</h3>
+                <h3 className="text-3xl text-center md:text-left font-semibold">{anime?.name_season}</h3>
                 <div className="flex flex-wrap items-center space-x-5 justify-center md:justify-start space-y-6 md:space-y-1">
                     <span className="font-semibold text-lg text-white flex justify-center items-center gap-2">
                         <IoStar size={16} className="text-yellow-300" />

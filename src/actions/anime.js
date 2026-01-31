@@ -49,9 +49,10 @@ export const getGender = async () => {
     return data
 }
 
+// Hace el llamado a todos los animes y filtra por genero si el usuario lo pide 
 export const getAnimeByGender = async (gender, page = 1) => {
 
-    const itemsPerPage = 3
+    const itemsPerPage = 24
     const from = (page - 1) * itemsPerPage
     const to = from + itemsPerPage - 1
 
@@ -68,7 +69,7 @@ export const getAnimeByGender = async (gender, page = 1) => {
             count
         }
     } else {
-        const {data, count, error} = await supabase.from('seasons').select('*', {count: 'exact'}).contains('gender', [gender]).order('created_at', {ascending: false}).range(0, 2)
+        const {data, count, error} = await supabase.from('seasons').select('*', {count: 'exact'}).contains('gender', [gender]).order('created_at', {ascending: false}).range(from, to)
 
         if(error) {
             console.log(error)
@@ -81,4 +82,16 @@ export const getAnimeByGender = async (gender, page = 1) => {
         }
     }
 
+}
+
+// hace la peticion para buscar un anime relacionado con ese nombre
+export const searchAnime = async (searchTerm) => {
+    const {data, error} = await supabase.from('seasons').select('id, name_season, description, image, slug_season ').ilike('name_season', `%${searchTerm}%`)
+
+    if(error) {
+        console.log(error)
+        throw new Error(error.message);
+    }
+
+    return data
 }

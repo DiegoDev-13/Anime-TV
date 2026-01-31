@@ -3,12 +3,16 @@ import { Logo } from "./Logo"
 import { IoMdHome } from "react-icons/io";
 import { IoFolderOpenSharp, IoSearch } from "react-icons/io5";
 import { FaUserCircle, FaBars  } from "react-icons/fa";
-
+import { useGlobalStore } from "../../store/global.store";
 export const Navbar = () => {
-  return (
-    <header className="py-4 bg-surface-dark text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12">
 
-      <button className="md:hidden cursor-pointer">
+  const setActiveMobile = useGlobalStore((state) => state.setActiveMobile)
+  const setActiveSheetSearch = useGlobalStore(state => state.setActiveSheetSearch)
+
+  return (
+    <header className="py-4 bg-surface-dark animated-fadeIn text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12 relative">
+
+      <button className="md:hidden cursor-pointer" onClick={() => setActiveMobile(true)}>
         <FaBars size={25} />
       </button>
 
@@ -27,7 +31,7 @@ export const Navbar = () => {
       </nav>
 
       <div className="flex justify-center gap-5">
-          <button className="cursor-pointer ">
+          <button className="cursor-pointer " onClick={() => setActiveSheetSearch(true)}>
             <IoSearch size={25} />
           </button>
 
