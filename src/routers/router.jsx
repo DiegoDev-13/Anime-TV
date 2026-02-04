@@ -3,6 +3,7 @@ import { RootLayout } from '../layouts/RootLayout'
 import {Home} from '../pages/Home'
 import { Directory } from '../pages/Directory'
 import { AnimeDetail } from '../pages/AnimeDetail'
+import { AnimeView } from '../pages/AnimeView'
 
 export const MyRouters = () => {
   return (
@@ -11,6 +12,7 @@ export const MyRouters = () => {
             <Route index element={<Home />} />
             <Route path='/directorio' element={<Directory />} />
             <Route path='/anime/:slug' element={<AnimeDetail />} />
+            <Route path='/anime/ver/:slug' element={<AnimeView />} />
         </Route>
     </Routes>
   )

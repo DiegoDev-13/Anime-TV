@@ -49,7 +49,7 @@ export const getGender = async () => {
     return data
 }
 
-// Hace el llamado a todos los animes y filtra por genero si el usuario lo pide 
+// Hace el llamado a todos los animes y la paginacion y filtra por genero si el usuario lo pide 
 export const getAnimeByGender = async (gender, page = 1) => {
 
     const itemsPerPage = 24
@@ -91,6 +91,29 @@ export const searchAnime = async (searchTerm) => {
     if(error) {
         console.log(error)
         throw new Error(error.message);
+    }
+
+    return data
+}
+
+// Traer el episodio mediantre el slug 
+export const getEpisodeBySlug = async (slug) => {
+    const {data, error} = await supabase.from('episodes').select('*').eq('slug_episode', slug).single()
+
+    if(error) {
+        console.log(error)
+        throw new Error(error.message);
+    }
+
+    return data
+}
+
+export const getAllEpisodesAnime = async (seasonId) => {
+    const {data, error} = await supabase.from('episodes').select('*').eq('season_id', seasonId).order('created_at', { ascending: false })
+
+    if(error) {
+        console.log(error)
+        throw new Error(error.message); 
     }
 
     return data
