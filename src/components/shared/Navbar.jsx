@@ -1,15 +1,21 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { Logo } from "./Logo"
 import { IoMdHome } from "react-icons/io";
 import { IoFolderOpenSharp, IoSearch } from "react-icons/io5";
-import { FaBars  } from "react-icons/fa";
+import { FaBars, FaUser  } from "react-icons/fa";
 import { useGlobalStore } from "../../store/global.store";
-import { LuLogIn } from "react-icons/lu";
+import { useSessionUser } from "../../hooks/auth/useSessionUser";
 
 export const Navbar = () => {
 
   const setActiveMobile = useGlobalStore((state) => state.setActiveMobile)
   const setActiveSheetSearch = useGlobalStore(state => state.setActiveSheetSearch)
+
+  const navigate = useNavigate()
+
+  const {session, isLoading} = useSessionUser()
+
+  console.log(session?.data.session)
 
   return (
     <header className="py-4 bg-surface-dark animated-fadeIn text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12 relative">
@@ -32,14 +38,23 @@ export const Navbar = () => {
         </NavLink>
       </nav>
 
-      <div className="flex justify-center gap-5">
-          <button className="cursor-pointer " onClick={() => setActiveSheetSearch(true)}>
+      <div className="flex justify-center items-center gap-5">
+          <button className="hover:text-white hover:border-white transition-all duration-300 cursor-pointer " onClick={() => setActiveSheetSearch(true)}>
             <IoSearch size={25} />
           </button>
 
-          <button className="cursor-pointer">
-            <LuLogIn size={25} />
-          </button>
+
+          {
+            session?.data.session
+              ? <div className="h-8 w-8 bg-white rounded-full flex justify-center items-center cursor-pointer" onClick={() => navigate('/profile')}>
+                  <span className="text-black text-xl font-bold cursor-pointer">D</span>
+                </div>
+              : <button className="flex justify-center items-center gap-2 py-2 px-3 text-sm font-semibold border border-stone-400 rounded-lg hover:text-white hover:border-white transition-all duration-300 cursor-pointer" onClick={() => navigate('/login')}>
+                <FaUser size={15} />
+                Login
+              </button>
+          }
+
       </div>
     </header>
   )

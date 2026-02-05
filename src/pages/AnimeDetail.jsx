@@ -19,6 +19,7 @@ export const AnimeDetail = () => {
 
   return (
     <div className="">
+      <title>{`${anime?.name_season} Sub Español Online gratis - AnimeVista`}</title>
         <AnimeInfo anime={anime} />
 
         <Separator />

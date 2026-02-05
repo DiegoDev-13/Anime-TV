@@ -4,6 +4,8 @@ import {Home} from '../pages/Home'
 import { Directory } from '../pages/Directory'
 import { AnimeDetail } from '../pages/AnimeDetail'
 import { AnimeView } from '../pages/AnimeView'
+import { Login } from '../pages/Login'
+import { Profile } from '../pages/Profile'
 
 export const MyRouters = () => {
   return (
@@ -13,6 +15,8 @@ export const MyRouters = () => {
             <Route path='/directorio' element={<Directory />} />
             <Route path='/anime/:slug' element={<AnimeDetail />} />
             <Route path='/anime/ver/:slug' element={<AnimeView />} />
+            <Route path='/login' element={<Login />}/>
+            <Route path='/profile' element={<Profile />} /> 
         </Route>
     </Routes>
   )

@@ -16,7 +16,9 @@ export const AnimeView = () => {
     if(isLoading || !episode || isLoadingEpisodes) return <Loader />
 
   return (
+    
     <div className=" w-full">
+        <title>{`${episode?.title} ${episode.episode_number} Sub Español Online gratis - AnimeVista`}</title>
         <div className="flex flex-wrap w-full space-y-4 ">
             <EpisodePlayer episode={episode} quantityEpisodes={episodes?.length || 0} slug={slug} />
 

@@ -32,6 +32,7 @@ export const Directory = () => {
 
   return (
     <div className="w-full flex flex-col justify-center text-white md:mb-10">
+      <title>{`Directorio de Animes - AnimeVista`}</title>
 
       {/* Muestra los generos en pantalla grande */}
       <div className="hidden md:flex">
