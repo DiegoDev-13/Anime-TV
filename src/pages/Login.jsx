@@ -14,8 +14,6 @@ export const Login = () => {
 
     const {session, isLoading} = useSessionUser()
 
-    console.log(session?.data.session)
-
     if(session?.data.session) {
         navigate('/')
     } 

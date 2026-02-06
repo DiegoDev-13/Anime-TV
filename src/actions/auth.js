@@ -15,9 +15,10 @@ export const signUp = async ({userName, email, password}) => {
         }
 
         const userId = data.user?.id
+        const userEmail = data.user?.email
 
-        if(!userId) {
-            throw new Error("Error al obtener id del usuario");
+        if(!userId || !userEmail) {
+            throw new Error("Error al obtener id del usuario o email");
         }
 
         // 2: Authenticamos al usuario 
@@ -37,7 +38,8 @@ export const signUp = async ({userName, email, password}) => {
         const {error: roleError} = await supabase.from('users').insert({
             user_id: userId,
             role: 'user',
-            full_name: userName
+            full_name: userName,
+            email: userEmail
         })
 
         if(roleError) {
@@ -62,9 +64,21 @@ export const getSession = async () => {
     }
 
     return  {
-        data
+        data 
     }
 }
+
+// Para traer los datos del usuario 
+export const getUserById = async (userId) => {
+    const {data, error} = await supabase.from('users').select('*').eq('user_id',userId).single()
+
+    if(error) {
+        console.log(error)
+        throw new Error(error.message);
+    }
+
+    return data
+} 
 
 // Cerrar session del usuario 
 export const signOut = async () => {

@@ -5,7 +5,11 @@ export const useGlobalStore = create((set, get) => ({
     activeMobile: false,
     setActiveMobile: () => set((state) => ({activeMobile: !state.activeMobile})),
 
+    //Search 
     activeSheetSearch: false,
-    setActiveSheetSearch: (state) => set({activeSheetSearch: state})
+    setActiveSheetSearch: (state) => set({activeSheetSearch: state}),
 
+    //Profile Sheet
+    activeProfileSheet: false,
+    setActiveProfileSheet: (state) => set({activeProfileSheet: state}),
 }))

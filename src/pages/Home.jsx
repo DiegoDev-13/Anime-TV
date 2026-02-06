@@ -4,6 +4,7 @@ import { EpisodiesGrid } from "../components/home/EpisodiesGrid"
 import { Slider } from '../components/home/Slider'
 
 export const Home = () => {
+  
   return (
     <div className="">
 

@@ -33,7 +33,7 @@ export const Slider = () => {
     }
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative z-1 w-full overflow-hidden">
         <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${current * 100}%)` }}>
             {
                 images.map((img, index) => (
@@ -42,15 +42,15 @@ export const Slider = () => {
             }
         </div>
 
-        <button className='text-white cursor-pointer hover:text-slate-400 transition-all duration-300 absolute top-1/2 left-2' onClick={sliderBack}>
+        <button className='text-white cursor-pointer hover:text-slate-400 transition-all duration-300 absolute z-2 top-1/2 left-2' onClick={sliderBack}>
             <IoIosArrowBack size={35} />
         </button>
 
-        <button className="text-white cursor-pointer hover:text-slate-400 transition-all duration-300 absolute top-1/2 right-2" onClick={sliderNext}>
+        <button className="text-white cursor-pointer hover:text-slate-400 transition-all duration-300 absolute z-2 top-1/2 right-2" onClick={sliderNext}>
             <IoIosArrowForward size={35} />
         </button>
 
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        <div className="absolute z-2 bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
             {
                 images.map((_, index) => (
                     <div key={index} className={`h-3 rounded-full transition-all duration-300 border border-slate-500 cursor-pointer hover:bg-purple-500 ${current === index ? 'bg-purple-400 w-8' : 'bg-white/50 w-3'}`} onClick={() => handleChange(index)} />

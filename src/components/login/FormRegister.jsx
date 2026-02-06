@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { IoEye, IoEyeOff } from "react-icons/io5";
 import { useRegister } from '../../hooks/auth/useRegister';
+import { Loader } from '../shared/Loader';
 
 export const FormRegister = () => {
 
@@ -27,6 +28,7 @@ export const FormRegister = () => {
         setshowPassword(!showPassword)
     }
 
+    if(isPending) return <Loader />
 
   return (
     <>
