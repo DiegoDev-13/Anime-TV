@@ -16,8 +16,8 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
     }
 
   return (
-        <div className="w-full h-screen z-100 absolute top-0 right-0" onClick={() => setActiveProfileSheet(false)}>
-            <div className="absolute z-1000 top-0 right-0 md:top-4 md:right-8 p-4 w-full h-screen md:h-auto md:w-80 border border-stone-700 rounded-lg bg-surface-dark animated-slideIn md:animated-slideInTop" onClick={e => e.stopPropagation()}>
+        <div className="w-full h-screen z-20 absolute top-0 right-0" onClick={() => setActiveProfileSheet(false)}>
+            <div className="absolute z-30 top-0 right-0 md:top-4 md:right-8 p-4 w-full h-screen md:h-auto md:w-80 border border-stone-700 rounded-lg bg-surface-dark animated-slideInTop" onClick={e => e.stopPropagation()}>
                 {
                     isPending 
                         ? <Loader />
@@ -27,16 +27,16 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
                                 </button>
                                 <div className="flex items-center justify-center md:justify-start my-4">
                                     <div className="h-10 w-10 flex items-center justify-center bg-white rounded-full mr-4">
-                                        <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.full_name)}</p>
+                                        <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
                                     </div>
                                     <div>
-                                        <span className="text-white font-medium text-[16px] line-clamp-1">{user?.full_name}</span>
+                                        <span className="text-white font-medium text-[16px] line-clamp-1">{user?.user_name}</span>
                                         <p className="text-sm">{user?.email}</p>
                                     </div>
                                 </div>
                                 <Separator />
                                 <div className="flex flex-col space-y-6 my-12 md:space-y-4 md:my-6">
-                                    <Link to='/profile' className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><IoMdSettings size={20} /> Configuración de Perfil</Link>
+                                    <Link to={`/perfil/${user?.user_name}`} className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><IoMdSettings size={20} /> Configuración de Perfil</Link>
                                     <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdFavorite size={20} /> Lista de Favoritos</Link>
                                     <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdFavorite size={20} /> Centro de Ayuda</Link>
                                 </div>

@@ -28,7 +28,7 @@ export const Navbar = () => {
   // console.log(user)
 
   return (
-    <header className="py-4 bg-surface-dark animated-fadeIn text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12 relative">
+    <header className="py-4 bg-surface-dark animated-fadeIn text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12 relative z-10">
 
       <button className="md:hidden cursor-pointer" onClick={() => setActiveMobile(true)}>
         <FaBars size={25} />
@@ -58,7 +58,7 @@ export const Navbar = () => {
               ? <LuLoaderCircle size={24} className="text-white animate-spin" /> 
               : session?.data.session
             ? <div className="h-8 w-8 bg-white rounded-full flex justify-center items-center cursor-pointer" onClick={() => setActiveProfileSheet(true)}>
-                  <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.full_name)}</p>
+                  <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
                 </div>
               : <button className="flex justify-center items-center gap-2 py-2 px-3 text-sm font-semibold border border-stone-400 rounded-lg hover:text-white hover:border-white transition-all duration-300 cursor-pointer" onClick={() => navigate('/login')}>
                 <FaUser size={15} />

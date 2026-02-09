@@ -1,17 +1,23 @@
-import { useEffect } from "react"
-import { signOut } from "../actions/auth"
-import { useNavigate } from "react-router-dom"
-import { supabase } from "../supabase/Client"
+import { useParams } from "react-router-dom"
+import { UserInfo } from "../components/profile/UserInfo"
+import { useUserByUserName } from "../hooks/auth/useUserByUserName"
+import { FavoriteAnimeList } from "../components/profile/FavoriteAnimeList"
 
 export const Profile = () => {
 
-  const handleSignOut = async () => {
-    await signOut()
-  }
+  const {userName} = useParams()
+
+  console.log(userName)
+
+  const {user, isLoading} = useUserByUserName(userName)
+
+  console.log(user)
   
   return (
-    <div className="flex justify-center items-center my-10">
-        <button className="py-2 px-4 bg-red-500 text-white text-sm rounded-lg cursor-pointer font-medium" onClick={handleSignOut}>Cerrar Sesion</button>
+    <div className="flex flex-col mx-auto">
+        <UserInfo />
+
+        <FavoriteAnimeList favorites={user.favorites_animes} />
     </div>
   )
 }

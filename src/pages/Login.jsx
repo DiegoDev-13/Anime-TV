@@ -34,7 +34,7 @@ export const Login = () => {
 
             <Separator />
             
-            <p className='text-center text-sm text-stone-400 mb-4'>¿No tienes cuenta? <Link className='text-white hover:text-stone-300 transition-all duration-300'>Registrate</Link> </p>
+            <p className='text-center text-sm text-stone-400 mb-4'>{btnLogin ? '¿No tienes cuenta?' : '¿Ya tienes una cuenta?'} <span className='text-white hover:text-stone-300 transition-all duration-300 cursor-pointer' onClick={() => setBtnLogin((prev) => !prev)}>{btnLogin ? 'Registrate' : 'Inisiar Sesión'}</span> </p>
             
             {
                 btnLogin && <p className='text-center text-sm text-stone-400'><Link className='text-purple-600 hover:text-purple-700 transition-all duration-300'>¿Olvidaste tu contraseña?</Link> </p>

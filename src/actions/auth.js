@@ -68,9 +68,20 @@ export const getSession = async () => {
     }
 }
 
-// Para traer los datos del usuario 
+// Para traer los datos del usuario mediante id
 export const getUserById = async (userId) => {
-    const {data, error} = await supabase.from('users').select('*').eq('user_id',userId).single()
+    const {data, error} = await supabase.from('users').select('*').eq('user_id', userId).single()
+
+    if(error) {
+        console.log(error)
+        throw new Error(error.message);
+    }
+
+    return data
+} 
+// Para traer los datos del usuario mediante el userName
+export const getUserByUserName = async (userName) => {
+    const {data, error} = await supabase.from('users').select('*').eq('user_name', userName).single()
 
     if(error) {
         console.log(error)
@@ -99,7 +110,7 @@ export const signIn = async ({email, password}) => {
 
     if(error) {
         console.log(error)
-        throw new Error("Error al iniciar session");
+        throw new Error('Correo o contraseña incorrecta');
         
     }
 } 
