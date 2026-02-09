@@ -5,7 +5,8 @@ export const useSessionUser = () => {
   const {data: session, isLoading} = useQuery({
     queryKey: ['user'],
     queryFn: getSession,
-    retry: false
+    retry: false,
+    refetchOnWindowFocus: false
   })
 
   return {

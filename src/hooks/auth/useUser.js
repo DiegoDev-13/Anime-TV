@@ -5,7 +5,8 @@ export const useUser = (userId) => {
   const {data: user, isLoading} = useQuery({
     queryKey: ['user', userId],
     queryFn: () => getUserById(userId),
-    retry: false
+    retry: false,
+    refetchOnWindowFocus: false
   })
 
   return {

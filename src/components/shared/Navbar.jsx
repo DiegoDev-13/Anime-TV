@@ -54,7 +54,7 @@ export const Navbar = () => {
           </button>
 
           {
-            isLoading 
+            isLoading || isLoadingUser
               ? <LuLoaderCircle size={24} className="text-white animate-spin" /> 
               : session?.data.session
             ? <div className="h-8 w-8 bg-white rounded-full flex justify-center items-center cursor-pointer" onClick={() => setActiveProfileSheet(true)}>

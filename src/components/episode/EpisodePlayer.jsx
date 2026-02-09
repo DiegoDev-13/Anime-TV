@@ -7,7 +7,7 @@ import { MdFavorite, MdOutlineSaveAlt } from "react-icons/md";
 
 export const EpisodePlayer = ({episode, quantityEpisodes, slug}) => {
 
-  const [option, setoption] = useState(episode.iframe.option_1.iframe)
+  const [option, setoption] = useState(episode?.iframe.option_1.iframe || '')
   const [optionActive, setoptionActive] = useState(0)
   const [currentAnime, setCurrentAnime] = useState(null)
 
@@ -33,14 +33,14 @@ export const EpisodePlayer = ({episode, quantityEpisodes, slug}) => {
   
 
     // Convertimos el objeto en array para poder iterar
-    const options = Object.values(episode.iframe)
+    const options = Object.values(episode?.iframe || {})
 
     const handleNextEp = () => {
-      navigate(`/anime/ver/${currentAnime}-${episode.episode_number + 1}`)
+      navigate(`/anime/ver/${currentAnime}-${episode?.episode_number + 1}`)
     }
 
     const handlePrevEp = () => {
-      navigate(`/anime/ver/${currentAnime}-${episode.episode_number - 1}`)
+      navigate(`/anime/ver/${currentAnime}-${episode?.episode_number - 1}`)
     }
     
     const handleAllEpisodes = () => {

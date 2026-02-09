@@ -29,6 +29,11 @@ body {
     background-color: #2a2438;
 }
 
+.bg-surface-dark-highlight:hover {
+    background-color: #382e50;
+
+}
+
 .bg-image-detail {
     background-color: #1a162585;
 }

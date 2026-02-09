@@ -28,9 +28,9 @@ export const getSeasonsHome = async () => {
 export const getAnimeBySlug = async (slug) => {
     const {data, error} = await supabase.from('seasons').select('*, episodes(*), season_comments(*))').eq('slug_season', slug).limit(2, { foreignTable: 'season_comments' }).order('created_at', { foreignTable: 'episodes', ascending: false }).order('created_at', { foreignTable: 'season_comments', ascending: false }).single()
 
-    if(error) {
+    if(error || !data) {
         console.log(error)
-        throw new Error(error.message);
+        throw new Error('Anime no encontrado');
     }
 
     return data
@@ -100,9 +100,9 @@ export const searchAnime = async (searchTerm) => {
 export const getEpisodeBySlug = async (slug) => {
     const {data, error} = await supabase.from('episodes').select('*').eq('slug_episode', slug).single()
 
-    if(error) {
+    if(error || !data) {
         console.log(error)
-        throw new Error(error.message);
+        throw new Error('Error al encontrar episodio');
     }
 
     return data
@@ -117,4 +117,19 @@ export const getAllEpisodesAnime = async (seasonId) => {
     }
 
     return data
+}
+
+
+// Llama a la api de ###(jikan)### y trae los datos de un anime 
+export const getAnimeDetails = async (name) => {
+    const url = 'https://api.jikan.moe/v4/anime?q='
+
+    try {
+        const res = await fetch(`${url}${name}`)
+        const data = await res.json()
+
+        return data.data[0].score
+    } catch (error) {
+        console.log(error)
+    }
 }

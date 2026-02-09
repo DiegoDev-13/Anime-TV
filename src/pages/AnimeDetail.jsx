@@ -11,11 +11,11 @@ export const AnimeDetail = () => {
 
     const {slug} = useParams()
 
-    const {data: anime, isLoading, isError} = useAnime(slug)
+    const {data: anime, isLoading, isError, error} = useAnime(slug)
 
-    if(isLoading || !anime) return <Loader />
+    if(isLoading) return <Loader />
 
-  if(isError) return <div className="my-30 text-center text-red-500 text-2xl">Error</div>
+  if(isError || !anime) return <div className="my-30 text-center text-red-500 text-2xl">{error.message}</div>
 
   return (
     <div className="">

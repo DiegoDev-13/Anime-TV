@@ -9,18 +9,20 @@ export const AnimeView = () => {
 
     const { slug } = useParams() 
 
-    const {data: episode, isLoading, isError} = useEpisode(slug)
+    const {data: episode, isLoading, isError, error} = useEpisode(slug)
 
     const {data: episodes, isLoading: isLoadingEpisodes} = useAllEpisodes(episode?.season_id)
 
-    if(isLoading || !episode || isLoadingEpisodes) return <Loader />
+    if(isLoading || isLoadingEpisodes) return <Loader />
+
+    if(isError) return <div className="my-30 text-center text-red-500 text-2xl">{error.message}</div>
 
   return (
     
     <div className=" w-full">
-        <title>{`${episode?.title} ${episode.episode_number} Sub Español Online gratis - AnimeVista`}</title>
+        <title>{`${episode?.title} ${episode?.episode_number} Sub Español Online gratis - AnimeVista`}</title>
         <div className="flex flex-wrap w-full space-y-4 ">
-            <EpisodePlayer episode={episode} quantityEpisodes={episodes?.length || 0} slug={slug} />
+            <EpisodePlayer episode={episode || []} quantityEpisodes={episodes?.length || 0} slug={slug} />
 
             <EpisodeList episodes={episodes} />
         </div>

@@ -5,7 +5,8 @@ export const useAllEpisodes = (seasonId) => {
     const {data, isLoading} = useQuery({
         queryKey: ['episodes', seasonId],
         queryFn: () => getAllEpisodesAnime(seasonId),
-        retry: false
+        retry: false,
+        refetchOnWindowFocus: false
     })
 
 

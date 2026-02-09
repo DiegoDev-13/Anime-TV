@@ -1,6 +1,7 @@
 import { MdEdit } from "react-icons/md";
+import { getFirstLetter } from "../../helpers";
 
-export const UserInfo = () => {
+export const UserInfo = ({user}) => {
   return (
     <div className="w-full flex flex-col items-center relative">
       <div className="w-full h-50 md:h-auto md:max-h-100">
@@ -9,10 +10,10 @@ export const UserInfo = () => {
       <div className="flex flex-col md:flex-row w-full justify-around items-center absolute md:bottom-10 md:left-0">
         <div className="flex flex-col md:flex-row items">
           <div className="w-20 h-20 md:w-30 md:h-30 flex justify-center items-center bg-amber-50 rounded-full">
-            <p className="uppercase text-4xl md:text-6xl font-semibold">O</p>
+            <p className="uppercase text-4xl md:text-6xl font-semibold">{getFirstLetter(user.user_name)}</p>
           </div> 
           <div className="ml-4">
-            <h2 className="text-2xl md:text-3xl text-white font-semibold mb-1">NameUser</h2>
+            <h2 className="text-2xl md:text-3xl text-white font-semibold mb-1">@{user.user_name}</h2>
             <p className="text-sm w-[80%] md:w-ful text-stone-300 ">Donde el 'un episodio más' se convierte en una maratón de toda la noche.</p>
           </div>  
         </div>

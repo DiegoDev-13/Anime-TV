@@ -1,11 +1,24 @@
 import { IoStar } from "react-icons/io5";
 import { CardGender } from "../directory/Cardgender";
 import { FaPlay, FaRegStopCircle } from "react-icons/fa";
+import { IoMdAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useSessionUser } from "../../hooks/auth/useSessionUser";
+import toast from "react-hot-toast";
 
 export const AnimeInfo = ({anime}) => {
 
     const navigate = useNavigate()
+
+    const {session, isLoading} = useSessionUser()
+    console.log(session.data.session)
+
+    const addFavorite = () => {
+        if(session.data.session) {
+            toast.error('Inicia Sesion para poder agregar a tu lista de favoritos')
+        }
+        console.log('agregado', anime)
+    }
 
   return (
     <div className="flex flex-col bg-dark bg-blend-overlay shadow-[inset_0px_0px_56px_70px_#0f0f12] bg-cover" style={{backgroundImage: `url('${anime?.image_front}')`,}}> 
@@ -22,11 +35,11 @@ export const AnimeInfo = ({anime}) => {
                 <div className="flex flex-wrap items-center space-x-5 justify-center md:justify-start space-y-6 md:space-y-1">
                     <span className="font-semibold text-lg text-white flex justify-center items-center gap-2">
                         <IoStar size={16} className="text-yellow-300" />
-                        4.8
+                        {anime.score}
                         <p className="text-stone-400 text-sm font-normal">(12k reviews)</p>
                     </span>
                     <div className="h-1 w-1 bg-stone-600 rounded-full" />
-                    <p className="text-stone-300 text-sm">2025</p>
+                    <p className="text-stone-300 text-sm">{anime.year}</p>
                     <div className="h-1 w-1 bg-stone-600 rounded-full" />
                     <span className="py-px px-2 border border-stone-600 rounded-sm text-xs text-stone-300">TV</span>
                     <div className="h-1 w-1 bg-stone-600 rounded-full" />
@@ -52,11 +65,18 @@ export const AnimeInfo = ({anime}) => {
                     }
                 </div>
 
-                <div className="flex justify-start items-center mt-6">
+                <div className="flex flex-col md:flex-row justify-start items-center mt-6 space-x-4">
                     <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-purple-600 py-3 px-6 rounded-lg font-semibold shadow-sm shadow-purple-600 cursor-pointer hover:bg-purple-700 transition-colors duration-300" onClick={() => navigate(`/anime/ver/${anime.slug_season}-1`)}>
                         <FaPlay size={12} />
                         Ver Ahora T1 E1
                     </button>
+
+                    {
+                        session.data.session === null ? '' : <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-surface-dark-highlight py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-white" onClick={() => addFavorite()}>
+                        <IoMdAdd size={16} />
+                        Añadir a favoritos
+                    </button>
+                    }
                 </div>
 
             </div>
