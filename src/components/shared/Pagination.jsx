@@ -1,4 +1,4 @@
-export const Pagination = ({setPage, page, totalItems}) => {
+export const Pagination = ({setPage, page, totalItems, itemsPerPage}) => {
 
     const handleNextPage = () => {
         setPage(prev => prev + 1)
@@ -10,7 +10,6 @@ export const Pagination = ({setPage, page, totalItems}) => {
         }
     }
 
-    const itemsPerPage = 24
     const totalPage = totalItems ? Math.ceil(totalItems / itemsPerPage) : 1
     const isLastpage = page >= totalPage
 

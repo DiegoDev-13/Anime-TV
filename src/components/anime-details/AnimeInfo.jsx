@@ -1,24 +1,56 @@
 import { IoStar } from "react-icons/io5";
 import { CardGender } from "../directory/Cardgender";
-import { FaPlay, FaRegStopCircle } from "react-icons/fa";
+import { FaBaby, FaPlay, FaRegSave, FaRegStopCircle } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useSessionUser } from "../../hooks/auth/useSessionUser";
 import toast from "react-hot-toast";
+import { useAddFavorite } from "../../hooks/favorites/useAddFavorite";
+import { useGetFavorite } from "../../hooks/favorites/useGetFavorite";
+import { TbLoader2 } from "react-icons/tb";
+import { useRemoveFavorite } from "../../hooks/favorites/useRemoveFavorite";
+import { useEffect, useState } from "react";
 
 export const AnimeInfo = ({anime}) => {
+
+    const [isFavorite, setIsFavorite] = useState(null)
 
     const navigate = useNavigate()
 
     const {session, isLoading} = useSessionUser()
-    console.log(session.data.session)
+    const {data: favorite, isLoading: isLoadingFavorite, isError: isErrorFavorite} = useGetFavorite(anime.slug_season)
 
+    useEffect(() => {
+      if(favorite) {
+        setIsFavorite(true)
+      } else {
+        setIsFavorite(false)
+      }
+    }, [favorite])
+
+    const {mutate: mutateAdd, isPending: isPendingAdd, isError: isErrorAdd} = useAddFavorite()
+    const {mutate: mutateRemove, isPending: isPendingRemove, isError: isErrorRemove} = useRemoveFavorite()
+     
     const addFavorite = () => {
-        if(session.data.session) {
+        if(session.data.session === null) {
             toast.error('Inicia Sesion para poder agregar a tu lista de favoritos')
+            return
         }
-        console.log('agregado', anime)
+        const {name_season, year, image, description, gender, score, slug_season} = anime
+
+        mutateAdd({name_season, year, image, description, gender, score, slug_season})
+        setIsFavorite(true)
     }
+
+    const removeFavorite = (slug) => {
+        if(session.data.session === null) {
+            toast.error('Inicia Sesion para poder eliminar de tu lista de favoritos')
+            return
+        }
+        mutateRemove(slug)
+        setIsFavorite(false)
+    }
+
 
   return (
     <div className="flex flex-col bg-dark bg-blend-overlay shadow-[inset_0px_0px_56px_70px_#0f0f12] bg-cover" style={{backgroundImage: `url('${anime?.image_front}')`,}}> 
@@ -65,17 +97,27 @@ export const AnimeInfo = ({anime}) => {
                     }
                 </div>
 
-                <div className="flex flex-col md:flex-row justify-start items-center mt-6 space-x-4">
+                <div className="flex flex-col md:flex-row justify-center items-center mt-6 md:space-x-4 space-y-4 md:space-y-0 mx-6 md:mx-0">
                     <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-purple-600 py-3 px-6 rounded-lg font-semibold shadow-sm shadow-purple-600 cursor-pointer hover:bg-purple-700 transition-colors duration-300" onClick={() => navigate(`/anime/ver/${anime.slug_season}-1`)}>
                         <FaPlay size={12} />
                         Ver Ahora T1 E1
                     </button>
 
                     {
-                        session.data.session === null ? '' : <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-surface-dark-highlight py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-white" onClick={() => addFavorite()}>
-                        <IoMdAdd size={16} />
-                        Añadir a favoritos
-                    </button>
+                        isLoadingFavorite || isPendingAdd || isPendingRemove
+                            ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-surface-dark-highlight py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-white">
+                                <TbLoader2 size={30} className="text-white animate-spin duration-300" />
+                            </button> 
+                            : isFavorite
+                                    ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-red-500/20 hover:bg-red-500/30 py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-red-500 border border-red-600" onClick={() => removeFavorite(anime.slug_season)}>
+                                        <FaRegSave size={20} />
+                                        Eliminar de favoritos
+                                    </button> 
+                                    : <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-surface-dark-highlight py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-white" onClick={addFavorite}>
+                                        <IoMdAdd size={16} />
+                                        Añadir a favoritos
+                                    </button> 
+
                     }
                 </div>
 

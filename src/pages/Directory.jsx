@@ -58,7 +58,7 @@ export const Directory = () => {
 
       <AnimeGridDirectory animes={animes} isLoading={isLoading} />
 
-        <Pagination setPage={setPage} page={page} totalItems={totalAnimes} />
+        <Pagination setPage={setPage} page={page} totalItems={totalAnimes} itemsPerPage={24}/>
 
     </div>
   )

@@ -6,12 +6,12 @@ export const useAnimeFavorites = (userId, page) => {
     const {data, isLoading, isError , error} = useQuery({
         queryKey: ['favorite', userId, page],
         queryFn: () => getAnimeFavorites(userId, page),
-        retry: false,
-        refetchOnWindowFocus: false
+        refetchOnWindowFocus: false,
     })
 
     return {
-        data,
+        data: data?.data,
+        totalFavorites: data?.count,
         isLoading,
         isError,
         error
