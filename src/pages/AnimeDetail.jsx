@@ -6,21 +6,26 @@ import { Separator } from '../components/shared/Separator'
 import { AnimeListEpisodes } from "../components/anime-details/AnimeListEpisodes"
 import { AnimeMoreInfo } from "../components/anime-details/AnimeMoreInfo"
 import { GridComments } from "../components/shared/GridComments"
+import { Comments } from "../components/anime-details/Comments"
+import { useSessionUser } from "../hooks/auth/useSessionUser"
+import { useUser } from "../hooks/auth/useUser"
 
 export const AnimeDetail = () => {
 
     const {slug} = useParams()
 
     const {data: anime, isLoading, isError, error} = useAnime(slug)
+    const {session, isLoading: isLoadingSession} = useSessionUser()
+    const {user, isLoading: isLoadingUser} = useUser(session?.data?.session?.user.id)
 
-    if(isLoading) return <Loader />
+    if(isLoading || isLoadingSession || isLoadingUser) return <Loader />
 
   if(isError || !anime) return <div className="my-30 text-center text-red-500 text-2xl">{error.message}</div>
 
   return (
     <div className="">
       <title>{`${anime?.name_season} Sub Español Online gratis - AnimeVista`}</title>
-        <AnimeInfo anime={anime} />
+        <AnimeInfo anime={anime} session={session}/>
 
         <Separator />
 
@@ -32,7 +37,10 @@ export const AnimeDetail = () => {
 
             <GridComments comments={anime.season_comments} />
           </div>
+
+
         </div>
+          <Comments session={session?.data.session} user={user} seasonId={anime.id}/>
     </div>
   )
 }

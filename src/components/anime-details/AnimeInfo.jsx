@@ -11,13 +11,14 @@ import { TbLoader2 } from "react-icons/tb";
 import { useRemoveFavorite } from "../../hooks/favorites/useRemoveFavorite";
 import { useEffect, useState } from "react";
 
-export const AnimeInfo = ({anime}) => {
+export const AnimeInfo = ({anime, session}) => {
 
     const [isFavorite, setIsFavorite] = useState(null)
 
     const navigate = useNavigate()
 
-    const {session, isLoading} = useSessionUser()
+    // console.log(session.data.session)
+
     const {data: favorite, isLoading: isLoadingFavorite, isError: isErrorFavorite} = useGetFavorite(anime.slug_season)
 
     useEffect(() => {
@@ -108,7 +109,7 @@ export const AnimeInfo = ({anime}) => {
                             ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-surface-dark-highlight py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-white">
                                 <TbLoader2 size={30} className="text-white animate-spin duration-300" />
                             </button> 
-                            : isFavorite
+                            : isFavorite && session.data.session
                                     ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-red-500/20 hover:bg-red-500/30 py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-red-500 border border-red-600" onClick={() => removeFavorite(anime.slug_season)}>
                                         <FaRegSave size={20} />
                                         Eliminar de favoritos

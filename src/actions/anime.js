@@ -24,7 +24,7 @@ export const getSeasonsHome = async () => {
     return data
 }
 
-// Hace la peticion en supabase para traer el anime mediante el slug
+// Hace la peticion en supabase para traer el anime mediante el slug + los comentarios relacionado a ese anime
 export const getAnimeBySlug = async (slug) => {
     const {data, error} = await supabase.from('seasons').select('*, episodes(*), season_comments(*))').eq('slug_season', slug).limit(2, { foreignTable: 'season_comments' }).order('created_at', { foreignTable: 'episodes', ascending: false }).order('created_at', { foreignTable: 'season_comments', ascending: false }).single()
 
@@ -35,6 +35,23 @@ export const getAnimeBySlug = async (slug) => {
 
     return data
 } 
+
+//Agrega un nuevo comentario a la base de datos
+export const addComment = async ({seasonId, userId, comment, imageProfile, ranking, userName}) => {
+    const {error} = await supabase.from('season_comments').insert({
+        'season_id': seasonId,
+        'user_uid': userId,
+        'comment': comment,
+        'image_profile': imageProfile,
+        'ranking': ranking,
+        'user_name': userName
+    })
+
+    if(error) {
+        console.log(error.message)
+        throw new Error("Error al intentar añadir comentario");
+    }
+}
 
 // Hace la peticion a supabase para traer los generos de los animes 
 export const getGender = async () => {
@@ -108,6 +125,7 @@ export const getEpisodeBySlug = async (slug) => {
     return data
 }
 
+//llama a todos los espisodios de una temporada
 export const getAllEpisodesAnime = async (seasonId) => {
     const {data, error} = await supabase.from('episodes').select('*').eq('season_id', seasonId).order('created_at', { ascending: false })
 
@@ -118,6 +136,7 @@ export const getAllEpisodesAnime = async (seasonId) => {
 
     return data
 }
+
 
 
 // Llama a la api de ###(jikan)### y trae los datos de un anime 
