@@ -11,7 +11,7 @@ export const getFirstLetter = (text = '') => {
 }
 
 //Funcion para formatear la fecha y devolver hace cuanto fue publicado el comentario
-export const formatDate = (date) => {
+export const formatDateAgo = (date) => {
     const now = new Date()
     const commentDate = new Date(date)
     const diffTiime = now.getTime() - commentDate.getTime()

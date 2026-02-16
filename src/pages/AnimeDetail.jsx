@@ -9,6 +9,7 @@ import { GridComments } from "../components/shared/GridComments"
 import { Comments } from "../components/anime-details/Comments"
 import { useSessionUser } from "../hooks/auth/useSessionUser"
 import { useUser } from "../hooks/auth/useUser"
+import { ErrorPage } from "../components/shared/ErrorPage"
 
 export const AnimeDetail = () => {
 
@@ -20,7 +21,7 @@ export const AnimeDetail = () => {
 
     if(isLoading || isLoadingSession || isLoadingUser) return <Loader />
 
-  if(isError || !anime) return <div className="my-30 text-center text-red-500 text-2xl">{error.message}</div>
+  if(isError || !anime) return <ErrorPage error={error.message} />
 
   return (
     <div className="">

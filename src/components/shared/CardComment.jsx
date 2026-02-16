@@ -1,5 +1,5 @@
 import { IoStar } from "react-icons/io5"
-import { formatDate } from "../../helpers"
+import { formatDateAgo } from "../../helpers"
 
 export const CardComment = ({name, image, comment, ranking, time}) => {
 
@@ -18,7 +18,7 @@ export const CardComment = ({name, image, comment, ranking, time}) => {
                   ))
                 }
               </div>
-              <span className="text-stone-300 text-xs">{formatDate(time)}</span>
+              <span className="text-stone-300 text-xs">{formatDateAgo(time)}</span>
             </div>
         </div>
         <p className="text-stone-300 italic text-[15px] max-h-40 md:max-h-50 line-clamp-6 md:line-clamp-8">" {comment} "</p>

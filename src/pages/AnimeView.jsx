@@ -4,6 +4,7 @@ import { Loader } from "../components/shared/Loader"
 import { EpisodePlayer } from "../components/episode/EpisodePlayer"
 import { EpisodeList } from "../components/episode/EpisodeList"
 import { useAllEpisodes } from "../hooks/useAllEpisodes"
+import { ErrorPage } from "../components/shared/ErrorPage"
 
 export const AnimeView = () => {
 
@@ -15,7 +16,7 @@ export const AnimeView = () => {
 
     if(isLoading || isLoadingEpisodes) return <Loader />
 
-    if(isError) return <div className="my-30 text-center text-red-500 text-2xl">{error.message}</div>
+    if(isError) return <ErrorPage error={error.message} />
 
   return (
     

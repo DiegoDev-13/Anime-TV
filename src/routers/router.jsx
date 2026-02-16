@@ -7,6 +7,7 @@ import { AnimeView } from '../pages/AnimeView'
 import { Login } from '../pages/Login'
 import { Profile } from '../pages/Profile'
 import { ProtectedRoute } from '../layouts/ProtectedRoute'
+import { ErrorPage } from '../components/shared/ErrorPage'
 
 export const MyRouters = () => {
   return (
@@ -20,6 +21,8 @@ export const MyRouters = () => {
             <Route element={<ProtectedRoute/>}>
               <Route path='/perfil/:userName' element={<Profile />} /> 
             </Route>
+
+            <Route path="*" element={<ErrorPage />} />
         </Route>
     </Routes>
   )
