@@ -21,7 +21,7 @@ export const getAnimeFavorites = async (userId, page = 1) => {
 }
 
 // Agrega un anime favorito a la lista del usuario
-export const addFavorites = async ({name_season, year, image, description, gender, score, slug_season}) => {
+export const addFavorites = async ({name_season, year, image, description, gender, score, slug_season, id}) => {
     const {error} = await supabase.from('favorites_animes').insert({
         title: name_season,
         year,
@@ -29,7 +29,8 @@ export const addFavorites = async ({name_season, year, image, description, gende
         description,
         genders: gender,
         score,
-        slug: slug_season
+        slug: slug_season,
+        season_id: id,
     })
 
     if(error) {
@@ -39,26 +40,28 @@ export const addFavorites = async ({name_season, year, image, description, gende
 
 }
 // Elimina un anime favorito de la lista del usuario
-export const removeFavorite = async (slug) => {
-    const {error} = await supabase.from('favorites_animes').delete().eq('slug', slug)
+export const removeFavorite = async (animeId) => {
+
+    const {error} = await supabase.from('favorites_animes').delete().eq('id', animeId)
 
     if(error) {
         console.log(error)
-        throw new Error("Error al intentar eliminar anime de la lista de favoritos");
+        // throw new Error("Error al intentar eliminar anime de la lista de favoritos");
+        throw new Error(error.message);
         
     }
 }
 
 // busca si el anime esta guardado en la listad del usuario
-export const getFavorite = async (slug) => {
-    const {data, error} = await supabase.from('favorites_animes').select('*').eq('slug', slug).single()
+export const getFavorite = async (userId, seasonId) => {
+    const {data, error} = await supabase.from('favorites_animes').select('*').eq('user_id', userId).eq('season_id', seasonId).maybeSingle()
 
     if(error) {
         console.log(error)
         throw new Error("Error al buscar anime favorito guardado");
     }
-
-    return data 
+    
+    return data
 }
 
 // Busca un anime de la lista de favoritos del usuario

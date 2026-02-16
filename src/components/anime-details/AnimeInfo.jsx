@@ -12,23 +12,13 @@ import { useRemoveFavorite } from "../../hooks/favorites/useRemoveFavorite";
 import { useEffect, useState } from "react";
 
 export const AnimeInfo = ({anime, session}) => {
-
-    const [isFavorite, setIsFavorite] = useState(null)
-
     const navigate = useNavigate()
 
-    // console.log(session.data.session)
+    const userId = session?.data?.session?.user.id
+    const seasonId = anime?.id
 
-    const {data: favorite, isLoading: isLoadingFavorite, isError: isErrorFavorite} = useGetFavorite(anime.slug_season)
-
-    useEffect(() => {
-      if(favorite) {
-        setIsFavorite(true)
-      } else {
-        setIsFavorite(false)
-      }
-    }, [favorite])
-
+    const {data: favorite, isLoading: isLoadingFavorite, isError: isErrorFavorite, refetch} = useGetFavorite(userId, seasonId)
+    
     const {mutate: mutateAdd, isPending: isPendingAdd, isError: isErrorAdd} = useAddFavorite()
     const {mutate: mutateRemove, isPending: isPendingRemove, isError: isErrorRemove} = useRemoveFavorite()
      
@@ -37,21 +27,23 @@ export const AnimeInfo = ({anime, session}) => {
             toast.error('Inicia Sesion para poder agregar a tu lista de favoritos')
             return
         }
-        const {name_season, year, image, description, gender, score, slug_season} = anime
+        const {name_season, year, image, description, gender, score, slug_season, id} = anime
 
-        mutateAdd({name_season, year, image, description, gender, score, slug_season})
-        setIsFavorite(true)
+        mutateAdd({name_season, year, image, description, gender, score, slug_season, id})
     }
 
-    const removeFavorite = (slug) => {
+    const removeFavorite = (animeId) => {
         if(session.data.session === null) {
             toast.error('Inicia Sesion para poder eliminar de tu lista de favoritos')
             return
         }
-        mutateRemove(slug)
-        setIsFavorite(false)
-    }
 
+        mutateRemove({ animeId, userId, seasonId }, {
+            onSuccess: () => {
+                refetch()
+            }
+        })
+    }
 
   return (
     <div className="flex flex-col bg-dark bg-blend-overlay shadow-[inset_0px_0px_56px_70px_#0f0f12] bg-cover" style={{backgroundImage: `url('${anime?.image_front}')`,}}> 
@@ -109,8 +101,8 @@ export const AnimeInfo = ({anime, session}) => {
                             ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-surface-dark-highlight py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-white">
                                 <TbLoader2 size={30} className="text-white animate-spin duration-300" />
                             </button> 
-                            : isFavorite && session.data.session
-                                    ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-red-500/20 hover:bg-red-500/30 py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-red-500 border border-red-600" onClick={() => removeFavorite(anime.slug_season)}>
+                            : favorite && session.data.session
+                                    ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-red-500/20 hover:bg-red-500/30 py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-red-500 border border-red-600" onClick={() => removeFavorite(favorite?.id)}>
                                         <FaRegSave size={20} />
                                         Eliminar de favoritos
                                     </button> 

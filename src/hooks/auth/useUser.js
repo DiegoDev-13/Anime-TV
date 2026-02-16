@@ -6,6 +6,7 @@ export const useUser = (userId) => {
     queryKey: ['user', userId],
     queryFn: () => getUserById(userId),
     retry: false,
+    enabled: !!userId,
     refetchOnWindowFocus: false
   })
 

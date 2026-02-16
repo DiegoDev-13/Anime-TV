@@ -11,7 +11,8 @@ export const useLogOut = () => {
     mutationFn: signOut,
     onSuccess: () => {
         queryClient.invalidateQueries({queryKey: ['user']}),
-        navigate('/login')
+        queryClient.clear()
+        navigate('/login', {replace: true})
     },
     onError: (err) => {
         throw new Error(err.message);

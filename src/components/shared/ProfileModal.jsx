@@ -2,7 +2,7 @@ import { IoCloseOutline } from "react-icons/io5"
 import {Separator} from '../shared/Separator'
 import { Link } from "react-router-dom"
 import { IoMdSettings } from "react-icons/io"
-import { MdFavorite, MdLogout } from "react-icons/md"
+import { MdFavorite, MdLogout, MdOutlineHelpOutline } from "react-icons/md"
 import { useLogOut } from "../../hooks/auth/useLogOut"
 import {Loader} from '../shared/Loader'
 import { getFirstLetter } from "../../helpers"
@@ -38,7 +38,7 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
                                 <div className="flex flex-col space-y-6 my-12 md:space-y-4 md:my-6">
                                     <Link to={`/perfil/${user?.user_name}`} className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><IoMdSettings size={20} /> Configuración de Perfil</Link>
                                     <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdFavorite size={20} /> Lista de Favoritos</Link>
-                                    <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdFavorite size={20} /> Centro de Ayuda</Link>
+                                    <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdOutlineHelpOutline size={20} /> Centro de Ayuda</Link>
                                 </div>
                                 <Separator />
                                 <button className="bg-red-600 md:bg-transparent text-white w-full md:w-auto px-4 py-2 md:px-0 md:py-0 rounded-lg md:rounded-none md:text-red-600 md:bg-none font-semibold flex items-center justify-center md:justify-start gap-2 cursor-pointer md:hover:text-red-700 transition-colors duration-300" onClick={handleSignOut}><MdLogout size={20} />Cerrar Sesión</button>

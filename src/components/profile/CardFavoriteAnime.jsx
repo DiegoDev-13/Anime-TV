@@ -12,8 +12,8 @@ export const CardFavoriteAnime = ({favorite, setSearchResults}) => {
   
   const handleRemove = (e) => {
     e.stopPropagation()
+    mutate({animeId: favorite.id, userId: favorite.user_id, seasonId: favorite.season_id})
     setSearchResults([])
-    mutate(favorite.slug)
   }
 
   if(isPending) return <Loader />

@@ -11,7 +11,7 @@ export const GridComments = ({comments}) => {
         
         {
             comments.map(comment => (
-                <CardComment key={comment.id} name={comment.user_name} image={comment.image_profile} comment={comment.comment} ranking={comment.ranking}/>
+                <CardComment key={comment.id} name={comment.user_name} image={comment.image_profile} comment={comment.comment} ranking={comment.ranking} time={comment.created_at}/>
             ))
         }
 
