@@ -2,14 +2,16 @@ import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
 import { getSearchFavorites } from "../../actions/AnimeFavorites"
 
-export const SearchFavorites = ({setSearchResults}) => {
+export const SearchFavorites = ({setSearchResults, userId}) => {
     const [searchTerm, setsearchTerm] = useState('')
+
+    console.log(userId)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         if(searchTerm.trim()) {
-            const data = await getSearchFavorites(searchTerm)
+            const data = await getSearchFavorites(userId, searchTerm)
             setSearchResults(data)
         }
     }

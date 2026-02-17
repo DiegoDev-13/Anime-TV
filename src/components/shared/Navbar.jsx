@@ -4,11 +4,11 @@ import { IoMdHome } from "react-icons/io";
 import { IoFolderOpenSharp, IoSearch } from "react-icons/io5";
 import { FaBars, FaUser  } from "react-icons/fa";
 import { useGlobalStore } from "../../store/global.store";
-import { useSessionUser } from "../../hooks/auth/useSessionUser";
 import { LuLoaderCircle } from "react-icons/lu";
 import { useUser } from "../../hooks/auth/useUser";
 import { getFirstLetter } from "../../helpers";
 import { ProfileModal } from "./ProfileModal";
+import { useUserStore } from "../../store/useUserStore";
 
 export const Navbar = () => {
 
@@ -19,13 +19,11 @@ export const Navbar = () => {
 
   const navigate = useNavigate()
 
-  const {session, isLoading} = useSessionUser()
+  const {session, isLoading} = useUserStore()
   
-  const userId = session?.data?.session?.user.id 
+  const userId = session?.user.id 
 
   const {user, isLoading: isLoadingUser} = useUser(userId)
-
-  // console.log(user)
 
   return (
     <header className="py-4 bg-surface-dark animated-fadeIn text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12 relative z-10">
@@ -56,7 +54,7 @@ export const Navbar = () => {
           {
             isLoading || isLoadingUser
               ? <LuLoaderCircle size={24} className="text-white animate-spin" /> 
-              : session?.data.session
+              : session
             ? <div className="h-8 w-8 bg-white rounded-full flex justify-center items-center cursor-pointer" onClick={() => setActiveProfileSheet(true)}>
                   <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
                 </div>

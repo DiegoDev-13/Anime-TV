@@ -19,7 +19,7 @@ export const MyRouters = () => {
             <Route path='/anime/ver/:slug' element={<AnimeView />} />
             <Route path='/login' element={<Login />}/>
             <Route element={<ProtectedRoute/>}>
-              <Route path='/perfil/:userName' element={<Profile />} /> 
+              <Route path='/perfil' element={<Profile />} /> 
             </Route>
 
             <Route path="*" element={<ErrorPage />} />

@@ -15,7 +15,7 @@ export const FavoriteAnimeList = ({userId}) => {
 
     const navigate = useNavigate()
 
-    const {data: favorites, isLoading, isError, error, totalFavorites} = useAnimeFavorites(userId, page)
+    const {data: favorites, isLoading, isError, totalFavorites} = useAnimeFavorites(userId, page)
 
     if(isLoading) return <Loader />
 
@@ -31,7 +31,7 @@ export const FavoriteAnimeList = ({userId}) => {
                 </div>
                 <p className="text-stone-400 text-sm">Tienes {totalFavorites || 0} animes guardadas en tu colección</p>
             </div>
-            <SearchFavorites setSearchResults={setSearchResults} />
+            <SearchFavorites setSearchResults={setSearchResults} userId={userId}/>
         </div>
 
         {

@@ -36,7 +36,7 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
                                 </div>
                                 <Separator />
                                 <div className="flex flex-col space-y-6 my-12 md:space-y-4 md:my-6">
-                                    <Link to={`/perfil/${user?.user_name}`} className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><IoMdSettings size={20} /> Configuración de Perfil</Link>
+                                    <Link to={`/perfil`} className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><IoMdSettings size={20} /> Configuración de Perfil</Link>
                                     <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdFavorite size={20} /> Lista de Favoritos</Link>
                                     <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdOutlineHelpOutline size={20} /> Centro de Ayuda</Link>
                                 </div>

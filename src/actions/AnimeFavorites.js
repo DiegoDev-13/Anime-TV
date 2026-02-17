@@ -65,8 +65,8 @@ export const getFavorite = async (userId, seasonId) => {
 }
 
 // Busca un anime de la lista de favoritos del usuario
-export const getSearchFavorites = async (searchTerm) => {
-    const {data, error} = await supabase.from('favorites_animes').select('*').ilike('title', `%${searchTerm}%`)
+export const getSearchFavorites = async (userId, searchTerm) => {
+    const {data, error} = await supabase.from('favorites_animes').select('*').eq('user_id', userId).ilike('title', `%${searchTerm}%`)
 
     if(error) {
         console.log(error.message)

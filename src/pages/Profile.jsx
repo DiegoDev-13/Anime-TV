@@ -1,18 +1,18 @@
 import { useParams } from "react-router-dom"
 import { UserInfo } from "../components/profile/UserInfo"
-import { useUserByUserName } from "../hooks/auth/useUserByUserName"
 import { FavoriteAnimeList } from "../components/profile/FavoriteAnimeList"
 import { Loader } from "../components/shared/Loader"
-import { useSessionUser } from "../hooks/auth/useSessionUser"
+import { useUserStore } from "../store/useUserStore"
+import { useUser } from "../hooks/auth/useUser"
 
 export const Profile = () => {
 
   const {userName} = useParams()
 
-  // console.log(userName)
+  const {session, isLoading: isLoadingSession} = useUserStore()
+  const userId = session?.user.id
 
-  const {user, isLoading} = useUserByUserName(userName)
-  const {session, isLoading: isLoadingSession} = useSessionUser()
+  const {user, isLoading} = useUser(userId)
 
   if(isLoading || isLoadingSession) return <Loader />
 
@@ -20,7 +20,7 @@ export const Profile = () => {
     <div className="flex flex-col">
         <UserInfo user={user} />
 
-        <FavoriteAnimeList userId={session?.data.session.user.id} />
+        <FavoriteAnimeList userId={session.user.id} />
     </div>
   )
 }

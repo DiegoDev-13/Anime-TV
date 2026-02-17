@@ -3,18 +3,16 @@ import { CardGender } from "../directory/Cardgender";
 import { FaBaby, FaPlay, FaRegSave, FaRegStopCircle } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
-import { useSessionUser } from "../../hooks/auth/useSessionUser";
 import toast from "react-hot-toast";
 import { useAddFavorite } from "../../hooks/favorites/useAddFavorite";
 import { useGetFavorite } from "../../hooks/favorites/useGetFavorite";
 import { TbLoader2 } from "react-icons/tb";
 import { useRemoveFavorite } from "../../hooks/favorites/useRemoveFavorite";
-import { useEffect, useState } from "react";
 
 export const AnimeInfo = ({anime, session}) => {
     const navigate = useNavigate()
 
-    const userId = session?.data?.session?.user.id
+    const userId = session?.user.id
     const seasonId = anime?.id
 
     const {data: favorite, isLoading: isLoadingFavorite, isError: isErrorFavorite, refetch} = useGetFavorite(userId, seasonId)
@@ -23,7 +21,7 @@ export const AnimeInfo = ({anime, session}) => {
     const {mutate: mutateRemove, isPending: isPendingRemove, isError: isErrorRemove} = useRemoveFavorite()
      
     const addFavorite = () => {
-        if(session.data.session === null) {
+        if(session === null) {
             toast.error('Inicia Sesion para poder agregar a tu lista de favoritos')
             return
         }
@@ -33,7 +31,7 @@ export const AnimeInfo = ({anime, session}) => {
     }
 
     const removeFavorite = (animeId) => {
-        if(session.data.session === null) {
+        if(session === null) {
             toast.error('Inicia Sesion para poder eliminar de tu lista de favoritos')
             return
         }
@@ -101,7 +99,7 @@ export const AnimeInfo = ({anime, session}) => {
                             ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-surface-dark-highlight py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-white">
                                 <TbLoader2 size={30} className="text-white animate-spin duration-300" />
                             </button> 
-                            : favorite && session.data.session
+                            : favorite && session
                                     ? <button className="flex w-full md:w-auto justify-center items-center gap-2 bg-red-500/20 hover:bg-red-500/30 py-3 px-6 rounded-lg font-semibold transition-all duration-300 cursor-pointer text-red-500 border border-red-600" onClick={() => removeFavorite(favorite?.id)}>
                                         <FaRegSave size={20} />
                                         Eliminar de favoritos

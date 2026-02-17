@@ -7,17 +7,17 @@ import { AnimeListEpisodes } from "../components/anime-details/AnimeListEpisodes
 import { AnimeMoreInfo } from "../components/anime-details/AnimeMoreInfo"
 import { GridComments } from "../components/shared/GridComments"
 import { Comments } from "../components/anime-details/Comments"
-import { useSessionUser } from "../hooks/auth/useSessionUser"
 import { useUser } from "../hooks/auth/useUser"
 import { ErrorPage } from "../components/shared/ErrorPage"
+import { useUserStore } from "../store/useUserStore"
 
 export const AnimeDetail = () => {
 
     const {slug} = useParams()
 
     const {data: anime, isLoading, isError, error} = useAnime(slug)
-    const {session, isLoading: isLoadingSession} = useSessionUser()
-    const {user, isLoading: isLoadingUser} = useUser(session?.data?.session?.user.id)
+    const {session, isLoading: isLoadingSession} = useUserStore()
+    const {user, isLoading: isLoadingUser} = useUser(session?.user.id)
 
     if(isLoading || isLoadingSession || isLoadingUser) return <Loader />
 
@@ -41,7 +41,7 @@ export const AnimeDetail = () => {
 
 
         </div>
-          <Comments session={session?.data.session} user={user} seasonId={anime.id}/>
+          <Comments session={session} user={user} seasonId={anime.id}/>
     </div>
   )
 }

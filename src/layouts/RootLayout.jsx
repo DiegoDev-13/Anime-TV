@@ -5,6 +5,7 @@ import { useGlobalStore } from "../store/global.store"
 import { MobileNavbar } from "../components/shared/MobileNavbar"
 import { SearchSheet } from "../components/shared/SearchSheet"
 import { useEffect } from "react"
+import { useUserStore } from "../store/useUserStore"
 
 export const RootLayout = () => {
   
@@ -12,10 +13,18 @@ export const RootLayout = () => {
   const activeSheetSearch = useGlobalStore(state => state.activeSheetSearch)
   const setActiveProfileSheet = useGlobalStore(state => state.setActiveProfileSheet)
 
+  const initialize = useUserStore(state => state.initialize)
+  // const {session, user, isLoading} = useUserStore()
+
+  // console.log(isLoading)
+  // console.log(session, user)
+
+
   const location = useLocation()
 
   // utilizamos el useEffect para cuando cambie de pagina se cierre el profileSheet 
   useEffect(() => {
+    initialize()
     setActiveProfileSheet(false)
   }, [location.pathname, setActiveProfileSheet])
   

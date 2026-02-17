@@ -3,8 +3,8 @@ import {Separator} from '../components/shared/Separator'
 import { FormLogin } from '../components/login/FormLogin'
 import { useState } from 'react'
 import { FormRegister } from '../components/login/FormRegister'
-import { useSessionUser } from '../hooks/auth/useSessionUser'
 import { Loader } from '../components/shared/Loader'
+import { useUserStore } from '../store/useUserStore'
 
 export const Login = () => {
 
@@ -12,9 +12,9 @@ export const Login = () => {
 
     const [btnLogin, setBtnLogin] = useState(true)
 
-    const {session, isLoading} = useSessionUser()
+    const {session, isLoading} = useUserStore()
 
-    if(session?.data.session) {
+    if(session) {
         navigate('/')
     } 
 
