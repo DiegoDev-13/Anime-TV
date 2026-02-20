@@ -4,8 +4,12 @@ import { FavoriteAnimeList } from "../components/profile/FavoriteAnimeList"
 import { Loader } from "../components/shared/Loader"
 import { useUserStore } from "../store/useUserStore"
 import { useUser } from "../hooks/auth/useUser"
+import { useState } from "react"
+import { ModalEditProfile } from "../components/profile/ModalEditProfile"
 
 export const Profile = () => {
+
+  const [editProfile, setEditProfile] = useState(false)
 
   const {userName} = useParams()
 
@@ -17,10 +21,12 @@ export const Profile = () => {
   if(isLoading || isLoadingSession) return <Loader />
 
   return (
-    <div className="flex flex-col">
-        <UserInfo user={user} />
+    <div className="flex flex-col relative">
+        <UserInfo user={user} setEditProfile={setEditProfile} />
 
         <FavoriteAnimeList userId={session.user.id} />
+
+        {/* { editProfile && <ModalEditProfile user={user} setEditProfile={setEditProfile} /> } */}
     </div>
   )
 }

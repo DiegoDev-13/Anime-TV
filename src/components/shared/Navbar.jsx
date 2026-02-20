@@ -56,7 +56,11 @@ export const Navbar = () => {
               ? <LuLoaderCircle size={24} className="text-white animate-spin" /> 
               : session
             ? <div className="h-8 w-8 bg-white rounded-full flex justify-center items-center cursor-pointer" onClick={() => setActiveProfileSheet(true)}>
-                  <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
+                  {
+                    user?.imagen_profile 
+                      ? <img src={user.imagen_profile } alt={user.user_name} className="w-full object-contain rounded-full"/>
+                      : <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
+                  }
                 </div>
               : <button className="flex justify-center items-center gap-2 py-2 px-3 text-sm font-semibold border border-stone-400 rounded-lg hover:text-white hover:border-white transition-all duration-300 cursor-pointer" onClick={() => navigate('/login')}>
                 <FaUser size={15} />

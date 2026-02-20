@@ -8,7 +8,6 @@ import {Loader} from '../shared/Loader'
 import { getFirstLetter } from "../../helpers"
 
 export const ProfileModal = ({user, setActiveProfileSheet}) => {
-
     const {mutate, isPending} = useLogOut()
 
     const handleSignOut =  () => {
@@ -27,7 +26,11 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
                                 </button>
                                 <div className="flex items-center justify-center md:justify-start my-4">
                                     <div className="h-10 w-10 flex items-center justify-center bg-white rounded-full mr-4">
-                                        <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
+                                        {
+                                            user?.imagen_profile 
+                                                ?  <img src={user.imagen_profile } alt={user.user_name} className="w-full object-contain rounded-full"/>
+                                                : <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
+                                        }
                                     </div>
                                     <div>
                                         <span className="text-white font-medium text-[16px] line-clamp-1">{user?.user_name}</span>

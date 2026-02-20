@@ -22,7 +22,7 @@ export const SearchSheet = () => {
   
 
   return (
-    <div className="fixed inset-0 bg-black/60 z-50 flex justify-end text-white transition-all duration-300" onClick={() => setActiveSheetSearch(false)}>
+    <div className="fixed inset-0 backdrop-blur-xs z-50 flex justify-end text-white transition-all duration-300" onClick={() => setActiveSheetSearch(false)}>
         <div className="bg-surface-dark w-full md:w-[45%] h-full animated-slideIn" onClick={e => e.stopPropagation()}>
           <div className="py-4 mx-4 border-b border-slate-400 flex justify-between items-center w-[95%]">
             <form className="flex justify-center items-center gap-2 w-full mr-6" onSubmit={handleSearch}>

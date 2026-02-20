@@ -75,3 +75,7 @@ export const getSearchFavorites = async (userId, searchTerm) => {
 
     return data
 }
+
+// export const getFavorites = async () => {
+//     const {} = await supabase.from('favorites').select('*').eq('user_id', userId).single()
+// }

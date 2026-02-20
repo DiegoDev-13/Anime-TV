@@ -12,4 +12,8 @@ export const useGlobalStore = create((set, get) => ({
     //Profile Sheet
     activeProfileSheet: false,
     setActiveProfileSheet: (state) => set({activeProfileSheet: state}),
+
+    //State de modalProdile
+    activeModalProfile: false,
+    setActiveModalProfile: (state) => set({activeModalProfile: state})
 }))

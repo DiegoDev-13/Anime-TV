@@ -38,6 +38,14 @@ body {
     background-color: #1a162585;
 }
 
+.bg-surface-dark-btn {
+    background-color: #1a1625;
+}
+
+.bg-surface-dark-btn:hover {
+    background-color: #231e30;
+}
+
 /* Estiloa para la barra lateral del overflow */
 .custom-scrollbar::-webkit-scrollbar {
   width: 10px; 

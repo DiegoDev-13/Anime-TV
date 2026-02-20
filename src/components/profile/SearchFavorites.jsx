@@ -5,8 +5,6 @@ import { getSearchFavorites } from "../../actions/AnimeFavorites"
 export const SearchFavorites = ({setSearchResults, userId}) => {
     const [searchTerm, setsearchTerm] = useState('')
 
-    console.log(userId)
-
     const handleSubmit = async (e) => {
         e.preventDefault()
 

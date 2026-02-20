@@ -1,7 +1,11 @@
 import { MdEdit } from "react-icons/md";
 import { getFirstLetter } from "../../helpers";
+import { useGlobalStore } from "../../store/global.store";
 
-export const UserInfo = ({user}) => {
+export const UserInfo = ({user, setEditProfile}) => {
+
+  const setActiveModalProfile = useGlobalStore(state => state.setActiveModalProfile)
+
   return (
     <div className="w-full flex flex-col items-center relative">
       <div className="w-full h-50 md:h-auto md:max-h-100">
@@ -10,7 +14,11 @@ export const UserInfo = ({user}) => {
       <div className="flex flex-col md:flex-row w-full justify-around items-center absolute md:bottom-10 md:left-0 mt-2 md:mt-0">
         <div className="flex flex-col justify-center items-center md:flex-row">
           <div className="w-20 h-20 md:w-30 md:h-30 flex justify-center items-center bg-amber-50 rounded-full">
-            <p className="uppercase text-4xl md:text-6xl font-semibold">{getFirstLetter(user.user_name)}</p>
+            {
+              user?.imagen_profile 
+                ? <img src={user?.imagen_profile } alt={user?.user_name} className="w-full object-contain rounded-full"/>
+                : <p className="uppercase text-4xl md:text-6xl font-semibold">{getFirstLetter(user.user_name)}</p>
+            }
           </div> 
           <div className="ml-4">
             <h2 className="text-2xl md:text-3xl text-white text-center md:text-left font-semibold mb-1">@{user.user_name}</h2>
@@ -18,7 +26,7 @@ export const UserInfo = ({user}) => {
           </div>  
         </div>
         <div className="">
-          <button className="text-xs md:text-[16px] absolute top-4 right-2 md:relative py-2 px-4 bg-surface-dark text-white rounded-3xl flex items-center gap-1 cursor-pointer font-medium">
+          <button className="text-xs md:text-[16px] absolute top-4 right-2 md:relative py-2 px-4 bg-surface-dark text-white rounded-3xl flex items-center gap-1 cursor-pointer font-medium" onClick={() => setActiveModalProfile(true)}>
             <MdEdit size={20} />
             Editar Perfil
           </button>
