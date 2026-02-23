@@ -1,9 +1,29 @@
 import { MdEdit } from "react-icons/md"
 import { getFirstLetter } from "../../helpers"
+import { useUpdateProfile } from "../../hooks/profile/useUpdateProfile"
+import { Loader } from "../shared/Loader"
 
-export const FormEditProfile = ({userData, setActiveModalProfile, setEditImagenProfile, setEditImagenBanner, formUserName, setFormUserName, formUserDescription, setFormUserDescription, imagenProfile, imagenBanner}) => {
+export const FormEditProfile = ({userData, setActiveModalProfile, setEditImagenProfile, setEditImagenBanner, formUserName, setFormUserName, formUserDescription, setFormUserDescription, imagenProfile, imagenBanner,}) => {
+
+    const {mutate, isPending} = useUpdateProfile()
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+
+        const userDataForm = {
+            id: userData.user_id,
+            userName: formUserName.toLowerCase(),
+            description: formUserDescription,
+        }
+
+        mutate(userDataForm)
+    }
+
+    if(isPending) return <Loader />
+
   return (
-    <form className="flex flex-col justify-center">
+    <form className="flex flex-col justify-center" onSubmit={handleSubmit}>
         <div className="flex justify-center relative">
             <div className="w-full h-35">
                 <img src={imagenBanner} alt="" className="w-full h-full rounded-lg"/>

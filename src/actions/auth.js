@@ -101,7 +101,7 @@ export const signOut = async () => {
     }
 }
 
-// Inisiar session 
+// Iniciar session 
 export const signIn = async ({email, password}) => {
     const {error} = await supabase.auth.signInWithPassword({
         email,

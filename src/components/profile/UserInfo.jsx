@@ -2,7 +2,7 @@ import { MdEdit } from "react-icons/md";
 import { getFirstLetter } from "../../helpers";
 import { useGlobalStore } from "../../store/global.store";
 
-export const UserInfo = ({user, setEditProfile}) => {
+export const UserInfo = ({user}) => {
 
   const setActiveModalProfile = useGlobalStore(state => state.setActiveModalProfile)
 

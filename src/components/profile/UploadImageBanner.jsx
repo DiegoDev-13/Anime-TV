@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { IoMdTrash } from "react-icons/io"
 
-export const UploadImageBanner = ({ setEditImagenBanner, imagenBanner, setImagenBanner}) => {
+export const UploadImageBanner = ({userData, setEditImagenBanner, imagenBanner, setImagenBanner, setFileBanner}) => {
       const [currentImage, setCurrentImage] = useState(null)
   
       useEffect(() => {
@@ -10,6 +10,7 @@ export const UploadImageBanner = ({ setEditImagenBanner, imagenBanner, setImagen
       
       const handleImageChange = (e) => {
           const file = e.target.files[0];
+          setFileBanner(file)
           setCurrentImage(URL.createObjectURL(file))
       }
 
