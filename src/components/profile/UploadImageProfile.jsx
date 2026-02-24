@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react"
 import { IoMdTrash } from "react-icons/io"
-import { MdOutlineFileUpload } from "react-icons/md"
 import { getFirstLetter } from "../../helpers"
 import { useUpdateImagenProfile } from "../../hooks/profile/useUpdateImagenProfile"
 import { Loader } from "../shared/Loader"
+import { useDeleteImagenProfile } from "../../hooks/profile/useDeleteImagenProfile"
 
-export const UploadImageProfile = ({userData, setEditImagenProfile, imagenProfile, setImagenProfile, userName, setFileProfile}) => {
-
+export const UploadImageProfile = ({userData, setEditImagenProfile, imagenProfile, setImagenProfile, userName}) => {
     const [currentImage, setCurrentImage] = useState(null)
     const [fileImagen, setFileImagen] = useState(null)
 
     const {mutate, isPending} = useUpdateImagenProfile()
+    const {mutate: mutateRemove, isPending: isPendingRemove} = useDeleteImagenProfile()
 
     useEffect(() => {
         setCurrentImage(imagenProfile)
@@ -18,7 +18,6 @@ export const UploadImageProfile = ({userData, setEditImagenProfile, imagenProfil
     
     const handleImageChange = (e) => {
         const file = e.target.files[0];
-        setFileProfile(file)
         setFileImagen(file)
         setCurrentImage(URL.createObjectURL(file))
     }
@@ -31,16 +30,27 @@ export const UploadImageProfile = ({userData, setEditImagenProfile, imagenProfil
         e.preventDefault()
 
         const formData = {
-            file: fileImagen,
+            file: fileImagen || '',
             userName: userData.user_name,
-            id: userData.user_id
+            id: userData.user_id,
+            imageName: 'imagen-profile'
         }
+        
+        if(fileImagen || currentImage) {
+
+            setImagenProfile(currentImage)
+            mutate(formData)
+            setEditImagenProfile(false)
+            return
+        }
+        
         setImagenProfile(currentImage)
-        mutate(formData)
+        mutateRemove(formData)
+        setEditImagenProfile(false)
         
     }
 
-    if(isPending) return <Loader />
+    if(isPending || isPendingRemove) return <Loader />
 
   return (
     <div className="flex flex-col justify-center items-center space-y-4">

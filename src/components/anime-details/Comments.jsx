@@ -54,7 +54,11 @@ export const Comments = ({session, user, seasonId}) => {
         <div className="flex flex-col md:flex-row space-x-5 my-4">
             {
                 session && <div className="w-13 h-13 bg-white rounded-full flex justify-center items-center mb-4 md:mb-0">
-                                <p className="text-4xl font-semibold uppercase">{getFirstLetter(user.user_name)}</p>
+                                {
+                                    user?.imagen_profile 
+                                        ? <img src={user?.imagen_profile} alt="" className="h-full w-full rounded-full object-contain" />
+                                        : <p className="text-4xl font-semibold uppercase">{getFirstLetter(user.user_name)}</p>
+                                }
                             </div>
             }
 

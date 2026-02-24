@@ -12,10 +12,7 @@ import { UploadImageBanner } from "./UploadImageBanner";
 
 export const ModalEditProfile = () => {
     const [editImagenProfile, setEditImagenProfile] = useState(null)
-    const [fileProfile, setFileProfile] = useState(null)
     const [editImagenBanner, setEditImagenBanner] = useState(null)
-    const [fileBanner, setFileBanner] = useState(null)
-
     
     const {user} = useUserStore()
     const userId = user?.id
@@ -47,9 +44,9 @@ export const ModalEditProfile = () => {
                             {
                                 editImagenProfile || editImagenBanner
                                     ? editImagenProfile 
-                                        ? <UploadImageProfile userData={userData} setEditImagenProfile={setEditImagenProfile} imagenProfile={imagenProfile} setImagenProfile={setImagenProfile} userName={userData.user_name} setFileProfile={setFileProfile} /> 
-                                        : <UploadImageBanner userData={userData} setEditImagenBanner={setEditImagenBanner} editImagenBanner={editImagenBanner} imagenBanner={imagenBanner} setImagenBanner={setImagenBanner} setFileBanner={setFileBanner} />
-                                    : <FormEditProfile userData={userData} setActiveModalProfile={setActiveModalProfile} setEditImagenProfile={setEditImagenProfile} setEditImagenBanner={setEditImagenBanner} formUserName={formUserName} setFormUserName={setFormUserName} formUserDescription={formUserDescription} setFormUserDescription={setFormUserDescription} imagenProfile={imagenProfile} imagenBanner={imagenBanner} fileProfile={fileProfile} fileBanner={fileBanner} /> 
+                                        ? <UploadImageProfile userData={userData} setEditImagenProfile={setEditImagenProfile} imagenProfile={imagenProfile} setImagenProfile={setImagenProfile} userName={userData.user_name} /> 
+                                        : <UploadImageBanner userData={userData} setEditImagenBanner={setEditImagenBanner} editImagenBanner={editImagenBanner} imagenBanner={imagenBanner} setImagenBanner={setImagenBanner} />
+                                    : <FormEditProfile userData={userData} setActiveModalProfile={setActiveModalProfile} setEditImagenProfile={setEditImagenProfile} setEditImagenBanner={setEditImagenBanner} formUserName={formUserName} setFormUserName={setFormUserName} formUserDescription={formUserDescription} setFormUserDescription={setFormUserDescription} imagenProfile={imagenProfile} imagenBanner={imagenBanner} /> 
                             }
                     </div>
         }

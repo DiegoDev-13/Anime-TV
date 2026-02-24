@@ -28,7 +28,7 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
                                     <div className="h-10 w-10 flex items-center justify-center bg-white rounded-full mr-4">
                                         {
                                             user?.imagen_profile 
-                                                ?  <img src={user.imagen_profile } alt={user.user_name} className="w-full object-contain rounded-full"/>
+                                                ?  <img src={user.imagen_profile } alt={user.user_name} className="w-full h-full object-contain rounded-full"/>
                                                 : <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
                                         }
                                     </div>

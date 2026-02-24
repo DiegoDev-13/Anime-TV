@@ -114,3 +114,15 @@ export const signIn = async ({email, password}) => {
         
     }
 } 
+
+// Hace un fecth de la imagen de los usuarios mediante el userName
+export const fecthImageProfile = async (userName) => {
+    const {data, error} = await supabase.from('users').select('imagen_profile').eq('user_name', userName)
+
+    if(error) {
+        console.log(error)
+        throw new Error(error.message);
+    }
+
+    return data
+}

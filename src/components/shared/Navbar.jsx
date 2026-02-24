@@ -58,7 +58,7 @@ export const Navbar = () => {
             ? <div className="h-8 w-8 bg-white rounded-full flex justify-center items-center cursor-pointer" onClick={() => setActiveProfileSheet(true)}>
                   {
                     user?.imagen_profile 
-                      ? <img src={user.imagen_profile } alt={user.user_name} className="w-full object-contain rounded-full"/>
+                      ? <img src={user.imagen_profile } alt={user.user_name} className="w-full h-full object-contain rounded-full"/>
                       : <p className="text-lg font-bold text-black uppercase">{getFirstLetter(user?.user_name)}</p>
                   }
                 </div>
