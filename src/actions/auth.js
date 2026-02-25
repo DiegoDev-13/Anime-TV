@@ -115,6 +115,32 @@ export const signIn = async ({email, password}) => {
     }
 } 
 
+// Envia un email para recuperar la contraseña
+export const resetPassword = async (email) => {
+    const {data, error} = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: 'http://localhost:5173/cambiar-contraseña'
+    })
+
+    if(error) {
+        console.log(error.message)
+        console.log(error)
+        throw new Error(error.message);
+    }
+
+}
+
+// Cambia la contraseña del usuario
+export const updatePassword = async (newPassword) => {
+    const {error} = await supabase.auth.updateUser({
+        password: newPassword
+    })
+
+    if(error) {
+        console.log(error.message)
+        throw new Error("Error al actualizar contraseña");
+    }
+}
+
 // Hace un fecth de la imagen de los usuarios mediante el userName
 export const fecthImageProfile = async (userName) => {
     const {data, error} = await supabase.from('users').select('imagen_profile').eq('user_name', userName)
@@ -126,3 +152,4 @@ export const fecthImageProfile = async (userName) => {
 
     return data
 }
+

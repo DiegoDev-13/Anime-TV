@@ -15,5 +15,13 @@ export const useGlobalStore = create((set, get) => ({
 
     //State de modalProdile
     activeModalProfile: false,
-    setActiveModalProfile: (state) => set({activeModalProfile: state})
+    setActiveModalProfile: (state) => set({activeModalProfile: state}),
+
+    //Store de si se envio el resetEmail
+    isSendResetEmail: false,
+    setIsSendResetEmail: (state) => set({isSendResetEmail: state}),
+
+    //Store de si ya se cambio la contraseña
+    isUpdatePassword: false,
+    setIsUpdatePassword: (state) => set({isUpdatePassword: state})
 }))

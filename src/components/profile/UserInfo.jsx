@@ -6,8 +6,6 @@ export const UserInfo = ({user}) => {
 
   const setActiveModalProfile = useGlobalStore(state => state.setActiveModalProfile)
 
-  console.log(user)
-
   return (
     <div className="w-full flex flex-col items-center relative">
       <div className="w-full h-50 md:h-80 md:max-h-100">
@@ -15,7 +13,7 @@ export const UserInfo = ({user}) => {
       </div>
       <div className="flex flex-col md:flex-row w-full justify-around items-center absolute md:bottom-10 md:left-0 mt-2 md:mt-0">
         <div className="flex flex-col justify-center items-center md:flex-row">
-          <div className="w-0 h-20 md:w-30 md:h-30 flex justify-center items-center bg-amber-50 rounded-full">
+          <div className="w-20 h-20 md:w-30 md:h-30 flex justify-center items-center bg-amber-50 rounded-full">
             {
               user?.imagen_profile 
                 ? <img src={user?.imagen_profile } alt={user?.user_name} className="w-full h-full object-contain rounded-full"/>

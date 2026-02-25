@@ -2,7 +2,7 @@ import { IoCloseOutline } from "react-icons/io5"
 import {Separator} from '../shared/Separator'
 import { Link } from "react-router-dom"
 import { IoMdSettings } from "react-icons/io"
-import { MdFavorite, MdLogout, MdOutlineHelpOutline } from "react-icons/md"
+import { MdDashboard, MdFavorite, MdLogout, MdOutlineHelpOutline } from "react-icons/md"
 import { useLogOut } from "../../hooks/auth/useLogOut"
 import {Loader} from '../shared/Loader'
 import { getFirstLetter } from "../../helpers"
@@ -13,6 +13,8 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
     const handleSignOut =  () => {
         mutate()
     }
+
+    console.log(user?.role)
 
   return (
         <div className="w-full h-screen z-20 absolute top-0 right-0" onClick={() => setActiveProfileSheet(false)}>
@@ -39,6 +41,9 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
                                 </div>
                                 <Separator />
                                 <div className="flex flex-col space-y-6 my-12 md:space-y-4 md:my-6">
+                                    {
+                                        user?.role === 'admin' && <Link to={`/dashboard`} className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdDashboard size={20} />Dashboard</Link>
+                                    }
                                     <Link to={`/perfil`} className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><IoMdSettings size={20} /> Configuración de Perfil</Link>
                                     <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdFavorite size={20} /> Lista de Favoritos</Link>
                                     <Link className="text-[15px] flex items-center gap-2 hover:text-stone-300 transition-all duration-300"><MdOutlineHelpOutline size={20} /> Centro de Ayuda</Link>

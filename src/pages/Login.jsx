@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {Separator} from '../components/shared/Separator'
 import { FormLogin } from '../components/login/FormLogin'
 import { useState } from 'react'
@@ -37,7 +37,7 @@ export const Login = () => {
             <p className='text-center text-sm text-stone-400 mb-4'>{btnLogin ? '¿No tienes cuenta?' : '¿Ya tienes una cuenta?'} <span className='text-white hover:text-stone-300 transition-all duration-300 cursor-pointer' onClick={() => setBtnLogin((prev) => !prev)}>{btnLogin ? 'Registrate' : 'Inisiar Sesión'}</span> </p>
             
             {
-                btnLogin && <p className='text-center text-sm text-stone-400'><Link className='text-purple-600 hover:text-purple-700 transition-all duration-300'>¿Olvidaste tu contraseña?</Link> </p>
+                btnLogin && <p className='text-center text-sm text-stone-400'><Link to='/recuperar-contraseña' className='text-purple-600 hover:text-purple-700 transition-all duration-300'>¿Olvidaste tu contraseña?</Link> </p>
             }
 
         </div>

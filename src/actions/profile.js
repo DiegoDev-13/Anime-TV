@@ -29,7 +29,10 @@ export const updateImagenProfile = async (formData) => {
     
     // // 1: Verficia si hay una imagenProfile 
     const { data: dataExists, error: errorExists } = await supabase.storage.from('imagen_users').exists(filePath)
-    console.log(dataExists)
+
+    if (errorExists && errorExists.status !== 404) {
+        console.error(errorExists.message);
+        }
 
     // Si exite la elimina y sube de nuevo 
     if(dataExists) {

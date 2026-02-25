@@ -26,7 +26,7 @@ export const Navbar = () => {
   const {user, isLoading: isLoadingUser} = useUser(userId)
 
   return (
-    <header className="py-4 bg-surface-dark animated-fadeIn text-gray-400 flex items-center justify-between px-5 border-b border-slate-700 lg:px-12 relative z-10">
+    <header className="py-4 bg-surface-dark animated-fadeIn text-gray-400 flex items-center justify-between px-5 border-b border-stone-700 lg:px-12 relative z-10">
 
       <button className="md:hidden cursor-pointer" onClick={() => setActiveMobile(true)}>
         <FaBars size={25} />
