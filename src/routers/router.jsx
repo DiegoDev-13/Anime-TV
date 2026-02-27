@@ -1,4 +1,4 @@
-import {Route, Routes} from 'react-router-dom'
+import {Navigate, Route, Routes} from 'react-router-dom'
 import { RootLayout } from '../layouts/RootLayout'
 import {Home} from '../pages/Home'
 import { Directory } from '../pages/Directory'
@@ -8,9 +8,15 @@ import { Login } from '../pages/Login'
 import { Profile } from '../pages/Profile'
 import { ProtectedRoute } from '../layouts/ProtectedRoute'
 import { ErrorPage } from '../components/shared/ErrorPage'
-import { Dashboard } from '../pages/Dashboard'
+import { DashboardLayout } from '../layouts/DashboardLayout'
 import { ResetPassword } from '../pages/ResetPassword'
 import { UpdatePassword } from '../pages/UpdatePassword'
+import { HomeDashboard } from '../pages/dashboard/HomeDashboard'
+import { ManageAnimeDashboard } from '../pages/dashboard/ManageAnimeDashboard'
+import { ManageEpisodeDashboard } from '../pages/dashboard/ManageEpisodeDashboard'
+import { ManageUsersDashboard } from '../pages/dashboard/ManageUsersDashboard'
+import { ManageCommentsDashboard } from '../pages/dashboard/ManageCommentsDashboard'
+import { SettingsDashboard } from '../pages/dashboard/SettingsDashboard'
 
 export const MyRouters = () => {
   return (
@@ -32,8 +38,14 @@ export const MyRouters = () => {
         </Route>
 
         <Route element={<ProtectedRoute />}>
-          <Route path='/dashboard' element={<Dashboard />}>
-            
+          <Route path='/dashboard' element={<DashboardLayout />}>
+            <Route index element={<Navigate to='inicio' />} />
+            <Route  path='inicio' element={<HomeDashboard />} />
+            <Route  path='administrar-animes' element={<ManageAnimeDashboard />} />
+            <Route  path='administrar-episodios' element={<ManageEpisodeDashboard />} />
+            <Route  path='usuarios' element={<ManageUsersDashboard />} />
+            <Route  path='comentarios' element={<ManageCommentsDashboard />} />
+            <Route  path='configuracion' element={<SettingsDashboard />} />
           </Route>
         </Route>
     </Routes>

@@ -46,6 +46,10 @@ body {
     background-color: #231e30;
 }
 
+
+.btn-surface-dark-highlight {
+    background-color: #2a2438;
+}
 /* Estiloa para la barra lateral del overflow */
 .custom-scrollbar::-webkit-scrollbar {
   width: 10px; 

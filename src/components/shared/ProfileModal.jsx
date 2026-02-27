@@ -14,8 +14,6 @@ export const ProfileModal = ({user, setActiveProfileSheet}) => {
         mutate()
     }
 
-    console.log(user?.role)
-
   return (
         <div className="w-full h-screen z-20 absolute top-0 right-0" onClick={() => setActiveProfileSheet(false)}>
             <div className="absolute z-30 top-0 right-0 md:top-4 md:right-8 p-4 w-full h-screen md:h-auto md:w-80 border border-stone-700 rounded-lg bg-surface-dark animated-slideInTop" onClick={e => e.stopPropagation()}>

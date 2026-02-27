@@ -39,9 +39,7 @@ export const UpdatePassword = () => {
 
     const handleUpdatePassword = handleSubmit((data) => {
         const { password } = data
-
         mutate(password)
-        console.log(password)
     })
 
     const handleShowPassword = () => {
@@ -56,7 +54,7 @@ export const UpdatePassword = () => {
                 </div>
                 <div className="flex flex-col justify-center items-center">
                     <h2 className="text-3xl text-white font-bold text-center mt-6">¡Actualización de contraseña exitosa!</h2>
-                    <p className="text-stone-300 text-sm text-center my-6">Tu cuenta ya está segura. Puedes seguir disfrutando de animeVista y seguir viendo tus series favoritas.</p>
+                    <p className="text-stone-300 text-sm text-center my-6">Tu cuenta ya está segura. Puedes seguir disfrutando de AnimeVista y seguir viendo tus series favoritas.</p>
                     <button type="button" className="py-2 w-full bg-purple-700 text-white font-bold hover:bg-purple-600 transition-all duration-300 cursor-pointer text-sm rounded-lg" onClick={() => navigate('/')} >ir al Inicio</button>
                 </div>
 
