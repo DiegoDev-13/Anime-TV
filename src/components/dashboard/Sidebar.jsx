@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 import { Logo } from "../shared/Logo"
 import { PiVideoFill } from "react-icons/pi";
-import { MdDashboard, MdMovie } from "react-icons/md";
+import { MdDashboard, MdMovie, MdReportProblem } from "react-icons/md";
 import { GrChapterAdd } from "react-icons/gr";
 import { HiMiniUsers } from "react-icons/hi2";
 import { BiSolidComment } from "react-icons/bi";
@@ -29,46 +29,53 @@ export const Sidebar = () => {
                 <Logo />
             </div>
             <div className="my-5 flex justify-center items-center md:hidden">
-                <PiVideoFill size={40} className="text-purple-700" />
+                <Link to='/'>
+                    <PiVideoFill size={40} className="text-purple-700" />
+                </Link>
             </div>
         </div>
 
         <nav className="w-full flex flex-col mx-auto space-y-3 transition-all duration-300">
-            <NavLink to='/dashboard/inicio' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[16px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <MdDashboard size={25} className="min-w-6.25" />
+            <NavLink to='/dashboard/inicio' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
+                <MdDashboard size={20} className="min-w-6.25" />
                 <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Dashboard</span>
             </NavLink>
             
-            <NavLink to='/dashboard/administrar-animes' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[16px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <MdMovie size={25} className="min-w-6.25" />
+            <NavLink to='/dashboard/administrar-animes' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
+                <MdMovie size={20} className="min-w-6.25" />
                 <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Administrar Anime</span>
             </NavLink>
 
-            <NavLink to='/dashboard/administrar-episodios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[16px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <GrChapterAdd size={25} className="min-w-6.25" />
+            <NavLink to='/dashboard/administrar-episodios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
+                <GrChapterAdd size={20} className="min-w-6.25" />
                 <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Administrar Episodios</span>
             </NavLink>
 
-            <NavLink to='/dashboard/usuarios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[16px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <HiMiniUsers size={25} className="min-w-6.25" />
+            <NavLink to='/dashboard/usuarios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
+                <HiMiniUsers size={20} className="min-w-6.25" />
                 <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Usuarios</span>
             </NavLink>
 
-            <NavLink to='/dashboard/comentarios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[16px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <BiSolidComment size={25} className="min-w-6.25" />
+            <NavLink to='/dashboard/comentarios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
+                <BiSolidComment size={20} className="min-w-6.25" />
                 <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Comentarios</span>
+            </NavLink>
+
+            <NavLink to='/dashboard/reportes' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
+                <MdReportProblem size={20} className="min-w-6.25" />
+                <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Reportes</span>
             </NavLink>
 
             <Separator />
 
-            <NavLink to='/dashboard/configuracion' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[16px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <BsFillNutFill size={25} className="min-w-6.25" />
+            <NavLink to='/dashboard/configuracion' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
+                <BsFillNutFill size={20} className="min-w-6.25" />
                 <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Configuración</span>
             </NavLink>
         </nav>
 
-        <button className="py-2 px-2 md:px-4 w-full mt-auto mb-6 flex justify-center items-center gap-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-600 transition-all duration-300 text-[16px] font-semibold" onClick={handleLogout}>
-            <RiLogoutBoxLine size={25} className="min-w-6.25" />
+        <button className="py-2 px-2 md:px-4 w-full mt-auto mb-6 flex justify-center items-center gap-2 bg-red-500 rounded-lg cursor-pointer hover:bg-red-600 transition-all duration-300 text-[15px] font-semibold" onClick={handleLogout}>
+            <RiLogoutBoxLine size={20} className="min-w-6.25" />
             <span className="hidden md:block opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap">Cerrar sesión</span>
         </button>
 

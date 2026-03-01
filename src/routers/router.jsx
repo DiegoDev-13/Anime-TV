@@ -17,6 +17,7 @@ import { ManageEpisodeDashboard } from '../pages/dashboard/ManageEpisodeDashboar
 import { ManageUsersDashboard } from '../pages/dashboard/ManageUsersDashboard'
 import { ManageCommentsDashboard } from '../pages/dashboard/ManageCommentsDashboard'
 import { SettingsDashboard } from '../pages/dashboard/SettingsDashboard'
+import { ManageReportsDashboard } from '../pages/dashboard/ManageReportsDashboard'
 
 export const MyRouters = () => {
   return (
@@ -45,6 +46,7 @@ export const MyRouters = () => {
             <Route  path='administrar-episodios' element={<ManageEpisodeDashboard />} />
             <Route  path='usuarios' element={<ManageUsersDashboard />} />
             <Route  path='comentarios' element={<ManageCommentsDashboard />} />
+            <Route  path='reportes' element={<ManageReportsDashboard />} />
             <Route  path='configuracion' element={<SettingsDashboard />} />
           </Route>
         </Route>
