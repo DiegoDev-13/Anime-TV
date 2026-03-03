@@ -5,11 +5,11 @@ import { MdDashboard, MdMovie, MdReportProblem } from "react-icons/md";
 import { GrChapterAdd } from "react-icons/gr";
 import { HiMiniUsers } from "react-icons/hi2";
 import { BiSolidComment } from "react-icons/bi";
-import {Separator} from '../shared/separator'
 import { BsFillNutFill } from "react-icons/bs";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { useLogOut } from "../../hooks/auth/useLogOut";
 import { Loader } from "../shared/Loader";
+import { Separator } from "../shared/Separator";
 
 
 export const Sidebar = () => {
@@ -23,7 +23,7 @@ export const Sidebar = () => {
     if(isPending) return <Loader />
 
   return (
-    <div className="bg-surface-dark text-stone-300 border-r border-slate-500 px-4 fixed h-screen w-20 md:w-55 lg:w-62.5 transition-all duration-300 flex flex-col">
+    <div className="bg-surface-dark text-stone-300 border-r border-slate-500 px-4 fixed h-full w-20 md:w-55 lg:w-62.5 transition-all duration-300 flex flex-col">
         <div className="flex justify-center items-center">
             <div className="my-6 hidden md:flex">
                 <Logo />

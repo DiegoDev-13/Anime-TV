@@ -42,3 +42,40 @@ export const formatDateAgo = (date) => {
       return `Hace ${diffWeeks} semana${diffWeeks > 1 ? 's' : ''}`
     }
 }
+
+//Funcion para dar el porcentaje de crecimiento de los usuarios respecto al mes anterior
+export const getGrowthPercentageUsers = (array) => {
+
+//   const array = [
+//     {
+//         "mes": "Nov 2025",
+//         "total_users": 0
+//     },
+//     {
+//         "mes": "Dec 2025",
+//         "total_users": 0
+//     },
+//     {
+//         "mes": "Jan 2026",
+//         "total_users": 0
+//     },
+//     {
+//         "mes": "Feb 2026",
+//         "total_users": 0
+//     },
+//     {
+//         "mes": "Mar 2026",
+//         "total_users": 3
+//     }
+// ]
+
+
+  if(array[3].total_users > 0) {
+    const result = ((array[4].total_users - array[3].total_users) / array[3].total_users)  * 100
+    return result
+  } else {
+    return 0
+  }
+
+}
+

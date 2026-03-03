@@ -1,0 +1,45 @@
+import { supabase } from "../supabase/Client"
+
+
+//Devuelve el numero de anime que estan agregado en la tabla animes
+export const getCountAnimes = async () => {
+    const {error, count} = await supabase.from('seasons').select('*', {count: 'exact'})
+
+    if(error) {
+        console.log(error)
+        throw new Error(error.message);
+    }
+
+    return {
+        count
+    }
+}
+
+
+//Devuelve el numero de usuario que inisiaron session en los ultimos 5 meses
+export const getSingupsUsers = async () => {
+  const { data, error } = await supabase
+    .rpc('get_user_signups_last_5_months');
+
+  if (error) {
+    console.error("Error al obtener usuarios:", error.message);
+    return;
+  }
+  
+  return data;
+};
+
+//Devuelve el numero de reportes que hacen falta revirsar
+export const getReportsPending = async () => {
+  const {data, count, error} = await supabase.from('reports').select('*', {count: 'exact'}).order('created_at', {ascending: false}).eq('filled', false).limit(5)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("error al intentar obtener los reportes");
+  }
+
+  return {
+    data,
+    count
+  }
+} 
