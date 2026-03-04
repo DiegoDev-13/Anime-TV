@@ -5,32 +5,13 @@ import { Separator } from "../../shared/Separator"
 
 const tableHeader = ['Estatus', 'Descriccion', 'Fecha']
 
-const statusOption = [
-    {
-        value: 'Pending', 
-        label: 'Pendiente'
-    },
-    {
-        value: 'Paid', 
-        label: 'Pagado'
-    },
-    {
-        value: 'Shipped', 
-        label: 'Enviado'
-    },
-    {
-        value: 'Delivered', 
-        label: 'Entregado'
-    },
-]
 
 export const ReportsTableViews = ({reportsData}) => {
 
-    console.log(reportsData)
 
   return (
     <div className="relative border border-stone-500 w-full md:w-140 xl:w-160  rounded-lg">
-        <div className="p-3">
+        <div className="p-3 bg-surface-dark border-b border-stone-400 rounded-t-lg">
             <h3 className="text-white text-lg font-medium">Reportes Recientes</h3>
         </div>
         <table className="text-sm w-full caption-bottom overflow-auto">

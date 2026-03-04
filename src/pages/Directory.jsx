@@ -42,7 +42,7 @@ export const Directory = () => {
       {/* Muestra los generos en mobiles */}
       <div className="md:hidden flex justify-center">
         <select className="w-1/2 mx-10 bg-zinc-800 p-2 rounded-lg border border-purple-500 outline-none focus:ring-2 focus:ring-purple-600 " onChange={handleChange}>
-          <option value="All">All</option>
+          <option value={currentOption}>{currentOption}</option>
           {
             genders.map(gender => (
               <option key={gender.id} value={gender.name}>{gender.name}</option>

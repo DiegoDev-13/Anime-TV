@@ -6,7 +6,6 @@ export const useGetSingupsUsers = () => {
     queryKey: ['users'],
     queryFn: getSingupsUsers,
     retry: false,
-    refetchOnWindowFocus: false
   })
 
   return {

@@ -15,7 +15,6 @@ export const getCountAnimes = async () => {
     }
 }
 
-
 //Devuelve el numero de usuario que inisiaron session en los ultimos 5 meses
 export const getSingupsUsers = async () => {
   const { data, error } = await supabase
@@ -43,3 +42,37 @@ export const getReportsPending = async () => {
     count
   }
 } 
+
+//Devuelve todos los animes con rango para el dashboard
+export const getAnimesDashboard = async (gender, page = 1) => {
+
+  const itemsPerPage = 5
+  const from = (page - 1) * itemsPerPage
+  const to = from + itemsPerPage - 1
+
+  if(gender === 'All') {
+    const {data, count, error} = await supabase.from('seasons').select('*', {count: 'exact'}).order('created_at', {ascending: false}).range(from, to)
+
+    if(error) {
+      console.log(error.message)
+      throw new Error("No se pudo obtener la lista de animes para el dashboard");
+    }
+
+    return {
+      data, 
+      count
+    }
+  } else {
+    const {data, count, error} = await supabase.from('seasons').select('*', {count: 'exact'}).contains('gender', [gender]).order('created_at', {ascending: false}).range(from, to)
+
+    if(error) {
+      console.log(error.message)
+      throw new Error("No se pudo obtener la lista de animes para el dashboard");
+    }
+
+    return {
+      data, 
+      count
+    }
+  }
+}
