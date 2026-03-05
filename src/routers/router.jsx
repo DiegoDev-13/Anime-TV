@@ -18,6 +18,7 @@ import { ManageUsersDashboard } from '../pages/dashboard/ManageUsersDashboard'
 import { ManageCommentsDashboard } from '../pages/dashboard/ManageCommentsDashboard'
 import { SettingsDashboard } from '../pages/dashboard/SettingsDashboard'
 import { ManageReportsDashboard } from '../pages/dashboard/ManageReportsDashboard'
+import { NewAnime } from '../pages/dashboard/NewAnime'
 
 export const MyRouters = () => {
   return (
@@ -42,12 +43,14 @@ export const MyRouters = () => {
           <Route path='/dashboard' element={<DashboardLayout />}>
             <Route index element={<Navigate to='inicio' />} />
             <Route  path='inicio' element={<HomeDashboard />} />
-            <Route  path='administrar-animes' element={<ManageAnimeDashboard />} />
-            <Route  path='administrar-episodios' element={<ManageEpisodeDashboard />} />
-            <Route  path='usuarios' element={<ManageUsersDashboard />} />
-            <Route  path='comentarios' element={<ManageCommentsDashboard />} />
-            <Route  path='reportes' element={<ManageReportsDashboard />} />
-            <Route  path='configuracion' element={<SettingsDashboard />} />
+            <Route path='administrar-animes' element={<ManageAnimeDashboard />} />
+            <Route  path='administrar-animes/nuevo' element={<NewAnime />} />
+            {/* <Route  path='administrar-animes/edit:id' element={<NewAnime />} /> */}
+            <Route path='administrar-episodios' element={<ManageEpisodeDashboard />} />
+            <Route path='comentarios' element={<ManageCommentsDashboard />} />
+            <Route path='usuarios' element={<ManageUsersDashboard />} />
+            <Route path='reportes' element={<ManageReportsDashboard />} />
+            <Route path='configuracion' element={<SettingsDashboard />} />
           </Route>
         </Route>
     </Routes>

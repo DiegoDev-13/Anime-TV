@@ -1,10 +1,6 @@
-{/* <div className="border border-stone-500 w-full md:w-140 xl:w-160 h-120 rounded-lg"> */}
-
 import { formatDateAgo } from "../../../helpers"
-import { Separator } from "../../shared/Separator"
 
 const tableHeader = ['Estatus', 'Descriccion', 'Fecha']
-
 
 export const ReportsTableViews = ({reportsData}) => {
 

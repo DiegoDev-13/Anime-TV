@@ -30,7 +30,7 @@ export const HomeDashboard = () => {
     <div className='flex flex-col justify-center items-center' >
         <div className='w-full my-2 flex justify-between '>
           <h2 className='text-white self-start text-2xl font-semibold mb-2'>Panel de Aministrador</h2>
-          <button type='button' className='flex justify-center items-center gap-1.5 py-1.5 px-3 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-lg cursor-pointer transition-all duration-300'>
+          <button type='button' className='flex justify-center items-center gap-1.5 py-1.5 px-3 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-lg cursor-pointer transition-all duration-300' onClick={() => navigate('/dashboard/administrar-animes/nuevo')}>
             <IoMdAdd size={20} className='font-bold' />
             Agregar Anime
           </button>
@@ -85,17 +85,17 @@ export const HomeDashboard = () => {
 
           <div className='flex flex-col space-y-4 w-full md:w-90'>
             <div className='border border-stone-500 w-full rounded-lg'>
-              <div className='flex p-2 border-b border-stone-500'>
+              <div className='flex p-2 bg-surface-dark rounded-t-lg border-b border-stone-500'>
                 <h3 className='text-lg text-white font-semibold'>Acciones Rápidas</h3>
               </div>
               <div className='flex flex-col justify-center items-center'>
-                <span className='text-stone-300 text-sm font-semibold w-[80%] flex justify-around items-center gap-3 my-2 p-2 rounded-lg cursor-pointer hover:bg-purple-600/10 transition-all duration-300'>
+                <span className='text-stone-300 text-sm font-semibold w-[80%] flex justify-around items-center gap-3 my-2 p-2 rounded-lg cursor-pointer hover:bg-purple-600/10 transition-all duration-300' onClick={() => navigate('/dashboard/administrar-animes/nuevo')}>
                   <MdAddBox size={20} className='bg-purple-600/50 text-purple-600 w-7 h-7 rounded-lg' />
                   Agregar amine
                   <IoIosArrowForward size={18} />
                 </span>
 
-                <span className='text-stone-300 text-sm font-semibold w-[80%] flex justify-around items-center gap-3 my-2 p-2 rounded-lg cursor-pointer hover:bg-purple-600/10 transition-all duration-300'>
+                <span className='text-stone-300 text-sm font-semibold w-[80%] flex justify-around items-center gap-3 my-2 p-2 rounded-lg cursor-pointer hover:bg-purple-600/10 transition-all duration-300' >
                   <MdOutlineFileUpload size={20} className='bg-slate-600/50 text-stone-500 w-7 h-7 rounded-lg' />
                   Subir Episodio
                   <IoIosArrowForward size={18} />

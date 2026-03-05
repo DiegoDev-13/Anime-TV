@@ -4,13 +4,16 @@ import { useEffect } from "react"
 import { useUserStore } from "../store/useUserStore"
 import { Loader } from "../components/shared/Loader"
 import { useUser } from "../hooks/auth/useUser"
+import { ModalAddAnime } from "../components/dashboard/anime/ModalAddAnime"
+import { useGlobalStore } from "../store/global.store"
 
 export const DashboardLayout = () => {
 
   const navigate = useNavigate()
-
+  
   const initialize = useUserStore(state => state.initialize)
   const {user, session, isLoading} = useUserStore()
+  const activeModalNewAnime = useGlobalStore(state => state.activeModalNewAnime)
 
   const {user: userData, isLoading: isLoadingUserData} = useUser(user?.id)
 
@@ -44,6 +47,9 @@ export const DashboardLayout = () => {
       <div className="container m-5 mt-7 flex-1 ml-30 md:ml-60 lg:ml-67.5">
         <Outlet />
       </div>
+
+      {activeModalNewAnime && <ModalAddAnime />}
+      
 
     </div>
   )

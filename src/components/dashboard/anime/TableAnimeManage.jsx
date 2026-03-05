@@ -1,6 +1,5 @@
 import { MdEdit } from "react-icons/md"
 import { FaTrashAlt } from "react-icons/fa";
-import {Pagination} from '../../shared/Pagination'
 
 const tableHeader = ['poster', 'titulo', 'episodios', 'emisión', 'acciones']
 
@@ -8,9 +7,9 @@ export const TableAnimeManage = ({data, totalAnimes}) => {
 
 
   return (
-      <div className="relative  w-full">
+      <div className="relative w-full ">
 
-          <table className="text-sm w-full caption-bottom overflow-auto border rounded-lg border-stone-500">
+          <table className="text-sm w-full caption-bottom overflow-auto border border-stone-500">
               <thead className="bg-slate-800 pb-3">
                   <tr className="text-sm text-slate-400 font-bold text-left">
                       {
@@ -28,7 +27,7 @@ export const TableAnimeManage = ({data, totalAnimes}) => {
                       data?.map(anime => (
                           <tr key={anime.id} className="border-b border-stone-400 bg-image-detail text-stone-400 " >
                             <td className="p-4 tracking-tighter">
-                                  <img src={anime.image} alt="" className="w-15 h-20 object-contain rounded-lg"/>
+                                  <img src={anime.image} alt={anime.name_season} loading="lazy" className="w-15 h-20 object-contain rounded-lg"/>
                               </td>
                               <td className="p-4 font-medium tracking-tighter ">
                                   <span className={`font-semibo text-white rounded-lg text-[17px]`}> 

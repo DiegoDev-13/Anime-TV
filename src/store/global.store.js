@@ -23,5 +23,9 @@ export const useGlobalStore = create((set, get) => ({
 
     //Store de si ya se cambio la contraseña
     isUpdatePassword: false,
-    setIsUpdatePassword: (state) => set({isUpdatePassword: state})
+    setIsUpdatePassword: (state) => set({isUpdatePassword: state}),
+
+    //State de ModalAddNewAnime
+    activeModalNewAnime: false,
+    setActiveModalNewAnime: (state) => set({activeModalNewAnime: state}),
 }))

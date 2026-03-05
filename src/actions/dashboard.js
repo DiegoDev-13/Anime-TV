@@ -76,3 +76,15 @@ export const getAnimesDashboard = async (gender, page = 1) => {
     }
   }
 }
+
+//Para el buscador de anime en el dashboard
+export const getSearchDashboardItems = async (table, nameSearch, searchTerm) => {
+  const {data, error} = await supabase.from(table).select('*').ilike(nameSearch, `%${searchTerm}%`).limit(5)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error Al buscar en el dashboard");
+  }
+
+  return data
+}
