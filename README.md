@@ -9,3 +9,4 @@
 - Zustand
 - React Hook Form
 - Zod
+- Recharts
