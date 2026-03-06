@@ -88,3 +88,17 @@ export const getSearchDashboardItems = async (table, nameSearch, searchTerm) => 
 
   return data
 }
+
+// Agrega un nuevo anime a la base de datos 
+export const addAnime = async (anime) => {
+  const {error} = await supabase.from('animes').insert({
+    name: anime.title,
+    gender: anime.genders,
+    image: anime.poster
+  })
+
+  if(error) {
+    console.log(error.message)
+    throw new Error(error.message);
+  }
+}
