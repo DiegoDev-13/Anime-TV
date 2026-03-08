@@ -65,8 +65,8 @@ export const ModalAddAnime = () => {
     // if(isLoading) return <Loader />
 
   return (
-    <div className="w-full h-screen fixed flex justify-center backdrop-blur-xs z-50" onClick={() => setActiveModalNewAnime(false)}>
-        <div className="w-130 h-full md:h-150 flex flex-col bg-surface-dark mx-auto md:mt-5 rounded-2xl p-5 animated-slideInTop" onClick={(e) => e.stopPropagation()}>
+    <div className="w-full h-screen fixed flex justify-center items-center backdrop-blur-xs z-50" onClick={() => setActiveModalNewAnime(false)}>
+        <div className="w-130 h-full flex flex-col bg-surface-dark mx-auto md:mt-5 rounded-2xl p-5 animated-slideInTop" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between ">
                 <h3 className="text-white text-lg font-semibold flex justify-center items-center gap-2">
                     <AiFillFolderAdd size={25} className="text-purple-700" />
@@ -81,8 +81,8 @@ export const ModalAddAnime = () => {
             {
                 isLoading || isPending
                     ? <Loader />
-                    :<form className="flex flex-col w-full h-full justify-between" onSubmit={onRegister}>
-                        <div className="flex flex-col justify-center mt-4 space-y-2">
+                    :<form className="flex flex-col w-full h-full justify-between" autoComplete="off" onSubmit={onRegister}>
+                        <div className="flex flex-col justify-center space-y-2">
                             <label htmlFor="title" className="text-white text-sm">Titulo</label>
                             <input type="text" id="title" placeholder="Ingrese un título" className="p-2 text-white text-[16px] rounded-lg otuline-none focus:outline-none bg-surface-dark-highlight border border-stone-600 transition-all duration-300" {...register('title')}/>
                             {
@@ -92,7 +92,7 @@ export const ModalAddAnime = () => {
                         <div className="flex mt-4 gap-3 flex-wrap">
                             {
                                 gendersArray.map((gender, index) => (
-                                    <div key={index} className="relative text-white bg-surface-dark-highlight py-3 pl-4 pr-8 rounded-2xl border border-stone-600">
+                                    <div key={index} className="relative text-white bg-surface-dark-highlight py-2 pl-4 pr-8 rounded-2xl border border-stone-600">
                                         <span className="text-sm font-semibold">{gender}</span>
                                         <button type="button" className="text-stone-400 hover:text-white absolute top-0 right-1 cursor-pointer transition-all duration-200" onClick={() => handleRemoveGender(index)}>
                                             <IoIosClose size={25} />
@@ -104,9 +104,10 @@ export const ModalAddAnime = () => {
                                 gendersArray.length >= 1 && <button type="button" className="py-1.5 px-3 text-red-500 flex justify-center items-center rounded-xl border border-red-500 cursor-pointer hover:bg-red-800/30 transition-colors duration-300" onClick={() => setgendersArray([])}>Limpiar</button>
                             }
                         </div>
-                        <div className="flex flex-col justify-center mt-4 space-y-2">
+                        <div className="flex flex-col justify-center space-y-2">
                             <label htmlFor="genders" className="text-white text-sm">Generos</label>
                             <select id="genders" className="w-full text-white bg-zinc-800 p-2 rounded-lg border border-stone-500 outline-none focus:ring-2 focus:ring-purple-600 overflow-auto" onChange={handleAddGender} value=''>
+                                <option value='Genero' >Generos</option>
                                 {
                                     dataGenders.map(gender => (
                                         <option key={gender.id} value={gender.name}>{gender.name}</option>

@@ -43,6 +43,58 @@ export const formatDateAgo = (date) => {
     }
 }
 
+//Funcion para formater la fecha y devolver la fecha en formato correcto
+export const formatDate = (date) => {
+  let dateMonth = new Date(date)
+  let dateFormat = new Date(date)
+
+  switch (dateMonth.getMonth()) {
+    case 0:
+      dateMonth = 'Ene'
+      break
+    case 1:
+      dateMonth = 'Feb'
+      break
+    case 2:
+      dateMonth = 'Mar'
+      break
+    case 3:
+      dateMonth = 'Abr'
+      break
+    case 4:
+      dateMonth = 'May'
+      break
+    case 5:
+      dateMonth = 'Jun'
+      break
+    case 6:
+      dateMonth = 'jul'
+      break
+    case 7:
+      dateMonth = 'Ago'
+      break
+    case 8:
+      dateMonth = 'Sep'
+      break
+    case 9:
+      dateMonth = 'Oct'
+      break
+    case 10:
+      dateMonth = 'Nov'
+      break
+    case 12:
+      dateMonth = 'Dic'
+      break
+  
+    default:
+      dateMonth = new Date(date)
+      break;
+  }
+  
+  return `${dateMonth} ${dateFormat.getDate()}, ${dateFormat.getFullYear()}`
+
+}
+
 //Funcion para dar el porcentaje de crecimiento de los usuarios respecto al mes anterior
 export const getGrowthPercentageUsers = (array) => {
 

@@ -34,7 +34,7 @@ export const FormLogin = () => {
                         <p className="text-stone-400 text-sm ">Constinúa tu aventura donde la dejaste.</p>
                     </div>
 
-                    <form className="w-full" onSubmit={hnadleSubmit}>
+                    <form className="w-full" autoComplete="off" onSubmit={hnadleSubmit}>
                         <label htmlFor="email" className="text-sm text-stone-400">Correo Electrónico</label>
                         <div className="flex space-x-1 items-center relative bg-dark rounded-lg border border-stone-700 pl-6 my-1 mb-4">
                             <MdEmail size={20} className="text-stone-400 absolute left-2.5"/>

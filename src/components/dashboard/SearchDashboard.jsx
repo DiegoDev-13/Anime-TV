@@ -2,7 +2,7 @@ import { useState } from "react"
 import { IoSearch } from "react-icons/io5"
 import { getSearchDashboardItems } from "../../actions/dashboard"
 
-export const SearchDashboard = ({setSearchResults, table, nameSearch, title, setAnimeSeleted = null}) => {
+export const SearchDashboard = ({setSearchResults, table, nameSearch, title, setAnimeSelected = null}) => {
     const [searchTerm, setsearchTerm] = useState('')
 
     const handleSubmit = async (e) => {
@@ -11,14 +11,14 @@ export const SearchDashboard = ({setSearchResults, table, nameSearch, title, set
         if(searchTerm.trim()) {
             const data = await getSearchDashboardItems(table, nameSearch, searchTerm)
             setSearchResults(data)
-            setAnimeSeleted(null)
+            setAnimeSelected(null)
         }
     }
     
     const handleClear = () => {
         setsearchTerm('')
         setSearchResults([])
-        setAnimeSeleted(null)
+        setAnimeSelected(null)
     }
 
   return (

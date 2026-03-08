@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { getGender } from "../actions/anime"
 
 export const useGender = () => {
-  const {data, isLoading} = useQuery({
+  const {data, isLoading, isError} = useQuery({
     queryKey: ['gender'],
     queryFn: getGender,
     retry: false
@@ -10,6 +10,7 @@ export const useGender = () => {
 
   return {
     data, 
-    isLoading
+    isLoading,
+    isError
   }
 }

@@ -10,6 +10,7 @@ import { IoReload } from "react-icons/io5";
 import { useNavigate } from "react-router-dom"
 import { SearchDashboard } from "../../components/dashboard/SearchDashboard"
 import { AnimeResults } from "../../components/dashboard/home/AnimeResults"
+import { ErrorPage } from "../../components/shared/ErrorPage"
 
 export const ManageAnimeDashboard = () => {
 
@@ -20,7 +21,7 @@ export const ManageAnimeDashboard = () => {
   const [SearchResults, setSearchResults] = useState([])
 
   const {data: animes, totalAnimes, isLoading, isError, refetch, isFetching} = useGetAnimesDashboard(currentOption, page)
-  const {data: genders, isLoading: isLoadingGenders} = useGender()
+  const {data: genders, isLoading: isLoadingGenders, isErrorGenders} = useGender()
   
   
   const handleChange = (e) => {
@@ -35,10 +36,12 @@ export const ManageAnimeDashboard = () => {
 
   if(isLoading || isLoadingGenders || isFetching) return <Loader />
 
+  if(isError || isErrorGenders) return <ErrorPage />
+
   return (
     <div className="flex flex-col w-full mb-6">
       <div className='w-full my-2 flex justify-between '>
-        <h2 className='text-white self-start text-2xl font-semibold mb-2'>Administrar Anime</h2>
+        <h2 className='text-white self-start text-2xl font-semibold mb-2'>Administrar Animes</h2>
         <button type='button' className='flex justify-center items-center gap-1.5 py-1.5 px-3 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-lg cursor-pointer transition-all duration-300' onClick={() => navigate('/dashboard/administrar-animes/nuevo')} >
           <IoMdAdd size={20} className='font-bold' />
           Agregar Anime

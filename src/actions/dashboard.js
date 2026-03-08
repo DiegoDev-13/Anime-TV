@@ -102,3 +102,15 @@ export const addAnime = async (anime) => {
     throw new Error(error.message);
   }
 }
+
+// Devuelve todas las seasons que tiene un anime mediante el ID 
+export const getSeasonsById = async (id) => {
+  const {data, error} = await supabase.from('seasons').select('*').eq('anime_id', id)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al traer temporadas relacionadas al anime");
+  }
+
+  return data
+}

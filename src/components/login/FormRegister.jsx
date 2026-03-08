@@ -37,7 +37,7 @@ export const FormRegister = () => {
             <p className="text-stone-400 text-sm text-center">Comienza tu viaje havia el mundo de las historias infinitas.</p>
         </div>
 
-        <form className="w-full" onSubmit={onRegister}>
+        <form className="w-full" autoComplete='off' onSubmit={onRegister}>
             <label htmlFor="username" className="text-sm text-stone-400">Nombre de Usuario</label>
             <div className="flex space-x-1 items-center relative bg-dark rounded-lg border border-stone-700 pl-6 my-1 mb-4">
                 <FaUser size={16} className="text-stone-400 absolute left-3"/>
