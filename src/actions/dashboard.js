@@ -106,11 +106,44 @@ export const addAnime = async (anime) => {
 // Devuelve todas las seasons que tiene un anime mediante el ID 
 export const getSeasonsById = async (id) => {
   const {data, error} = await supabase.from('seasons').select('*').eq('anime_id', id)
-
+  
   if(error) {
     console.log(error.message)
     throw new Error("Error al traer temporadas relacionadas al anime");
   }
-
+  
   return data
+}
+
+// Agrega una nueva season a la base de datos 
+export const addSeason = async (season) => {
+  const {error} = await supabase.from('seasons').insert({
+    anime_id: season.idAnimeSelected,
+    name_season: season.title,
+    season: season.numberSeason,
+    image: season.poster,
+    slug_season: season.slugSeason,
+    streaming: season.status,
+    description: season.description,
+    gender: season.genders,
+    image_front: season.banner,
+    year: season.yearSeason,
+    studio: season.studyAnimation,
+    score: season.rating
+  })
+
+  if(error){
+    console.log(error.message)
+    throw new Error("Error al intentar agregar temporada al anime");
+  }
+}
+
+// Elimina una season mediante el id 
+export const deleteSeason = async (seasonId) => {
+  const {error} = await supabase.from('seasons').delete().eq('id', seasonId)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar eliminar la temporada");
+  }
 }

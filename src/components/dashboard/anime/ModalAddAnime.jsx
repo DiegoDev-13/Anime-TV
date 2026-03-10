@@ -29,7 +29,6 @@ export const ModalAddAnime = () => {
     }, [gendersArray, setValue])
 
     const handleAddGender = (e) => {
-        console.log(e.target.value)
         const gender = e.target.value
 
         if(gendersArray.length >= 8) {

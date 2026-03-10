@@ -6,6 +6,7 @@ import { Loader } from "../components/shared/Loader"
 import { useUser } from "../hooks/auth/useUser"
 import { ModalAddAnime } from "../components/dashboard/anime/ModalAddAnime"
 import { useGlobalStore } from "../store/global.store"
+import { ModalConfirmDelete } from "../components/dashboard/anime/ModalConfirmDelete"
 
 export const DashboardLayout = () => {
 
@@ -14,6 +15,7 @@ export const DashboardLayout = () => {
   const initialize = useUserStore(state => state.initialize)
   const {user, session, isLoading} = useUserStore()
   const activeModalNewAnime = useGlobalStore(state => state.activeModalNewAnime)
+  const ativeModalConfirmDelete = useGlobalStore(state => state.ativeModalConfirmDelete)
 
   const {user: userData, isLoading: isLoadingUserData} = useUser(user?.id)
 
@@ -49,7 +51,10 @@ export const DashboardLayout = () => {
       </div>
 
       {activeModalNewAnime && <ModalAddAnime />}
-      
+
+
+      {ativeModalConfirmDelete && <ModalConfirmDelete />}
+  
 
     </div>
   )

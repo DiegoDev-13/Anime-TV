@@ -1,10 +1,22 @@
 import { MdEdit } from "react-icons/md"
 import { FaTrashAlt } from "react-icons/fa";
+import { useDeleteSeason } from "../../../hooks/dashboard/useDeleteSeason";
+import { Loader } from "../../shared/Loader";
+import { useGlobalStore } from "../../../store/global.store";
 
 const tableHeader = ['poster', 'titulo', 'episodios', 'emisión', 'acciones']
 
 export const TableAnimeManage = ({data, totalAnimes}) => {
 
+    const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
+    const setIdDelete = useGlobalStore(state => state.setIdDelete)
+
+    const {mutate, isPending, isError} = useDeleteSeason()
+
+    const handleDelete = (id) => {
+        setAtiveModalConfirmDelete(true)
+        setIdDelete(id)
+    }
 
   return (
       <div className="relative w-full ">
@@ -25,7 +37,7 @@ export const TableAnimeManage = ({data, totalAnimes}) => {
               <tbody className="[&_tr:last-child]:border-0">
                   {
                       data?.map(anime => (
-                          <tr key={anime.id} className="border-b border-stone-400 bg-image-detail text-stone-400 " >
+                          <tr key={anime.id} className="border-b border-stone-400 bg-[#1a162585] hover:bg-[#2620369a] text-stone-400 transition-all duration-300" >
                             <td className="p-4 tracking-tighter">
                                   <img src={anime.image} alt={anime.name_season} loading="lazy" className="w-15 h-20 object-contain rounded-lg"/>
                               </td>
@@ -53,7 +65,7 @@ export const TableAnimeManage = ({data, totalAnimes}) => {
                                   <button className="cursor-pointer hover hover:text-white transition-colors duration-300">
                                     <MdEdit size={20} />
                                   </button>
-                                  <button className="ml-5 cursor-pointer hover hover:text-white transition-colors duration-300">
+                                  <button className="ml-5 cursor-pointer hover hover:text-white transition-colors duration-300" onClick={() => handleDelete(anime.id)}>
                                     <FaTrashAlt size={20} />
                                   </button>
                               </td>

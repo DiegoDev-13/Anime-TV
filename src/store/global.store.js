@@ -28,4 +28,11 @@ export const useGlobalStore = create((set, get) => ({
     //State de ModalAddNewAnime
     activeModalNewAnime: false,
     setActiveModalNewAnime: (state) => set({activeModalNewAnime: state}),
-}))
+
+    //State de ModalConfimDelete
+    ativeModalConfirmDelete: false,
+    setAtiveModalConfirmDelete: (state) => set({ativeModalConfirmDelete: state}),
+
+    idDelete: null,
+    setIdDelete: (state) => set({idDelete: state})
+})) 
