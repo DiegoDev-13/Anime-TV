@@ -7,8 +7,6 @@ export const GridSeasonsSelected = ({animeSelected}) => {
     // console.log(animeSelected?.id)
     const {data: seasons, isLoading, isError} = useGetSeasonsById(animeSelected?.id)
 
-    console.log(seasons)
-
   return (
     <div className="">
         <h2 className="text-white text-2xl font-semibold">Temporadas de Anime</h2>

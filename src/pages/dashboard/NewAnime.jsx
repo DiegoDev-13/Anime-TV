@@ -9,6 +9,8 @@ import { useGlobalStore } from "../../store/global.store"
 import { GridSeasonsSelected } from "../../components/dashboard/anime/GridSeasonsSelected"
 import { IoIosArrowBack, IoMdAdd } from "react-icons/io";
 import { useNavigate } from "react-router-dom"
+import { FormAddNewSeason } from "../../components/dashboard/anime/FormAddNewSeason"
+import { NoSelected } from "../../components/dashboard/NoSelected"
 
 export const NewAnime = () => {
 
@@ -63,11 +65,16 @@ export const NewAnime = () => {
                             ?  SearchResults.map(anime => (
                             <CardAnimeResults key={anime.id} anime={anime} handleSeleted={handleSeleted} />
                             ))
-                            : <h2 className="text-stone-400">No hay seleccionado</h2>
+                            :   <NoSelected text='No hay anime seleccionado' /> 
                 }
             </div>
         </div>
         <Separator />
+
+        {
+            animeSelected && <FormAddNewSeason idAnimeSelected={animeSelected.id} />
+        }
+
     </div>
   )
 }

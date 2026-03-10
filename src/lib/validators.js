@@ -24,7 +24,15 @@ export const passwordResetScheme = z.object({
 
 export const dashboardAnimeAdd = z.object({
     title: z.string().min(3, 'El titulo debe tener minimo 3 caracteres').max(35, 'El titulo debe ser maximo de 35 caracteres'),
-    genders: z.array(z.string()).min(1, 'Debes seleccionar al menos un género').max(5, 'Máximo 8 géneros').nonempty('El campo géneros no puede estar vacío'),
+    genders: z.array(z.string()).min(1, 'Debes seleccionar al menos un género').max(8, 'Máximo 8 géneros').nonempty('El campo géneros no puede estar vacío'),
     poster: z.string().url('Debe ser una URL válida').min(1, 'Tiene que aver una url de la iamgen')
 })
 
+
+export const dashboardAddSeasonScheme = z.object({
+    title: z.string().min(3, 'El titulo debe tener minimo 3 caracteres').max(35, 'El titulo debe ser maximo de 35 caracteres'),
+    numberSeason: z.number().min(1, 'La temporada tiene que tener un numero'),
+    yearSeason: z.number().min(4, 'El año tiene que ser valido'),
+    slugSeason: z.string().min(1, 'El slug del anime es obligatorio').regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug inválido"),
+    genders: z.array(z.string()).min(1, 'Debes seleccionar al menos un género').max(8, 'Máximo 8 géneros').nonempty('El campo géneros no puede estar vacío'),
+})
