@@ -31,9 +31,6 @@ export const CardAnimeResults = ({anime, handleSeleted}) => {
             <button type="button" className="bg-purple-700/30 p-2.5 text-purple-700 font-bold flex justify-center items-center rounded-2xl border border-purple-700 hover:bg-purple-700/50 transition-all duration-200 cursor-pointer" onClick={() => handleCopyText(anime.id)}>
                 ID #{anime.id} <FaRegCopy size={20} className="ml-2" />
             </button>
-            <button type="button" className="bg-purple-700/30 p-2.5 text-white rounded-lg hover:bg-purple-700/50 transition-all duration-200 cursor-pointer">
-                <MdEdit size={25} className="text-purple-700"/>
-            </button>
         </div>
         
     </div>

@@ -147,3 +147,35 @@ export const deleteSeason = async (seasonId) => {
     throw new Error("Error al intentar eliminar la temporada");
   }
 }
+
+// Actualiza una season mediante el di 
+export const updateSeason = async (season) => {
+  const {error} = await supabase.from('seasons').update({
+    name_season: season.title,
+    season: season.numberSeason,
+    image: season.poster,
+    slug_season: season.slugSeason,
+    streaming: season.status,
+    description: season.description,
+    gender: season.gender,
+    image_front: season.banner,
+    year: season.yearSeason,
+    studio: season.studyAnimation,
+    score: season.rating
+  }).eq('id', season.idSeason)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar actualizar temporada");
+  }
+}
+
+//Elimina un anime con sus season/Episodios mediante el id
+export const deleteAnime = async (animeId) => {
+  const { error } = await supabase.from('animes').delete().eq('id', animeId)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar eliminar anime"); 
+  }
+}

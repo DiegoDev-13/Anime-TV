@@ -4,16 +4,22 @@ import { FaImage, FaInfoCircle } from "react-icons/fa"
 import { Separator } from "../../shared/Separator";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { formatSlug } from "../../../helpers";
-import { IoIosClose } from "react-icons/io";
+import { IoIosArrowBack, IoIosClose } from "react-icons/io";
 import { useGender } from "../../../hooks/useGender";
 import { Loader } from "../../shared/Loader";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { dashboardAddSeasonScheme } from "../../../lib/validators";
-import { useAddSeason } from "../../../hooks/dashboard/useAddSeason";
+import { useNavigate } from "react-router-dom";
+import { useUpdateSeason } from "../../../hooks/dashboard/useUpdateSeason";
 
 
-export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
+export const FormEditSeason = ({title , season}) => {
+
+    const navigate = useNavigate()
+
+    // console.log(season)
+    
     const urlRegex = /^(https?:\/\/)?([\w\d-]+\.)+[\w-]+(\/[\w\d-._~:/?#[\]@!$&'()*+,;=]*)?$/i;
 
     const [loadingImages, setLoadingImages] = useState(false)
@@ -23,12 +29,17 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
     const [bannerImage, setBannerImage] = useState("https://osgf.gov.ng/storage/temp/oc64663771bc022/assets/images/no-banner.jpg")
     const [inputBannerImage, setInputBannerImage] = useState('')
     const [inputTitle, setInputTitle] = useState('')
+    const [numberSeason, setNumberSeason] = useState(null)
     const [gendersArray, setgendersArray] = useState([]) 
-    const [seasonStatus, setseasonStatus] = useState(true)
+    const [seasonStatus, setseasonStatus] = useState(null)
+    const [yearSeason, setYearSeason] = useState(null)
+    const [rating, setRating] = useState(null)
+    const [studyAnimation, setStudyAnimation] = useState(null)
+    const [description, setDescription] = useState(null)
 
 
     const {data: dataGenders, isLoading} = useGender()
-    const {mutate, isPending, isError} = useAddSeason()
+    const {mutate, isPending, isError} = useUpdateSeason()
 
     const {register, handleSubmit, formState: {errors}, setValue} = useForm({
         resolver: zodResolver(dashboardAddSeasonScheme)
@@ -65,11 +76,39 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
         setValue('slugSeason', formatSlug(inputTitle))
     }
 
+    useEffect(() => {
+      setPosterImage(season.image)
+      setInputPosterImage(season.image)
+      setBannerImage(season.image_front)
+      setInputBannerImage(season.image_front)
+
+      setInputTitle(season.name_season)
+      setNumberSeason(season.season)
+      setYearSeason(season.year)
+      setgendersArray(season.gender)
+      setseasonStatus(season.streaming)
+      setRating(season.score)
+      setStudyAnimation(season.studio)
+      setDescription(season.description)
+    }, [season])
+
     //Para manejar la logica de los generos 
 
     useEffect(() => {
+        setValue('poster', inputPosterImage, {shouldValidate: true})
+        setValue('banner', inputBannerImage, {shouldValidate: true})
+        
+        setValue('title', inputTitle, {shouldValidate: true})
+        setValue('numberSeason', numberSeason, {shouldValidate: true})
+        setValue('yearSeason', yearSeason, {shouldValidate: true})
+        setValue('slugSeason', formatSlug(inputTitle), {shouldValidate: true})
         setValue('genders', gendersArray, {shouldValidate: true})
-    }, [gendersArray, setValue])
+        setValue('status', seasonStatus, {shouldValidate: true})
+        setValue('rating', rating, {shouldValidate: true})
+        setValue('studyAnimation', studyAnimation, {shouldValidate: true})
+        setValue('description', description, {shouldValidate: true})
+
+    }, [gendersArray, setValue, season])
 
     const handleAddGender = (e) => {
         const gender = e.target.value
@@ -103,11 +142,12 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
 
     //Logica de enviar formulario 
     const onSubmit = handleSubmit((data) => {
-        // console.log(data)
         const {banner, poster, title, numberSeason, yearSeason, slugSeason, genders, status, rating, studyAnimation, description} = data
+        
 
-        const season = {
-            idAnimeSelected,
+
+        const Editseason = {
+            idSeason: season.id,
             banner, 
             poster, 
             title, 
@@ -121,16 +161,21 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
             description
         }
 
-        mutate(season)
+        mutate(Editseason)
     })
 
     if(isLoading || isPending) return <Loader />
 
   return (
     <>
-        <div className="my-4">
-            <h2 className="text-white text-2xl font-semibold">{title}</h2>
-            <p className="text-stone-400 text-sm mt-1">Sube los datos de la temporada del anime seleccionado</p>
+        <div className="flex itesm-center space-x-6 my-4">
+            <button className="p-2 border border-purple-700 rounded-lg text-purple-600 hover:bg-purple-700/15 cursor-pointer transition-all duration-300" onClick={() => navigate(-1)}>
+                <IoIosArrowBack size={30} />
+            </button>
+            <div>
+                <h2 className="text-white text-2xl font-semibold">{title}</h2>
+                <p className="text-stone-400 text-sm mt-1">Sube los datos de la temporada del anime seleccionado</p>
+            </div>
         </div>
         <form onSubmit={onSubmit} className="w-full flex justify-between mb-6">
             <div className="w-[37%] p-5 bg-surface-dark border border-stone-700 rounded-lg">
@@ -193,16 +238,16 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
                 <div className="flex justify-between my-4 w-full">
                     <div className="flex flex-col w-[30%]">
                         <label htmlFor="numberSeason" className="text-stone-300 text-[16px] font-semibold">Numero de temporada</label>
-                        <input type="number" id="numberSeason" min='1' max="50" step="1" className="p-2 mt-2 text-stone-400 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" onChange={(e) => setValue('numberSeason', Number(e.target.value))} />
+                        <input type="number" id="numberSeason" min='1' max="50" step="1" className="p-2 mt-2 text-stone-400 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" value={numberSeason} onChange={(e) => setNumberSeason(e.target.value)} />
                         {
                             errors.numberSeason && <p className="text-sm text-red-500">{errors.numberSeason.message}</p>
                         }
                     </div>
                     <div className="flex flex-col w-[30%]">
                         <label htmlFor="yearSeason" className="text-stone-300 text-[16px] font-semibold">Año de temporada</label>
-                        <input type="number" id="yearSeason" min="1990" max="2099" step="1" placeholder="Año de publicacion" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" onChange={(e) => setValue('yearSeason', Number(e.target.value))} />
+                        <input type="number" id="yearSeason" min="1990" max="2099" step="1" placeholder="Año de publicacion" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" value={yearSeason} onChange={(e) => setYearSeason(e.target.value)} />
                         {
-                            errors.numberSeason && <p className="text-sm text-red-500">{errors.numberSeason.message}</p>
+                            errors.yearSeason && <p className="text-sm text-red-500">{errors.yearSeason.message}</p>
                         }
                     </div>
                     <div className="flex flex-col w-[35%]">
@@ -249,9 +294,8 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
                     <div className="flex flex-col w-[30%]">
                         <label htmlFor="status" className="text-stone-300 text-[16px] font-semibold">Status</label>
                         <select id="status" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg font-semibold" onChange={(e) => handleChangeStatus(e)}>
-                            <option></option>
-                            <option value={false} className="text-white bg-green-500 font-semibold">En emision</option>
-                            <option value={true} className="text-white bg-red-500 font-semibold">Finalizado</option>
+                            <option value={true} className="text-white bg-green-500 font-semibold">En emision</option>
+                            <option value={false} className="text-white bg-red-500 font-semibold">Finalizado</option>
                         </select>
                         {
                             errors.status && <p className="text-sm text-red-500">{errors.status.message}</p>
@@ -259,14 +303,14 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
                     </div>
                     <div className="flex flex-col w-[30%]">
                         <label htmlFor="rating" className="text-stone-300 text-[16px] font-semibold">Rating</label>
-                        <input type="number" id="rating" min="0" max="10" step="0.01" placeholder="Raiing del anime" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" onChange={(e) => setValue('rating', Number(e.target.value))} />
+                        <input type="number" id="rating" min="0" max="10" step="0.01" placeholder="Raiing del anime" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" value={rating} onChange={(e) => setRating(e.target.value)} />
                         {
                             errors.rating && <p className="text-sm text-red-500">{errors.rating.message}</p>
                         }
                     </div>
                     <div className="flex flex-col w-[30%]">
                         <label htmlFor="studyAnimation" className="text-stone-300 text-[16px] font-semibold">Estudio de animación</label>
-                        <input type="text" id="studyAnimation" className="p-2 mt-2 text-stone-400 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" autoComplete="off" {...register('studyAnimation')} />
+                        <input type="text" id="studyAnimation" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" autoComplete="off" value={studyAnimation} onChange={(e) => setStudyAnimation(e.target.value)} />
                         {
                             errors.studyAnimation && <p className="text-sm text-red-500">{errors.studyAnimation.message}</p>
                         }
@@ -274,7 +318,7 @@ export const FormAddNewSeason = ({title ,idAnimeSelected}) => {
                 </div>
                 <div className="w-full">
                         <label htmlFor="description" className="text-stone-300 text-[16px] font-semibold">Descripción</label>
-                        <textarea className="w-full max-h-80 min-h-30 p-4 mt-2 bg-surface-dark-highlight text-stone-300 rounded-lg border border-stone-700 outline-none focus:border-purple-700 transition-all duration-300" rows="7" cols="20" maxLength={900} id='description' placeholder="Escribe una descripción del anime" {...register('description')} ></textarea>
+                        <textarea className="w-full max-h-80 min-h-30 p-4 mt-2 bg-surface-dark-highlight text-stone-300 rounded-lg border border-stone-700 outline-none focus:border-purple-700 transition-all duration-300" rows="7" cols="20" maxLength={900} id='description' placeholder="Escribe una descripción del anime" value={description} onChange={(e) => setDescription(e.target.value)} ></textarea>
                         {
                             errors.description && <p className="text-sm text-red-500">{errors.description.message}</p>
                         }

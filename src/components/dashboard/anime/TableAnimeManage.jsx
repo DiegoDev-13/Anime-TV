@@ -3,19 +3,24 @@ import { FaTrashAlt } from "react-icons/fa";
 import { useDeleteSeason } from "../../../hooks/dashboard/useDeleteSeason";
 import { Loader } from "../../shared/Loader";
 import { useGlobalStore } from "../../../store/global.store";
+import { useNavigate } from "react-router-dom";
 
 const tableHeader = ['poster', 'titulo', 'episodios', 'emisión', 'acciones']
 
 export const TableAnimeManage = ({data, totalAnimes}) => {
 
+    const navigate = useNavigate()
+
     const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
     const setIdDelete = useGlobalStore(state => state.setIdDelete)
+    const setMutate = useGlobalStore(state => state.setMutate)
 
-    const {mutate, isPending, isError} = useDeleteSeason()
+    // const {mutate, isPending, isError} = useDeleteSeason()
 
     const handleDelete = (id) => {
         setAtiveModalConfirmDelete(true)
         setIdDelete(id)
+        setMutate(useDeleteSeason)
     }
 
   return (
@@ -62,7 +67,7 @@ export const TableAnimeManage = ({data, totalAnimes}) => {
                                   </span>
                               </td>
                               <td className="p-4 font-medium tracking-tighter">
-                                  <button className="cursor-pointer hover hover:text-white transition-colors duration-300">
+                                  <button className="cursor-pointer hover hover:text-white transition-colors duration-300" onClick={() => navigate(`/dashboard/administrar-animes/edit/${anime.slug_season}`)}>
                                     <MdEdit size={20} />
                                   </button>
                                   <button className="ml-5 cursor-pointer hover hover:text-white transition-colors duration-300" onClick={() => handleDelete(anime.id)}>

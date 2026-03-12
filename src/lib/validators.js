@@ -34,7 +34,7 @@ export const dashboardAnimeAdd = z.object({
 
 // Validacion para agregar una temporada a un anime 
 export const dashboardAddSeasonScheme = z.object({
-    title: z.string().min(3, 'El titulo debe tener minimo 3 caracteres').max(35, 'El titulo debe ser maximo de 35 caracteres'),
+    title: z.string().min(3, 'El titulo debe tener minimo 3 caracteres').max(40, 'El titulo debe ser maximo de 40 caracteres'),
     numberSeason: z.number(),
     yearSeason: z.number().min(4, 'El año tiene que ser valido'),
     slugSeason: z.string().min(1, 'El slug del anime es obligatorio').regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug inválido"),

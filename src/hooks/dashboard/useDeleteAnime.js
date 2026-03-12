@@ -1,10 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { deleteAnime } from "../../actions/dashboard"
 import toast from "react-hot-toast"
-import { deleteSeason } from "../../actions/dashboard"
 import { useGlobalStore } from "../../store/global.store"
+import { useNavigate } from "react-router-dom"
 
-export const useDeleteSeason = () => {
-    
+export const useDeleteAnime = () => {
+
+    const navigate = useNavigate()
+
     const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
     const setIdDelete = useGlobalStore(state => state.setIdDelete)  
     const setMutate = useGlobalStore(state => state.setMutate)
@@ -12,19 +15,19 @@ export const useDeleteSeason = () => {
     const queryClient = useQueryClient()
 
   const {mutate, isPending, isError} = useMutation({
-    mutationFn: deleteSeason,
+    mutationFn: deleteAnime,
     onSuccess: () => {
         queryClient.invalidateQueries(['animeDashboard'])
-        toast.success('Temporada eliminada con exito!')
-        setIdDelete(null)
+        navigate('/dashboard/administrar-animes')
+        toast.success('anime eliminado con exito!')
         setAtiveModalConfirmDelete(false)
+        setIdDelete(null)
         setMutate(null)
     },
     onError: (err) => {
         toast.error(err)
-    } 
+    }
   })
-
 
   return {
     mutate,

@@ -72,7 +72,7 @@ export const NewAnime = () => {
         <Separator />
 
         {
-            animeSelected && <FormAddNewSeason idAnimeSelected={animeSelected.id} />
+            animeSelected && <FormAddNewSeason title="Agregar nueva temporada" idAnimeSelected={animeSelected.id} />
         }
 
     </div>

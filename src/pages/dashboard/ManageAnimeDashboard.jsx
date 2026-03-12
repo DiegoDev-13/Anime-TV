@@ -64,6 +64,11 @@ export const ManageAnimeDashboard = () => {
           <IoReload size={20} />
         </button>
       </div>
+
+      <div className="w-full flex justify-between items-center mb-4">
+        <h2 className="text-white text-2xl font-semibold">Lista de Temporadas</h2>
+        <p className="text-stone-200">Total: <span className="text-stone-400">{totalAnimes}</span></p>
+      </div>
         
         {
           SearchResults.length > 0 

@@ -1,9 +1,15 @@
 import toast from "react-hot-toast"
-import { FaRegCopy } from "react-icons/fa"
+import { FaRegCopy, FaTrashAlt } from "react-icons/fa"
 import { MdEdit } from "react-icons/md"
 import { formatDate} from "../../../helpers"
+import { useGlobalStore } from "../../../store/global.store"
+import { useDeleteAnime } from "../../../hooks/dashboard/useDeleteAnime"
 
 export const CardAnimeSelected = ({anime}) => {
+
+    const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
+    const setIdDelete = useGlobalStore(state => state.setIdDelete)
+    const setMutate = useGlobalStore(state => state.setMutate)
 
     const handleCopyText = async (text) => {
         try {
@@ -12,6 +18,12 @@ export const CardAnimeSelected = ({anime}) => {
         } catch (err) {
             toast.error('Error al intentar copiar Id', err)
         }
+    }
+
+    const handleDelete = (id) => {
+        setAtiveModalConfirmDelete(true)
+        setIdDelete(id)
+        setMutate(useDeleteAnime)
     }
 
   return (
@@ -31,9 +43,14 @@ export const CardAnimeSelected = ({anime}) => {
             <button type="button" className="bg-purple-700/30 p-2.5 text-purple-700 font-bold flex justify-center items-center rounded-2xl border border-purple-700 hover:bg-purple-700/50 transition-all duration-200 cursor-pointer" onClick={() => handleCopyText(anime.id)}>
                 ID #{anime.id} <FaRegCopy size={20} className="ml-2" />
             </button>
-            <button type="button" className="bg-purple-700/30 p-2.5 text-white rounded-lg hover:bg-purple-700/50 transition-all duration-200 cursor-pointer">
-                <MdEdit size={25} className="text-purple-700"/>
-            </button>
+            <div className="flex space-x-3">    
+                <button type="button" className="bg-purple-700/30 p-2.5 text-white rounded-lg hover:bg-purple-700/50 transition-all duration-200 cursor-pointer">
+                    <MdEdit size={25} className="text-purple-700"/>
+                </button>
+                <button type="button" className="bg-purple-700/30 py-2.5 px-3.5 text-white rounded-lg hover:bg-purple-700/50 transition-all duration-200 cursor-pointer" onClick={() => handleDelete(anime.id)}>
+                    <FaTrashAlt size={20} className="text-purple-700"/>
+                </button>
+            </div>
         </div>
         
     </div>

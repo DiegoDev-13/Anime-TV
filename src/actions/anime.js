@@ -152,3 +152,4 @@ export const getAnimeDetails = async (name) => {
         console.log(error)
     }
 }
+

@@ -34,7 +34,7 @@ export const FormLogin = () => {
                         <p className="text-stone-400 text-sm ">Constinúa tu aventura donde la dejaste.</p>
                     </div>
 
-                    <form className="w-full" autoComplete="off" onSubmit={hnadleSubmit}>
+                    <form className="w-full" onSubmit={hnadleSubmit}>
                         <label htmlFor="email" className="text-sm text-stone-400">Correo Electrónico</label>
                         <div className="flex space-x-1 items-center relative bg-dark rounded-lg border border-stone-700 pl-6 my-1 mb-4">
                             <MdEmail size={20} className="text-stone-400 absolute left-2.5"/>
@@ -44,7 +44,7 @@ export const FormLogin = () => {
                         <label htmlFor="password" className="text-sm text-stone-400">Contraseña</label>
                         <div className="flex space-x-1 items-center relative bg-dark rounded-lg border border-stone-700 pl-6 my-1 mb-4">
                             <TbLockFilled size={20} className="text-stone-400 absolute left-2.5"/>
-                            <input type={showPassword ? "text" : "password"} id="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Ingresa tu Contraseña" className="w-full outline-none focus:outline-none text-sm text-stone-300 p-3" />
+                            <input type={showPassword ? "text" : "password"} id="password" value={password} onChange={e => setPassword(e.target.value)} autoComplete="off" placeholder="Ingresa tu Contraseña" className="w-full outline-none focus:outline-none text-sm text-stone-300 p-3" />
                             {
                                 showPassword 
                                     ? <IoEyeOff size={20} className="text-stone-400 absolute right-2.5 cursor-pointer" onClick={handleShowPassword}/>

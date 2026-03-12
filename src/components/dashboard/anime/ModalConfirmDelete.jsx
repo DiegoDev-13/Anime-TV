@@ -6,10 +6,12 @@ import { Loader } from "../../shared/Loader";
 
 export const ModalConfirmDelete = () => {
 
-    const {mutate, isPending, isError} = useDeleteSeason()
-
+    
     const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
     const idDelete = useGlobalStore(state => state.idDelete)
+    const useMutate = useGlobalStore(state => state.useMutate)
+
+    const {mutate, isPending, isError} = useMutate()
 
     const handleConfirm = () => {
         mutate(idDelete)
@@ -27,10 +29,10 @@ export const ModalConfirmDelete = () => {
                                 <div className="bg-red-700/20 p-3 rounded-full">
                                     <MdOutlineWarningAmber size={60} className="text-red-700" />
                                 </div>
-                                <h2 className="text-white text-2xl text-center font-semibold">¿Eliminar temporada?</h2>
+                                <h2 className="text-white text-2xl text-center font-semibold">¿Seguro de Eliminar?</h2>
                             </div>
                             <div className="my-4 px-8">
-                                <p className="text-stone-400 text-center font-semibold">Esta acción es <span className="text-purple-700 ">irreversible</span>. Al eliminar esta temporada, se borrarán permanentemente todos sus episodios, comentarios y datos analiticos asociados.</p>
+                                <p className="text-stone-400 text-center font-semibold">Esta acción es <span className="text-purple-700 ">irreversible</span>. Al eliminar, se borrarán permanentemente todos sus episodios, comentarios y datos analiticos asociados.</p>
                             </div>
                             <div className="w-full flex my-6 justify-between items-center">
                                 <button className='flex justify-center items-center gap-1.5 py-3 px-13 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-lg cursor-pointer transition-all duration-300' onClick={() => setAtiveModalConfirmDelete(false)}>Cancelar</button>
