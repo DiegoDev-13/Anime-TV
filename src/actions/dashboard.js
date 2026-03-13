@@ -148,7 +148,7 @@ export const deleteSeason = async (seasonId) => {
   }
 }
 
-// Actualiza una season mediante el di 
+// Actualiza/Edita una season mediante el di 
 export const updateSeason = async (season) => {
   const {error} = await supabase.from('seasons').update({
     name_season: season.title,
@@ -178,4 +178,19 @@ export const deleteAnime = async (animeId) => {
     console.log(error.message)
     throw new Error("Error al intentar eliminar anime"); 
   }
+}
+
+//Actualiza/Edita un anime 
+export const updateAnime = async (anime) => {
+  const {error} = await supabase.from('animes').update({
+    name: anime.title,
+    gender: anime.genders,
+    image: anime.poster
+  }).eq('id', anime.id)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar actualizar anime!");
+  }
+
 }

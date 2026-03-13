@@ -37,7 +37,14 @@ export const useGlobalStore = create((set, get) => ({
     idDelete: null,
     setIdDelete: (state) => set({idDelete: state}),
 
-    //setea cual mutate se usara 
+    //setea cual mutate se usara En le modal de liminarcion de anime o season
     useMutate: null,
     setMutate: (state) => set({useMutate: state}),
+
+     //Stare para la parte de editAnime
+    activeModalEditAnime: false,
+    setActiveModalEditAnime: (state) => set({activeModalEditAnime: state}),
+
+    animeEdit: null,
+    setAnimeEdit: (state) => set({animeEdit: state}),
 })) 

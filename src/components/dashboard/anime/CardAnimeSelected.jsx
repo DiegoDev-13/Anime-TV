@@ -8,6 +8,8 @@ import { useDeleteAnime } from "../../../hooks/dashboard/useDeleteAnime"
 export const CardAnimeSelected = ({anime}) => {
 
     const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
+    const setActiveModalEditAnime = useGlobalStore(state => state.setActiveModalEditAnime)
+    const setAnimeEdit = useGlobalStore(state => state.setAnimeEdit)
     const setIdDelete = useGlobalStore(state => state.setIdDelete)
     const setMutate = useGlobalStore(state => state.setMutate)
 
@@ -18,6 +20,11 @@ export const CardAnimeSelected = ({anime}) => {
         } catch (err) {
             toast.error('Error al intentar copiar Id', err)
         }
+    }
+
+    const handleEdit = (anime) => {
+        setActiveModalEditAnime(true)
+        setAnimeEdit(anime)
     }
 
     const handleDelete = (id) => {
@@ -44,7 +51,7 @@ export const CardAnimeSelected = ({anime}) => {
                 ID #{anime.id} <FaRegCopy size={20} className="ml-2" />
             </button>
             <div className="flex space-x-3">    
-                <button type="button" className="bg-purple-700/30 p-2.5 text-white rounded-lg hover:bg-purple-700/50 transition-all duration-200 cursor-pointer">
+                <button type="button" className="bg-purple-700/30 p-2.5 text-white rounded-lg hover:bg-purple-700/50 transition-all duration-200 cursor-pointer" onClick={() => handleEdit(anime)}>
                     <MdEdit size={25} className="text-purple-700"/>
                 </button>
                 <button type="button" className="bg-purple-700/30 py-2.5 px-3.5 text-white rounded-lg hover:bg-purple-700/50 transition-all duration-200 cursor-pointer" onClick={() => handleDelete(anime.id)}>

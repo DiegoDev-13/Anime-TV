@@ -132,12 +132,12 @@ export const FormEditSeason = ({title , season}) => {
 
    //Logica del selected del status
     const handleChangeStatus = (e) => {
-        if(e.target.value === 'true') {
-            setseasonStatus(true)
-        } else if(e.target.value === 'false') {
-            setseasonStatus(false)
-        }
-        setValue('status', seasonStatus)
+
+        const newValue = e.target.value === 'true'
+        setseasonStatus(newValue);
+        
+        setValue('status', newValue, {shouldValidate: true})
+
     }
 
     //Logica de enviar formulario 
@@ -293,7 +293,7 @@ export const FormEditSeason = ({title , season}) => {
                 <div className="flex justify-between my-4 w-full">
                     <div className="flex flex-col w-[30%]">
                         <label htmlFor="status" className="text-stone-300 text-[16px] font-semibold">Status</label>
-                        <select id="status" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg font-semibold" onChange={(e) => handleChangeStatus(e)}>
+                        <select id="status" className="p-2 mt-2 text-stone-200 bg-surface-dark-highlight border border-stone-700 rounded-lg font-semibold" value={seasonStatus?.toString()} onChange={handleChangeStatus}>
                             <option value={true} className="text-white bg-green-500 font-semibold">En emision</option>
                             <option value={false} className="text-white bg-red-500 font-semibold">Finalizado</option>
                         </select>
