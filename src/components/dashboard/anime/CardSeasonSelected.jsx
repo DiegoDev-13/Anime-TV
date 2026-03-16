@@ -5,7 +5,7 @@ import { formatDate} from "../../../helpers"
 import { useGlobalStore } from "../../../store/global.store"
 import { useDeleteAnime } from "../../../hooks/dashboard/useDeleteAnime"
 
-export const CardAnimeSelected = ({anime}) => {
+export const CardSeasonSelected = ({anime}) => {
 
     const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
     const setActiveModalEditAnime = useGlobalStore(state => state.setActiveModalEditAnime)
@@ -40,8 +40,8 @@ export const CardAnimeSelected = ({anime}) => {
         <div className="flex justify-center items-center space-x-2 md:space-x-4 xl:space-x-8">
             <img src={anime.image} alt="" className="w-15 h-20 object-contain rounded-lg" />
             <div className="flex flex-col space-y-1">
-                <p className="text-white text-lg font-semibold">{anime.name}</p>
-                <p className="text-sm text-stone-400">{anime.gender[0]} - {anime.gender[1]} - {anime.gender[2]}</p>
+                <p className="text-white text-lg font-semibold">{anime.name_season}</p>
+                <p className="text-sm text-stone-400">Temporada: {anime.season}</p>
             </div>
         </div>
         <div className="flex justify-center items-center space-x-2 md:space-x-4 xl:space-x-8">

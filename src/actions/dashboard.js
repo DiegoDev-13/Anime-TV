@@ -194,3 +194,15 @@ export const updateAnime = async (anime) => {
   }
 
 }
+
+// Devuelve todos los capitulos que tiene una temporada mediante el ID 
+export const getEpisodesById = async (id) => {
+  const {data, count, error} = await supabase.from('episodes').select('*', {count: 'exact'}).eq('season_id', id).order('created_at', {ascending: false})
+  
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al traer los episodios relacionados con la temporada");
+  }
+  
+  return {data, count}
+}
