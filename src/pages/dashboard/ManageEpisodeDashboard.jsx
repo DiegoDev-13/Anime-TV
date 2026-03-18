@@ -23,8 +23,6 @@ export const ManageEpisodeDashboard = () => {
      setSearchResults([])
   }
 
-  console.log(animeSelected)
-
   return (
     <div className="flex flex-col w-full">
         <div className="flex justify-center items-center">
@@ -62,7 +60,7 @@ export const ManageEpisodeDashboard = () => {
         <Separator />
 
         {
-            animeSelected && <FormAddNewEpisode title="Agregar nueva capitulo" idAnimeSelected={animeSelected.id} titleAnime={animeSelected.name_season}/>
+            animeSelected && <FormAddNewEpisode title="Agregar nueva capitulo" animeSelected={animeSelected} setAnimeSelected={setAnimeSelected} />
         }
     </div>
   )

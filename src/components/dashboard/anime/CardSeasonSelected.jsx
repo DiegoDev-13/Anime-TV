@@ -33,8 +33,6 @@ export const CardSeasonSelected = ({anime}) => {
         setMutate(useDeleteAnime)
     }
 
-    console.log(anime)
-
   return (
     <div className="w-full py-4 px-2 md:px-8 xl:px-14 flex justify-between items-center border border-purple-500 rounded-lg bg-slate-800 transition-all duration-300" >
         <div className="flex justify-center items-center space-x-2 md:space-x-4 xl:space-x-8">

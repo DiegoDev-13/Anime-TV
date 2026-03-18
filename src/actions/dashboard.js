@@ -206,3 +206,20 @@ export const getEpisodesById = async (id) => {
   
   return {data, count}
 }
+
+// Agrega un nuevo capitulo a una temporada 
+export const addNewEpisode = async (newEpisode) => {
+  const {error} = await supabase.from('episodes').insert({
+    title: newEpisode.title,
+    episode_image: newEpisode.imageEpisode,
+    episode_number: newEpisode.numberEpisode,
+    iframe: newEpisode.iframes,
+    slug_episode: newEpisode.slugEpisode,
+    season_id: newEpisode.seasonId
+  })
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar agregar un nuevo capitulo a la temporada");
+  }
+} 

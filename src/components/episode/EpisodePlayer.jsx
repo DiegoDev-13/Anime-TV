@@ -7,7 +7,7 @@ import { MdFavorite, MdOutlineSaveAlt } from "react-icons/md";
 
 export const EpisodePlayer = ({episode, quantityEpisodes, slug}) => {
 
-  const [option, setoption] = useState(episode?.iframe.option_1.iframe || '')
+  const [option, setoption] = useState(episode?.iframe['0'].iframe || '')
   const [optionActive, setoptionActive] = useState(0)
   const [currentAnime, setCurrentAnime] = useState(null)
 

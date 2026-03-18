@@ -18,7 +18,7 @@ export const GridEpisodesSelected = ({animeSelected}) => {
                 ? <div className="my-4 flex flex-col space-y-4 w-full h-140 overflow-auto">
                     {
                         episodes.map(episode => (
-                            <CardEpisodesSeasonSelected episode={episode} />
+                            <CardEpisodesSeasonSelected key={episode.id} episode={episode} />
 
                         ))
                     }

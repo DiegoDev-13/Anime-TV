@@ -46,3 +46,18 @@ export const dashboardAddSeasonScheme = z.object({
     poster: z.string().url('Debe ser una URL válida').min(1, 'La url para la portada es requerida'),
     banner: z.string().url('Debe ser una URL válida').min(1, 'La url para el banner es requerida')
 })
+
+
+// Validacion para agregar un nuevo capitulo 
+
+const iframeSchema = z.object({
+    nameIframe: z.string().optional(),
+    linkIframe: z.string().url('URL no válida'),
+});
+
+export const dashboardAddEpisode = z.object({
+    title: z.string().min(3, 'El titulo deber tener minimo 3 caracteres').max(40, 'El titulo debe ser maximo de 40 caracteres'),
+    numberEpisode: z.number().min(1, 'El numero del capitulo debe ser valido'),
+    slugEpisode: z.string().min(1, 'El slug del episodio es obligatorio').regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Slug inválido"),
+    imageEpisode: z.string().url('Debe ser una URL válida').min(1, 'La url para la portada es requerida'),
+})
