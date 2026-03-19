@@ -223,3 +223,20 @@ export const addNewEpisode = async (newEpisode) => {
     throw new Error("Error al intentar agregar un nuevo capitulo a la temporada");
   }
 } 
+
+// Para editar un capitulo mediante el id
+export const updateEpisodeById = async (episode) => {
+  const {error} = await supabase.from('episodes').update({
+    title: episode.title,
+    episode_image: episode.imageEpisode,
+    episode_number: episode.numberEpisode,
+    iframe: episode.iframes,
+    slug_episode: episode.slugEpisode
+  }).eq('id', episode.id)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar editar el capitulo");
+    
+  }
+}

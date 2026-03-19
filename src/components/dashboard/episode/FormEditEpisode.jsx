@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { formatSlug } from "../../../helpers"
 import { FaImage } from "react-icons/fa"
 import { CardIframe } from "../episode/CardIframe"
@@ -6,26 +6,52 @@ import toast from "react-hot-toast"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { dashboardAddEpisode } from "../../../lib/validators"
-import { useAddEpisode } from "../../../hooks/dashboard/useAddEpisode"
 import { Loader } from "../../shared/Loader"
+import { useNavigate, useParams } from "react-router-dom"
+import { useEpisode } from "../../../hooks/useEpisode"
+import { useUpdateEpisode } from "../../../hooks/dashboard/useUpdateEpisode"
+import { ErrorEditEpisode } from "./ErrorEditEpisode"
 
-export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
+export const FormEditEpisode = () => {
+
+  const navigate = useNavigate()
+  const {slug} = useParams()
   
-  const [titleInput, setTitleInput] = useState(animeSelected?.name_season)
+  const [titleInput, setTitleInput] = useState('')
   const [numberEpisodeInput, setNumberEpisodeInput] = useState(null)
   const [inputImage, setInputImage] = useState(null)
   const [objIframes, setObjIframes] = useState([])
   const [nameIframe, setNameIframe] = useState('')
   const [linkIframe, setLinkIframe] = useState('')
+
+  const {data: EpisodeData, isLoading, isError: isErrorEpisode, error: errorEdit} = useEpisode(slug)
+
+  useEffect(() => {
+    if(!isLoading && EpisodeData) {
+      setTitleInput(EpisodeData?.title)
+      setNumberEpisodeInput(EpisodeData?.episode_number)
+      setInputImage(EpisodeData?.episode_image)
+
+      //Convertimos un objetos que contiene objetos a un array de objetos
+      const dataArray = Object.values(EpisodeData?.iframe);
+      setObjIframes(dataArray)
+
+      setValue('title', EpisodeData?.title, {shouldValidate: true})
+      setValue('slugEpisode', formatSlug(EpisodeData?.title), {shouldValidate: true})
+      setValue('numberEpisode', EpisodeData?.episode_number, { shouldValidate: true });
+      setValue('imageEpisode', EpisodeData?.episode_image, {shouldValidate: true})
+    }
+  }, [EpisodeData, slug])
+  
   
   // Convertimos el objeto en array para poder iterar
   const options = Object.values(objIframes || {})
-
+  
   const {register, handleSubmit, setValue, formState: {errors}} = useForm({
     resolver: zodResolver(dashboardAddEpisode)
   })
 
-  const {mutate, isPending, isError} = useAddEpisode()
+  const {mutate, isPending, isError} = useUpdateEpisode()
 
   
   const handleAddIframe = () => {
@@ -35,7 +61,7 @@ export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
           name: nameIframe,
           iframe: linkIframe
         }
-
+        
         setObjIframes((prev) => [...prev, option])
         setNameIframe('')
         setLinkIframe('')
@@ -65,7 +91,9 @@ export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
 
     setValue('numberEpisode', numberFormat, { shouldValidate: true });
 
-};
+  }
+
+
   
   const handleChangeImageEpisode = (e) => {
     setInputImage(e.target.value)
@@ -85,23 +113,27 @@ export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
     // 1: Convertimos el array de objetos a un objetos que contiene objeteos 
     const objIndexado = Object.assign({}, objIframes)
     
-    const newEpisode = {
+    const episode = {
+      id: EpisodeData?.id,
       title,
-      seasonId: animeSelected.id,
       imageEpisode,
       numberEpisode,
       slugEpisode: `${formatSlug(titleInput)}-${numberEpisodeInput}`,
       iframes: objIndexado
     }
 
-    mutate(newEpisode)
+    mutate(episode)
     
   })
+
+  if(isLoading) return <Loader />
+
+  // if(isErrorEpisode) return <ErrorEditEpisode error={errorEdit}/>
   
   return (
     <div className="w-full mb-6">
         <div className="my-4">
-            <h2 className="text-white text-2xl font-semibold">{title}</h2>
+            <h2 className="text-white text-2xl font-semibold">Edita el episodio {EpisodeData?.episode_number} de {EpisodeData?.title} </h2>
             <p className="text-stone-400 text-sm mt-1">Sube los datos del capitulo de la tamporada seleccionada</p>
         </div>
 
@@ -135,7 +167,7 @@ export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
                 <div className="flex justify-between my-4 w-full space-x-4">
                     <div className="flex flex-col w-full">
                         <label htmlFor="slugEpisode" className="text-stone-300 text-[16px] font-semibold">Slug de temporada</label>
-                        <input type="text" id="slugEpisode" placeholder="Ingresa el slug del capitulo" className="p-2 mt-2 text-stone-400 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" value={`${formatSlug(titleInput)}-${numberEpisodeInput}`}  />
+                        <input type="text" id="slugEpisode" placeholder="Ingresa el slug del capitulo" className="p-2 mt-2 text-stone-400 bg-surface-dark-highlight border border-stone-700 rounded-lg outline-none focus:border-purple-700 transition-all duration-300" value={`${formatSlug(titleInput)}-${numberEpisodeInput}`}/>
                         <p className="text-white">Ejemplo: anime-1</p>
                         {
                             errors.slugEpisode && <p className="text-sm text-red-500">{errors.slugEpisode.message}</p>
@@ -201,7 +233,7 @@ export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
 
               <div  className="w-full flex flex-col">
                 <button type="submit" className="flex justify-center items-center gap-1.5 py-3 px-3 mt-3 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-lg cursor-pointer transition-all duration-300">Agregar Capitulo</button>
-                <button type="button" className="flex justify-center items-center gap-1.5 py-3 px-3 mt-3 border border-stone-600 text-stone-500 hover:bg-stone-700/15 hover:border-stone-500 hover:text-stone-400 font-bold rounded-lg cursor-pointer transition-all duration-300" onClick={() => setAnimeSelected(null)}>Cancelar & Voler Atras</button>              
+                <button type="button" className="flex justify-center items-center gap-1.5 py-3 px-3 mt-3 border border-stone-600 text-stone-500 hover:bg-stone-700/15 hover:border-stone-500 hover:text-stone-400 font-bold rounded-lg cursor-pointer transition-all duration-300" onClick={() => navigate(-1)}>Cancelar & Voler Atras</button>              
               </div>
 
             </form>

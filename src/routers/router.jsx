@@ -20,6 +20,7 @@ import { SettingsDashboard } from '../pages/dashboard/SettingsDashboard'
 import { ManageReportsDashboard } from '../pages/dashboard/ManageReportsDashboard'
 import { NewAnime } from '../pages/dashboard/NewAnime'
 import { EditSeason } from '../pages/dashboard/EditSeason'
+import { EditEpisode } from '../pages/dashboard/EditEpisode'
 
 export const MyRouters = () => {
   return (
@@ -48,6 +49,7 @@ export const MyRouters = () => {
             <Route path='administrar-animes/nuevo' element={<NewAnime />} />
             <Route path='administrar-animes/edit/:slug' element={<EditSeason />} />
             <Route path='administrar-episodios' element={<ManageEpisodeDashboard />} />
+            <Route path='administrar-episodios/edit/:slug' element={<EditEpisode />} />
             <Route path='comentarios' element={<ManageCommentsDashboard />} />
             <Route path='usuarios' element={<ManageUsersDashboard />} />
             <Route path='reportes' element={<ManageReportsDashboard />} />

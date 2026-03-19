@@ -133,8 +133,7 @@ export const getGrowthPercentageUsers = (array) => {
 
 // Para dar formato a el slug de los animes/temporadas 
 export const formatSlug = (text) => {
-  return text
-    .toLowerCase()
+  return text?.toLowerCase()
     .replace(/[^a-z0-9]+/g, '-')   // reemplaza todo lo que no sea alfanumérico por "-"
     .replace(/^-+|-+$/g, '')       // elimina guiones al inicio y al final
     .replace(/--+/g, '-');         // colapsa múltiples guiones
