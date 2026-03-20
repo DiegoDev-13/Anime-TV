@@ -8,12 +8,11 @@ export const useAddEpisode = () => {
     const navigate = useNavigate()
     const queryClient = useQueryClient()
 
-  const {mutate, isPending, isError} = useMutation({
+  const {mutate, isPending, isError, isSuccess} = useMutation({
     mutationFn: addNewEpisode,
     onSuccess: () => {
         queryClient.invalidateQueries(['EpisodesDashboard'])
         toast.success('Se ha agregado un nuevo capítulo a la temporada')
-        navigate(0)
     },
     onError: (err) => {
         toast.error(err )
@@ -23,6 +22,7 @@ export const useAddEpisode = () => {
   return {
     mutate,
     isPending,
-    isError
+    isError,
+    isSuccess
   }
 }

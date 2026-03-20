@@ -2,18 +2,33 @@ import { MdEdit } from "react-icons/md"
 import { formatDate } from "../../../helpers"
 import { FaTrashAlt } from "react-icons/fa"
 import { useNavigate } from "react-router-dom"
+import { useGlobalStore } from "../../../store/global.store"
+import { useDeleteEpisodeById } from "../../../hooks/dashboard/episode/useDeleteEpisodeById"
+import { Loader } from "../../shared/Loader"
 
 export const CardEpisodesSeasonSelected = ({episode}) => {
 
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+
+  const {mutate, isPending, isError} = useDeleteEpisodeById()
+
+  const setDescriptionModalDelete = useGlobalStore(state => state.setDescriptionModalDelete)
+  const setAtiveModalConfirmDelete = useGlobalStore(state => state.setAtiveModalConfirmDelete)
+  const setIdDelete = useGlobalStore(state => state.setIdDelete) 
+  const setMutate = useGlobalStore(state => state.setMutate) 
 
   const handleEdit = (episode) => {
     navigate(`/dashboard/administrar-episodios/edit/${episode.slug_episode}`)
   }
 
   const handleDelete = (id) => {
-
+    setAtiveModalConfirmDelete(true)
+    setIdDelete(id)
+    setMutate(useDeleteEpisodeById)
+    setDescriptionModalDelete('Esta acción es irreversible. Al eliminar, se borrará el episodio, comentarios y datos analiticos asociados.')
   }
+
+  if(isPending) return <Loader />
 
   return (
     <div className="w-[97%] py-4 px-2 md:px-8 xl:px-14 flex justify-between items-center border border-stone-700 rounded-lg bg-[#2a2438] transition-all duration-300">

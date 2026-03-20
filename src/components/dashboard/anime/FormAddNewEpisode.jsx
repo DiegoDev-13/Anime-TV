@@ -25,7 +25,7 @@ export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
     resolver: zodResolver(dashboardAddEpisode)
   })
 
-  const {mutate, isPending, isError} = useAddEpisode()
+  const {mutate, isPending, isError, isSuccess} = useAddEpisode()
 
   
   const handleAddIframe = () => {
@@ -97,6 +97,12 @@ export const FormAddNewEpisode = ({title, animeSelected, setAnimeSelected}) => {
     mutate(newEpisode)
     
   })
+
+  if(isSuccess) {
+    console.log('isSuccess')
+
+    setAnimeSelected(null)
+  }
   
   return (
     <div className="w-full mb-6">

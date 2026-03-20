@@ -33,6 +33,10 @@ export const useGlobalStore = create((set, get) => ({
     ativeModalConfirmDelete: false,
     setAtiveModalConfirmDelete: (state) => set({ativeModalConfirmDelete: state}),
 
+    //description modal delete
+    descriptionModalDelete: null,
+    setDescriptionModalDelete: (state) => set({descriptionModalDelete: state}),
+
     //Revice el id cual se borrara
     idDelete: null,
     setIdDelete: (state) => set({idDelete: state}),

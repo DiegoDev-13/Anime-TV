@@ -24,7 +24,7 @@ export const FormEditEpisode = () => {
   const [nameIframe, setNameIframe] = useState('')
   const [linkIframe, setLinkIframe] = useState('')
 
-  const {data: EpisodeData, isLoading, isError: isErrorEpisode, error: errorEdit} = useEpisode(slug)
+  const {data: EpisodeData, isLoading, isError: isErrorEpisode,} = useEpisode(slug)
 
   useEffect(() => {
     if(!isLoading && EpisodeData) {
@@ -51,7 +51,7 @@ export const FormEditEpisode = () => {
     resolver: zodResolver(dashboardAddEpisode)
   })
 
-  const {mutate, isPending, isError} = useUpdateEpisode()
+  const {mutate, isPending, isError, error: errorEdit} = useUpdateEpisode()
 
   
   const handleAddIframe = () => {
@@ -110,7 +110,7 @@ export const FormEditEpisode = () => {
     const {title, imageEpisode, numberEpisode, slugEpisode} = data
 
     // Se hace esto por que la tabla de los Iframes en la base de datos es de formato JSON 
-    // 1: Convertimos el array de objetos a un objetos que contiene objeteos 
+    // 1: Convertimos el array de objetos a un objeto que contiene objeteos 
     const objIndexado = Object.assign({}, objIframes)
     
     const episode = {
@@ -128,7 +128,7 @@ export const FormEditEpisode = () => {
 
   if(isLoading) return <Loader />
 
-  // if(isErrorEpisode) return <ErrorEditEpisode error={errorEdit}/>
+  if(isError) return <ErrorEditEpisode error={errorEdit}/>
   
   return (
     <div className="w-full mb-6">

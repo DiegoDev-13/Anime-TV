@@ -240,3 +240,13 @@ export const updateEpisodeById = async (episode) => {
     
   }
 }
+
+// Para eliminar un episodio mediante el id 
+export const deleteEpisodeByid = async (id) => {
+  const {error} = await supabase.from('episodes').delete().eq('id', id)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar eliminar el capitulo!");
+  }
+} 

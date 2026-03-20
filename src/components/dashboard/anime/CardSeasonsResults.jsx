@@ -1,6 +1,5 @@
 import toast from "react-hot-toast"
-import { FaRegCopy } from "react-icons/fa"
-import { formatDateAgo } from "../../../helpers"
+import { formatDate, formatDateAgo } from "../../../helpers"
 
 export const CardSeasonsResults = ({anime, handleSeleted}) => {
 
@@ -12,6 +11,8 @@ export const CardSeasonsResults = ({anime, handleSeleted}) => {
             toast.error('Error al intentar copiar Id', err)
         }
     }
+
+    console.log(anime)
 
   return (
     <div className="w-full py-4 px-2 md:px-8 xl:px-14 flex justify-around items-center border border-slate-500 hover:border-purple-500 rounded-lg bg-surface-dark-highlight transition-all duration-300 cursor-pointer" onClick={() => handleSeleted(anime)}>
@@ -30,7 +31,7 @@ export const CardSeasonsResults = ({anime, handleSeleted}) => {
         <div className="flex justify-center items-center space-x-2 md:space-x-4 xl:space-x-8">
             <div className="flex flex-col self-end items-center">
                 <p className="text-sm text-stone-400">Fecha de agregado</p>
-                <p className="text-white font-semibold">{formatDateAgo(anime.created_at)}</p>
+                <p className="text-white font-semibold">{formatDate(anime.created_at)}</p>
             </div>
         </div>
         
