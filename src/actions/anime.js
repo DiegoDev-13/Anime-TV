@@ -153,3 +153,18 @@ export const getAnimeDetails = async (name) => {
     }
 }
 
+
+// agrega un reporte a la base de datos 
+export const addReport = async (report) => {
+    const {error} = await supabase.from('reports').insert({
+        title_anime: report.animeTitle,
+        user_email: report.userEmail,
+        type: report.incidentType,
+        description: report.description
+    })
+
+    if(error) {
+        console.log(error.message)
+        throw new Error("Error al intentar agregar reporte");
+    }
+}

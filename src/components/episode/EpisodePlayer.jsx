@@ -4,12 +4,14 @@ import {Separator} from '../shared/Separator'
 import { FaBars } from "react-icons/fa"
 import { IoIosArrowBack, IoIosArrowForward, IoIosFlag } from "react-icons/io";
 import { MdFavorite, MdOutlineSaveAlt } from "react-icons/md";
+import { ModalReport } from "./ModalReport";
 
 export const EpisodePlayer = ({episode, quantityEpisodes, slug}) => {
 
   const [option, setoption] = useState(episode?.iframe['0'].iframe || '')
   const [optionActive, setoptionActive] = useState(0)
   const [currentAnime, setCurrentAnime] = useState(null)
+  const [activeModalReport, setactiveModalReport] = useState(false)
 
   const navigate = useNavigate()
 
@@ -48,7 +50,7 @@ export const EpisodePlayer = ({episode, quantityEpisodes, slug}) => {
     }
 
   return (
-    <div className="flex flex-col items-center w-full lg:w-[69%] mx-auto bg-surface-dark p-6 rounded-lg border border-stone-800" >
+    <div className="flex flex-col items-center w-full relative lg:w-[69%] mx-auto bg-surface-dark p-6 rounded-lg border border-stone-800" >
         <div className="flex flex-col w-full">
           <h3 className="text-stone-200 text-xl font-medium mb-4">{episode.title} <span className="font-bold text-white">Episodio</span> {episode.episode_number}</h3>
 
@@ -96,7 +98,7 @@ export const EpisodePlayer = ({episode, quantityEpisodes, slug}) => {
                   <MdFavorite size={16} />
                   <span className="hidden md:block">fav</span>
                 </button>
-                <button className="md:flex justify-center items-center gap-2 py-3 px-4.5 bg-surface-dark-highlight rounded-lg uppercase text-xs font-semibold text-stone-300 cursor-pointer hover:text-purple-600 transition-all duration-300 hidden">
+                <button className="md:flex justify-center items-center gap-2 py-3 px-4.5 bg-surface-dark-highlight rounded-lg uppercase text-xs font-semibold text-stone-300 cursor-pointer hover:text-purple-600 transition-all duration-300 hidden" onClick={() => setactiveModalReport(true)}>
                   <IoIosFlag size={16} />
                   report
                 </button>
@@ -105,6 +107,11 @@ export const EpisodePlayer = ({episode, quantityEpisodes, slug}) => {
 
             <Separator />
         </div>
+
+        {
+          activeModalReport && <ModalReport setactiveModalReport={setactiveModalReport} titleAnime={slug} />
+        }
+
     </div>
   )
 }

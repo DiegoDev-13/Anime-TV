@@ -95,7 +95,7 @@ export const HomeDashboard = () => {
                   <IoIosArrowForward size={18} />
                 </span>
 
-                <span className='text-stone-300 text-sm font-semibold w-[80%] flex justify-around items-center gap-3 my-2 p-2 rounded-lg cursor-pointer hover:bg-purple-600/10 transition-all duration-300' >
+                <span className='text-stone-300 text-sm font-semibold w-[80%] flex justify-around items-center gap-3 my-2 p-2 rounded-lg cursor-pointer hover:bg-purple-600/10 transition-all duration-300' onClick={() => navigate('/dashboard/administrar-episodios')} >
                   <MdOutlineFileUpload size={20} className='bg-slate-600/50 text-stone-500 w-7 h-7 rounded-lg' />
                   Subir Episodio
                   <IoIosArrowForward size={18} />

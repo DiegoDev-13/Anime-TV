@@ -250,3 +250,18 @@ export const deleteEpisodeByid = async (id) => {
     throw new Error("Error al intentar eliminar el capitulo!");
   }
 } 
+
+// Devuelve una lista de todos los usuarios registrado en la app
+export const getUsersdashboard = async () => {
+  const { data: { users }, error } = await supabase.auth.admin.listUsers({
+    page: 1,
+    perPage: 10
+  });
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al traer usuarios desde la base de datos");
+  }
+
+  return users
+} 

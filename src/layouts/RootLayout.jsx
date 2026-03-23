@@ -7,6 +7,7 @@ import { SearchSheet } from "../components/shared/SearchSheet"
 import { useEffect } from "react"
 import { useUserStore } from "../store/useUserStore"
 import { ModalEditProfile } from "../components/profile/ModalEditProfile"
+import { ModalReport } from "../components/episode/ModalReport"
 
 export const RootLayout = () => {
   
@@ -14,6 +15,7 @@ export const RootLayout = () => {
   const activeSheetSearch = useGlobalStore(state => state.activeSheetSearch)
   const setActiveProfileSheet = useGlobalStore(state => state.setActiveProfileSheet)
   const activeModalProfile = useGlobalStore(state => state.activeModalProfile)
+  const activeModalReport = useGlobalStore(state => state.activeModalReport)
 
   const initialize = useUserStore(state => state.initialize)
   // const {session, user, isLoading} = useUserStore()
@@ -45,7 +47,11 @@ export const RootLayout = () => {
         activeSheetSearch && <SearchSheet />
       }
 
-       { activeModalProfile && <ModalEditProfile /> }
+      { activeModalProfile && <ModalEditProfile /> }
+
+      {/* {
+        activeModalReport && <ModalReport />
+      } */}
         
       <main className="container flex-1 mx-auto my-8 ">
           <Outlet/>
