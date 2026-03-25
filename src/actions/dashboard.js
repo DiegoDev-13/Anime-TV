@@ -265,3 +265,58 @@ export const getUsersdashboard = async () => {
 
   return users
 } 
+
+// Devuelve todos los reportes de los episodios
+export const getReportsEpisodes = async (page = 1) => {
+
+  const itemsPerPage = 6
+  const from = (page - 1) * itemsPerPage
+  const to = from + itemsPerPage - 1
+
+  const {data, count, error} = await supabase.from('reports').select('*', {count: 'exact'}).range(from, to).order('created_at', {ascending: false})
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al traer lista de reportes de episodios");
+  }
+
+  return {
+    data, 
+    count
+  }
+} 
+
+// Devuelve un reporte mediante el id
+export const getReportById = async (reportId) => {
+  const {data, error} = await supabase.from('reports').select('*').eq('id', reportId).single()
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar traer reporte desde la base de datos");
+  }
+
+  return data
+}
+
+//Elimina un reporte mediante el id
+export const deleteReportById = async (reportId) => {
+  const {error} = await supabase.from('reports').delete().eq('id', reportId)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar eliminar reporte")
+  }
+} 
+
+//Acutalizar el estado del reporte a true / false
+export const updateReportById = async (report) => {
+  const {error} = await supabase.from('reports').update({
+    filled: report.state
+  }).eq('id', report.id)
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar actualizar el estado del reporte");
+    
+  }
+} 

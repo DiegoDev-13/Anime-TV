@@ -34,7 +34,7 @@ export const ManageAnimeDashboard = () => {
     setCurrentOption('All')
   }
 
-  if(isLoading || isLoadingGenders || isFetching) return <Loader />
+  if(isLoading || isLoadingGenders ) return <Loader />
 
   if(isError || isErrorGenders) return <ErrorPage />
 

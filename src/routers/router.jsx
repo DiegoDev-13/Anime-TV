@@ -21,6 +21,7 @@ import { ManageReportsDashboard } from '../pages/dashboard/ManageReportsDashboar
 import { NewAnime } from '../pages/dashboard/NewAnime'
 import { EditSeason } from '../pages/dashboard/EditSeason'
 import { EditEpisode } from '../pages/dashboard/EditEpisode'
+import { DetailsReports } from '../pages/dashboard/DetailsReports'
 
 export const MyRouters = () => {
   return (
@@ -53,6 +54,7 @@ export const MyRouters = () => {
             <Route path='comentarios' element={<ManageCommentsDashboard />} />
             <Route path='usuarios' element={<ManageUsersDashboard />} />
             <Route path='reportes' element={<ManageReportsDashboard />} />
+            <Route path='reportes/detalles/:id' element={<DetailsReports />} />
             <Route path='configuracion' element={<SettingsDashboard />} />
           </Route>
         </Route>
