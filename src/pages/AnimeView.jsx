@@ -5,8 +5,21 @@ import { EpisodePlayer } from "../components/episode/EpisodePlayer"
 import { EpisodeList } from "../components/episode/EpisodeList"
 import { useAllEpisodes } from "../hooks/useAllEpisodes"
 import { ErrorPage } from "../components/shared/ErrorPage"
+import { supabase } from "../supabase/Client"
+import { useEffect } from "react"
 
 export const AnimeView = () => {
+
+
+  //Registra la vista cuando el usuario ingresa a la pagina a ver un anime
+  useEffect(() => {
+    const registrarVisita = async () => {
+      await supabase.from('page_views').insert([{ page_path: window.location.pathname }])
+    };
+
+    registrarVisita()
+  }, [])
+  
 
     const { slug } = useParams() 
 

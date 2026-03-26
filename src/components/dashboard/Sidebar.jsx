@@ -3,8 +3,6 @@ import { Logo } from "../shared/Logo"
 import { PiVideoFill } from "react-icons/pi";
 import { MdDashboard, MdMovie, MdReportProblem } from "react-icons/md";
 import { GrChapterAdd } from "react-icons/gr";
-import { HiMiniUsers } from "react-icons/hi2";
-import { BiSolidComment } from "react-icons/bi";
 import { BsFillNutFill } from "react-icons/bs";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { useLogOut } from "../../hooks/auth/useLogOut";
@@ -49,16 +47,6 @@ export const Sidebar = () => {
             <NavLink to='/dashboard/administrar-episodios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
                 <GrChapterAdd size={20} className="min-w-6.25" />
                 <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Administrar Episodios</span>
-            </NavLink>
-
-            <NavLink to='/dashboard/usuarios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <HiMiniUsers size={20} className="min-w-6.25" />
-                <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Usuarios</span>
-            </NavLink>
-
-            <NavLink to='/dashboard/comentarios' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>
-                <BiSolidComment size={20} className="min-w-6.25" />
-                <span className="opacity-0 md:opacity-100 transition-opacity duration-300 whitespace-nowrap" >Comentarios</span>
             </NavLink>
 
             <NavLink to='/dashboard/reportes' className={({isActive}) => `${isActive ? 'btn-surface-dark-highlight text-purple-600 ' : 'bg-surface-dark text-stone-400 '} flex items-center p-2 gap-2 text-[15px] font-semibold hover:text-purple-500 rounded-lg transition-all duration-300`}>

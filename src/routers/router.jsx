@@ -14,8 +14,6 @@ import { UpdatePassword } from '../pages/UpdatePassword'
 import { HomeDashboard } from '../pages/dashboard/HomeDashboard'
 import { ManageAnimeDashboard } from '../pages/dashboard/ManageAnimeDashboard'
 import { ManageEpisodeDashboard } from '../pages/dashboard/ManageEpisodeDashboard'
-import { ManageUsersDashboard } from '../pages/dashboard/ManageUsersDashboard'
-import { ManageCommentsDashboard } from '../pages/dashboard/ManageCommentsDashboard'
 import { SettingsDashboard } from '../pages/dashboard/SettingsDashboard'
 import { ManageReportsDashboard } from '../pages/dashboard/ManageReportsDashboard'
 import { NewAnime } from '../pages/dashboard/NewAnime'
@@ -51,8 +49,6 @@ export const MyRouters = () => {
             <Route path='administrar-animes/edit/:slug' element={<EditSeason />} />
             <Route path='administrar-episodios' element={<ManageEpisodeDashboard />} />
             <Route path='administrar-episodios/edit/:slug' element={<EditEpisode />} />
-            <Route path='comentarios' element={<ManageCommentsDashboard />} />
-            <Route path='usuarios' element={<ManageUsersDashboard />} />
             <Route path='reportes' element={<ManageReportsDashboard />} />
             <Route path='reportes/detalles/:id' element={<DetailsReports />} />
             <Route path='configuracion' element={<SettingsDashboard />} />

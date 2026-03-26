@@ -10,7 +10,9 @@ export const useUpdateReportById = () => {
     mutationFn: updateReportById,
     onSuccess: () => {
         queryClient.invalidateQueries(['report']),
-        toast.success('Se ha actualizado el estado del reporte')
+        toast.success('Se ha actualizado el estado del reporte y se eliminara automáticamente en las próximas 48 horas', {
+          duration: 5000,
+        })
     },
      onError: (err) => {
         toast.error(err)

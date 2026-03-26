@@ -44,8 +44,7 @@ export const ModalReport = ({setactiveModalReport, titleAnime}) => {
         }
             
         setErrorType(false)
-        setErrorDescription(false)
-        console.log(report)
+        setErrorDescription(false)  
         mutate(report)
         
     }

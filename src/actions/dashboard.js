@@ -15,6 +15,18 @@ export const getCountAnimes = async () => {
     }
 }
 
+//Devuelve el total de vista mes a mes de los ultimos 4 meses + actual y el porcentaje de crecimineto 
+export const getStatsFiveMonths = async () => {
+  const {data, error} = await supabase.rpc('obtener_estadisticas_mensuales')
+
+  if(error) {
+    console.log(error.message)
+    throw new Error("Error al intentar obtener las estadística de visualizaciones");
+  }
+
+  return data
+}
+
 //Devuelve el numero de usuario que inisiaron session en los ultimos 5 meses
 export const getSingupsUsers = async () => {
   const { data, error } = await supabase
@@ -311,7 +323,8 @@ export const deleteReportById = async (reportId) => {
 //Acutalizar el estado del reporte a true / false
 export const updateReportById = async (report) => {
   const {error} = await supabase.from('reports').update({
-    filled: report.state
+    filled: report.state,
+    updated_at: new Date().toISOString()
   }).eq('id', report.id)
 
   if(error) {

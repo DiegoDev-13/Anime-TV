@@ -13,6 +13,7 @@ import { useGetSingupsUsers } from '../../hooks/dashboard/useGetSingupsUsers'
 import { getGrowthPercentageUsers } from '../../helpers'
 import { useGetReportsPending } from '../../hooks/dashboard/useGetReportsPending'
 import { ReportsTableViews } from '../../components/dashboard/home/ReportsTableViews'
+import { useGetStatsFiveMonths } from '../../hooks/dashboard/useGetStatsFiveMonths'
 
 export const HomeDashboard = () => {
 
@@ -21,10 +22,11 @@ export const HomeDashboard = () => {
   const {data: count, isLoading} = useGetCountAnimes()
   const {data: usersSingupsFiveMonths, isLoading: isloadingUsers} = useGetSingupsUsers()
   const {data: reportsData, totalReports,  isLoading: isLoadingReports} = useGetReportsPending()
+  const {data: dataStatsFiveMonths, isLoading: isLoadingStastFiveMonths, isError: isErrorStatsFiveMonths} = useGetStatsFiveMonths()
 
-  // console.log(reportsData)
+  // console.log(dataStatsFiveMonths)
 
-  if(isLoading || isloadingUsers || isLoadingReports) return <Loader />
+  if(isLoading || isloadingUsers || isLoadingReports || isLoadingStastFiveMonths) return <Loader />
 
   return (
     <div className='flex flex-col justify-center items-center' >
@@ -52,10 +54,10 @@ export const HomeDashboard = () => {
           <div className='bg-surface-dark rounded-lg border border-stone-500 w-63 h-48'>
             <div className='flex justify-around my-4'>
               <h3 className='text-stone-400 font-medium'>Vistas Mensuales</h3>
-              <GrowthPercentage data={10} />
+              <GrowthPercentage data={dataStatsFiveMonths[0].porcentaje_crecimiento} />
             </div>  
-            <h2 className='text-white text-4xl font-semibold m-0 pl-4'>424k</h2>
-            <MiniChart />
+            <h2 className='text-white text-4xl font-semibold m-0 pl-4'>{dataStatsFiveMonths[0].total_vistas}</h2>
+            <MiniChart dataStats={dataStatsFiveMonths} />
           </div>
 
           <div className='bg-surface-dark rounded-lg border border-stone-500 w-63 h-48'>
